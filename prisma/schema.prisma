@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  price       Int      // Price in kobo (Naira * 100)
+  category    String
+  sizes       String   // JSON array of sizes
+  colors      String   // JSON array of colors
+  images      String   // JSON array of image URLs
+  description String?
+  inStock     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+
+  @@map("products")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+  status      OrderStatus @default(PENDING)
+  total       Int         // Total in kobo
+  customerInfo String?    // JSON with customer details for guest checkout
+  paymentInfo String?     // JSON with payment details
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  items      OrderItem[]
+  receipts   Receipt[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  size      String
+  color     String
+  price     Int    // Price at time of purchase (in kobo)
+
+  @@map("order_items")
+}
+
+model Receipt {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fileName  String
+  filePath  String
+  uploadedAt DateTime @default(now())
+
+  @@map("receipts")
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
