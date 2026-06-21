@@ -6,7 +6,7 @@ Add the following to your `.env.local` file:
 
 ```env
 # Email Service (Resend)
-RESEND_API_KEY=re_P8FrUiXB_BVtJv9iyc2T5Kg16QQWgRxNk
+RESEND_API_KEY=your_resend_api_key_here
 ```
 
 ## Verification Steps

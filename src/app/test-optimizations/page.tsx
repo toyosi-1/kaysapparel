@@ -307,14 +307,11 @@ export default function TestOptimizationsPage() {
             <div className="flex items-center gap-4">
               <Badge variant="outline" className="bg-green-50 text-green-800 border-green-200">
                 <CheckCircle className="h-3 w-3 mr-1" />
-                Resend API Configured
+                Resend API Ready
               </Badge>
-              <span className="text-sm text-gray-600">
-                API key ending in: ...WgRxNk
-              </span>
             </div>
             <p className="text-sm text-gray-600 mt-2">
-              Email service will send real emails in production mode when NODE_ENV=production
+              Email service will send real emails when RESEND_API_KEY is set in production environment variables.
             </p>
           </CardContent>
         </Card>
