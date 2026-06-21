@@ -1,0 +1,37 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+    
+    // Receipt uploads - allow authenticated users or guests to upload
+    // to their own order folder
+    match /receipts/{orderId}/{fileName} {
+      allow read: if isAuthenticated() || isAdmin();
+      allow create: if request.resource.size < 5 * 1024 * 1024 // 5MB max
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if isAdmin();
+    }
+    
+    // Product images - admins can upload, publicly readable
+    match /products/{productId}/{fileName} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // User profile images - users can upload their own, publicly readable
+    match /users/{userId}/{fileName} {
+      allow read: if true;
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if request.auth != null && request.auth.uid == userId || isAdmin();
+    }
+  }
+}
