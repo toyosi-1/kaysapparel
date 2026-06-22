@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { formatPrice } from "@/lib/data";
 import { Product } from "@/lib/types";
 import { useCartStore } from "@/lib/store";
@@ -51,12 +52,23 @@ export function ProductDetail({ product }: ProductDetailProps) {
         {/* Product Image */}
         <div className="space-y-4">
           <div className="aspect-[3/4] bg-gradient-to-br from-muted/50 to-muted rounded-2xl overflow-hidden flex items-center justify-center relative">
-            <div className="text-center p-8">
-              <div className="w-28 h-28 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
-                <ShoppingBag className="h-10 w-10 text-primary/50" />
+            {product.images[0] ? (
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized={!product.images[0].startsWith("http")}
+              />
+            ) : (
+              <div className="text-center p-8">
+                <div className="w-28 h-28 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <ShoppingBag className="h-10 w-10 text-primary/50" />
+                </div>
+                <p className="text-muted-foreground text-sm font-medium">{product.name}</p>
               </div>
-              <p className="text-muted-foreground text-sm font-medium">{product.name}</p>
-            </div>
+            )}
             {!product.inStock && (
               <div className="absolute top-4 left-4">
                 <Badge variant="destructive" className="rounded-full">Sold Out</Badge>
