@@ -61,13 +61,14 @@ export default function CartPage() {
               >
                 {/* Product thumbnail */}
                 <div className="w-20 h-24 md:w-24 md:h-28 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0 relative">
-                  {item.product.images[0]?.startsWith("http") ? (
+                  {item.product.images[0] ? (
                     <Image
                       src={item.product.images[0]}
                       alt={item.product.name}
                       fill
                       className="object-cover"
                       sizes="100px"
+                      unoptimized={!item.product.images[0].startsWith("http")}
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
