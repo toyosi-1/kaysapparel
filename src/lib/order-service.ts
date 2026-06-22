@@ -2,6 +2,7 @@ import { orderService, Order, OrderItem } from './firebase-services'
 import { useCartStore } from './store'
 import { emailService } from './email-service'
 import { validateOrderData, checkRateLimit } from './validation'
+import { getDeliveryPrice, isValidDeliveryZone, DeliveryZone } from './delivery'
 
 export interface CustomerInfo {
   firstName: string
@@ -9,6 +10,8 @@ export interface CustomerInfo {
   email: string
   phone: string
   address: string
+  deliveryZone: string
+  deliveryFee?: number
 }
 
 export interface PaymentInfo {
@@ -25,6 +28,11 @@ export async function createOrder(customerInfo: CustomerInfo): Promise<Order> {
       throw new Error('Too many order attempts. Please try again later.');
     }
 
+    // Validate delivery zone
+    if (!customerInfo.deliveryZone || !isValidDeliveryZone(customerInfo.deliveryZone)) {
+      throw new Error('Please select a valid delivery location');
+    }
+
     // Validate customer information
     const validationResult = validateOrderData(customerInfo);
 
@@ -35,6 +43,15 @@ export async function createOrder(customerInfo: CustomerInfo): Promise<Order> {
 
     // Use sanitized customer data
     const sanitizedCustomerInfo = validationResult.sanitizedData;
+
+    // Calculate delivery fee
+    const deliveryZone = customerInfo.deliveryZone as DeliveryZone;
+    const deliveryFee = getDeliveryPrice(deliveryZone);
+    const sanitizedWithDelivery = {
+      ...sanitizedCustomerInfo,
+      deliveryZone,
+      deliveryFee
+    };
 
     const cartItems = useCartStore.getState().items
     
@@ -52,13 +69,16 @@ export async function createOrder(customerInfo: CustomerInfo): Promise<Order> {
       price: item.product.price
     }))
 
-    // Calculate total
-    const total = useCartStore.getState().getTotal()
+    // Calculate subtotal and total with delivery fee
+    const subtotal = useCartStore.getState().getTotal()
+    const total = subtotal + deliveryFee
 
     // Create order in Firebase with sanitized data
     const order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'> = {
-      customerInfo: sanitizedCustomerInfo,
+      customerInfo: sanitizedWithDelivery,
       items: orderItems,
+      subtotal,
+      deliveryFee,
       total,
       status: 'pending',
       paymentInfo: {

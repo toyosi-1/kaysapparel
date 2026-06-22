@@ -206,15 +206,15 @@ export const mobileUI = {
   // Check if virtual keyboard is visible
   isVirtualKeyboardVisible: (): boolean => {
     if (typeof window === 'undefined') return false;
+    const win = window as Window;
     
     // Visual viewport API is more reliable
-    if ('visualViewport' in window) {
-      const viewport = window.visualViewport!;
-      return viewport.height < window.innerHeight * 0.8;
+    if (win.visualViewport) {
+      return win.visualViewport.height < win.innerHeight * 0.8;
     }
     
     // Fallback: check if window height significantly changed
-    return window.innerHeight < window.screen.height * 0.8;
+    return win.innerHeight < win.screen.height * 0.8;
   }
 };
 

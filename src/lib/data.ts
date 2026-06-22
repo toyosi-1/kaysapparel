@@ -14,7 +14,7 @@ export const products: Product[] = [
   {
     id: "1",
     name: "Elegant Midi Dress",
-    price: 18000,
+    price: 12000,
     category: "dresses",
     sizes: ["S", "M", "L", "XL"],
     colors: ["Black", "Wine", "Navy"],
@@ -26,7 +26,7 @@ export const products: Product[] = [
   {
     id: "2",
     name: "Ankara Print Blouse",
-    price: 12000,
+    price: 8000,
     category: "tops",
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: ["Multi-color", "Blue Print", "Red Print"],
@@ -62,7 +62,7 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Lace Bodycon Dress",
-    price: 22000,
+    price: 12000,
     category: "dresses",
     sizes: ["S", "M", "L"],
     colors: ["White", "Black", "Burgundy"],
@@ -98,7 +98,7 @@ export const products: Product[] = [
   {
     id: "8",
     name: "Off-Shoulder Top",
-    price: 9500,
+    price: 8000,
     category: "tops",
     sizes: ["S", "M", "L", "XL"],
     colors: ["White", "Black", "Red"],

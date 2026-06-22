@@ -30,17 +30,19 @@ export function formatPrice(price: number): string {
 export async function getProducts(): Promise<Product[]> {
   try {
     const products = await productService.getAll()
-    return products.map(p => ({
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      category: p.category,
-      sizes: p.sizes,
-      colors: p.colors,
-      images: p.images,
-      description: p.description,
-      inStock: p.inStock
-    }))
+    return products
+      .filter((p): p is typeof p & { id: string } => !!p.id)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        price: p.price,
+        category: p.category,
+        sizes: p.sizes || [],
+        colors: p.colors || [],
+        images: p.images || [],
+        description: p.description || '',
+        inStock: p.inStock ?? true
+      }))
   } catch (error) {
     console.error('Error fetching products:', error)
     // Return empty array if Firebase is not configured
@@ -51,17 +53,19 @@ export async function getProducts(): Promise<Product[]> {
 export async function getProductsByCategory(category: string): Promise<Product[]> {
   try {
     const products = await productService.getByCategory(category)
-    return products.map(p => ({
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      category: p.category,
-      sizes: p.sizes,
-      colors: p.colors,
-      images: p.images,
-      description: p.description,
-      inStock: p.inStock
-    }))
+    return products
+      .filter((p): p is typeof p & { id: string } => !!p.id)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        price: p.price,
+        category: p.category,
+        sizes: p.sizes || [],
+        colors: p.colors || [],
+        images: p.images || [],
+        description: p.description || '',
+        inStock: p.inStock ?? true
+      }))
   } catch (error) {
     console.error('Error fetching products by category:', error)
     return []
@@ -71,18 +75,18 @@ export async function getProductsByCategory(category: string): Promise<Product[]
 export async function getProductById(id: string): Promise<Product | undefined> {
   try {
     const product = await productService.getById(id)
-    if (!product) return undefined
+    if (!product || !product.id) return undefined
     
     return {
       id: product.id,
       name: product.name,
       price: product.price,
       category: product.category,
-      sizes: product.sizes,
-      colors: product.colors,
-      images: product.images,
-      description: product.description,
-      inStock: product.inStock
+      sizes: product.sizes || [],
+      colors: product.colors || [],
+      images: product.images || [],
+      description: product.description || '',
+      inStock: product.inStock ?? true
     }
   } catch (error) {
     console.error('Error fetching product by ID:', error)

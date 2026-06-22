@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, Package, MapPin, Phone, Mail } from "lucide-react";
 import { orderService, Order } from "@/lib/firebase-services";
 import { formatPrice } from "@/lib/data";
+import { getDeliveryZoneInfo } from "@/lib/delivery";
 
-export default function OrderSuccessPage() {
+function OrderSuccessContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
   const [order, setOrder] = useState<Order | null>(null);
@@ -81,7 +82,13 @@ export default function OrderSuccessPage() {
                 </div>
                 
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">Total Amount</p>
+                  <p className="text-sm text-gray-500 mb-1">Subtotal</p>
+                  <p className="text-sm font-medium">{formatPrice(order.subtotal || 0)}</p>
+                  
+                  <p className="text-sm text-gray-500 mb-1 mt-3">Delivery Fee</p>
+                  <p className="text-sm font-medium">{formatPrice(order.deliveryFee || 0)}</p>
+                  
+                  <p className="text-sm text-gray-500 mb-1 mt-3">Total Amount</p>
                   <p className="font-semibold text-lg text-[#6B4C3B]">{formatPrice(order.total)}</p>
                   
                   <p className="text-sm text-gray-500 mb-1 mt-3">Payment Method</p>
@@ -93,6 +100,14 @@ export default function OrderSuccessPage() {
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <h3 className="font-medium mb-3">Delivery Information</h3>
                   <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4 text-gray-400" />
+                      <span>
+                        {order.customerInfo.deliveryZone
+                          ? getDeliveryZoneInfo(order.customerInfo.deliveryZone as any)?.label
+                          : 'Not specified'}
+                      </span>
+                    </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-gray-400" />
                       <span>{order.customerInfo.address}</span>
@@ -138,5 +153,23 @@ export default function OrderSuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OrderSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 py-16 text-center">
+        <div className="max-w-md mx-auto">
+          <div className="animate-pulse space-y-4">
+            <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto" />
+            <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto" />
+            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+          </div>
+        </div>
+      </div>
+    }>
+      <OrderSuccessContent />
+    </Suspense>
   );
 }

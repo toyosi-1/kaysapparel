@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/contexts/auth-context";
 import { orderService, Order } from "@/lib/firebase-services";
 import { formatPrice } from "@/lib/data";
+import { getDeliveryZoneInfo } from "@/lib/delivery";
 import {
   User,
   ShoppingBag,
@@ -303,10 +304,17 @@ export default function AccountPage() {
                                     <p className="font-medium text-primary">
                                       {formatPrice(order.total)}
                                     </p>
+                                    <p className="text-xs text-muted-foreground">
+                                      {order.deliveryFee ? `Delivery: ${formatPrice(order.deliveryFee)}` : ''}
+                                    </p>
                                   </div>
                                   <div>
                                     <p className="text-muted-foreground">
                                       {order.items.length} item{order.items.length !== 1 ? 's' : ''}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground">
+                                      {order.customerInfo?.deliveryZone ? 
+                                        getDeliveryZoneInfo(order.customerInfo.deliveryZone as any)?.label : ''}
                                     </p>
                                   </div>
                                 </div>

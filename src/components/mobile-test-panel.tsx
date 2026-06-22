@@ -16,7 +16,7 @@ import {
   Smartphone, 
   Tablet, 
   Monitor, 
-  Touch, 
+  Touchpad, 
   Zap, 
   Gauge,
   Eye
@@ -91,7 +91,7 @@ export function MobileTestPanel() {
           </div>
           
           <div className="text-center p-4 border rounded-lg">
-            <Touch className="h-5 w-5 mx-auto" />
+            <Touchpad className="h-5 w-5 mx-auto" />
             <h3 className="font-semibold mt-2">Touch Device</h3>
             <Badge variant={viewportInfo.isTouch ? "default" : "secondary"}>
               {viewportInfo.isTouch ? "Yes" : "No"}

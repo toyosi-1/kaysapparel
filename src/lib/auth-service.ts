@@ -8,7 +8,7 @@ import {
 } from 'firebase/auth'
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from './firebase'
-import { validateCustomerRegistration, validateLogin, checkRateLimit, ValidationResult } from './validation'
+import { validateCustomerRegistration, validateLogin, validateProfileUpdate, checkRateLimit, ValidationResult } from './validation'
 
 export interface UserProfile {
   uid: string

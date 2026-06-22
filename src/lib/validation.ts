@@ -3,6 +3,8 @@
  * Provides security-focused validation for KaysApparel e-commerce platform
  */
 
+import { isValidDeliveryZone } from './delivery';
+
 // Validation result interface
 export interface ValidationResult {
   isValid: boolean;
@@ -239,6 +241,7 @@ export const validateOrderData = (data: {
   email: string;
   phone: string;
   address: string;
+  deliveryZone?: string;
 }): ValidationResult => {
   const errors: Record<string, string> = {};
   
@@ -248,7 +251,8 @@ export const validateOrderData = (data: {
     lastName: sanitizeInput(data.lastName),
     email: sanitizeInput(data.email).toLowerCase(),
     phone: sanitizeInput(data.phone),
-    address: sanitizeInput(data.address)
+    address: sanitizeInput(data.address),
+    deliveryZone: sanitizeInput(data.deliveryZone || '')
   };
   
   // Validate first name
@@ -284,6 +288,13 @@ export const validateOrderData = (data: {
     errors.address = 'Delivery address is required';
   } else if (!validateAddress(sanitized.address)) {
     errors.address = 'Address must be between 10 and 200 characters';
+  }
+  
+  // Validate delivery zone
+  if (!sanitized.deliveryZone) {
+    errors.deliveryZone = 'Please select a delivery location';
+  } else if (!isValidDeliveryZone(sanitized.deliveryZone)) {
+    errors.deliveryZone = 'Please select a valid delivery location';
   }
   
   return {

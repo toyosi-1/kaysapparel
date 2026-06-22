@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { orderService, Order } from "@/lib/firebase-services";
 import { formatPrice } from "@/lib/data";
+import { getDeliveryZoneInfo } from "@/lib/delivery";
 import { 
   Package, 
   CheckCircle, 
@@ -28,7 +29,7 @@ const statusSteps = [
   { status: 'delivered', label: 'Delivered', icon: Home, color: 'text-green-600' },
 ];
 
-export default function TrackOrderPage() {
+function TrackOrderContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
   const [order, setOrder] = useState<Order | null>(null);
@@ -173,7 +174,13 @@ export default function TrackOrderPage() {
                   </div>
                   
                   <div>
-                    <p className="text-sm text-gray-500 mb-1">Total Amount</p>
+                    <p className="text-sm text-gray-500 mb-1">Subtotal</p>
+                    <p className="text-sm font-medium">{formatPrice(order.subtotal || 0)}</p>
+                    
+                    <p className="text-sm text-gray-500 mb-1 mt-3">Delivery Fee</p>
+                    <p className="text-sm font-medium">{formatPrice(order.deliveryFee || 0)}</p>
+                    
+                    <p className="text-sm text-gray-500 mb-1 mt-3">Total Amount</p>
                     <p className="font-semibold text-lg text-[#6B4C3B]">{formatPrice(order.total)}</p>
                     
                     <p className="text-sm text-gray-500 mb-1 mt-3">Payment Method</p>
@@ -187,6 +194,14 @@ export default function TrackOrderPage() {
                 <div className="bg-gray-50 rounded-lg p-6">
                   <h2 className="font-medium text-lg mb-4">Delivery Information</h2>
                   <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <MapPin className="h-4 w-4 text-gray-400" />
+                      <span className="text-sm">
+                        {order.customerInfo.deliveryZone
+                          ? getDeliveryZoneInfo(order.customerInfo.deliveryZone as any)?.label
+                          : 'Not specified'}
+                      </span>
+                    </div>
                     <div className="flex items-center gap-3">
                       <MapPin className="h-4 w-4 text-gray-400" />
                       <span className="text-sm">{order.customerInfo.address}</span>
@@ -220,6 +235,20 @@ export default function TrackOrderPage() {
                       <p className="font-medium text-sm">{formatPrice(item.price * item.quantity)}</p>
                     </div>
                   ))}
+                  <div className="pt-4 border-t border-gray-200 mt-3 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-500">Subtotal</span>
+                      <span className="font-medium">{formatPrice(order.subtotal || 0)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-500">Delivery Fee</span>
+                      <span className="font-medium">{formatPrice(order.deliveryFee || 0)}</span>
+                    </div>
+                    <div className="flex justify-between font-semibold">
+                      <span>Total</span>
+                      <span className="text-[#6B4C3B]">{formatPrice(order.total)}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -240,5 +269,21 @@ export default function TrackOrderPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function TrackOrderPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 py-16 text-center">
+        <div className="max-w-md mx-auto animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto" />
+          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+          <div className="h-10 bg-gray-200 rounded" />
+        </div>
+      </div>
+    }>
+      <TrackOrderContent />
+    </Suspense>
   );
 }
