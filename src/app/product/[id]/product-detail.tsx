@@ -51,13 +51,13 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
         {/* Product Image */}
         <div className="space-y-4">
-          <div className="aspect-[3/4] bg-gradient-to-br from-muted/50 to-muted rounded-2xl overflow-hidden flex items-center justify-center relative">
+          <div className="aspect-[3/4] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative">
             {product.images[0] ? (
               <Image
                 src={product.images[0]}
                 alt={product.name}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 unoptimized={!product.images[0].startsWith("http")}
               />
