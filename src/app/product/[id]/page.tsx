@@ -1,19 +1,23 @@
 import { notFound } from "next/navigation";
-import { getProductById, products } from "@/lib/data";
+import { getProducts, getProductById } from "@/lib/data-service";
 import { ProductDetail } from "./product-detail";
 
-export function generateStaticParams() {
-  return products.map((product) => ({
-    id: product.id,
-  }));
+export async function generateStaticParams() {
+  const products = await getProducts();
+  return products
+    .filter((product) => product.id)
+    .map((product) => ({
+      id: product.id,
+    }));
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }> | { id: string };
 }) {
-  const product = getProductById(params.id);
+  const resolvedParams = await params;
+  const product = await getProductById(resolvedParams.id);
 
   if (!product) {
     notFound();
