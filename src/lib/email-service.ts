@@ -174,8 +174,10 @@ export class EmailService {
                 </div>
               `).join('')}
               
-              <div class="total">
-                Total: ₦${order.total.toLocaleString()}
+              <div style="text-align: right; margin-top: 20px;">
+                <p><strong>Subtotal:</strong> ₦${(order.subtotal || 0).toLocaleString()}</p>
+                <p><strong>Delivery Fee:</strong> ₦${(order.deliveryFee || 0).toLocaleString()}</p>
+                <p class="total">Total: ₦${order.total.toLocaleString()}</p>
               </div>
             </div>
             
@@ -191,8 +193,9 @@ export class EmailService {
             
             <div class="order-details">
               <h3>Delivery Information</h3>
-              <p>${order.customerInfo?.address}</p>
-              <p>Phone: ${order.customerInfo?.phone}</p>
+              <p><strong>Location:</strong> ${order.customerInfo?.deliveryZone || 'Not specified'}</p>
+              <p><strong>Address:</strong> ${order.customerInfo?.address}</p>
+              <p><strong>Phone:</strong> ${order.customerInfo?.phone}</p>
             </div>
           </div>
           
@@ -228,6 +231,8 @@ ${order.items.map(item =>
   `- ${item.productName} (Size: ${item.size}, Color: ${item.color}, Qty: ${item.quantity}) - ₦${(item.price * item.quantity).toLocaleString()}`
 ).join('\n')}
 
+Subtotal: ₦${(order.subtotal || 0).toLocaleString()}
+Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
 Total: ₦${order.total.toLocaleString()}
 
 PAYMENT INFORMATION:
@@ -238,8 +243,9 @@ Amount: ₦${order.total.toLocaleString()}
 
 Please upload your payment receipt on the checkout page to complete your order.
 
-Delivery Address:
-${order.customerInfo?.address}
+Delivery Information:
+Location: ${order.customerInfo?.deliveryZone || 'Not specified'}
+Address: ${order.customerInfo?.address}
 Phone: ${order.customerInfo?.phone}
 
 Questions? Contact us at kays.apparel@gmail.com or 08136642570
@@ -279,6 +285,8 @@ Questions? Contact us at kays.apparel@gmail.com or 08136642570
               <h3>Order Status</h3>
               <p><strong>Order ID:</strong> ${order.id}</p>
               <p><strong>Status:</strong> ${order.status}</p>
+              <p><strong>Subtotal:</strong> ₦${(order.subtotal || 0).toLocaleString()}</p>
+              <p><strong>Delivery Fee:</strong> ₦${(order.deliveryFee || 0).toLocaleString()}</p>
               <p><strong>Total Paid:</strong> ₦${order.total.toLocaleString()}</p>
             </div>
             
@@ -305,6 +313,8 @@ Great news! We've received and confirmed your payment for order #${order.id}.
 
 Order ID: ${order.id}
 Status: ${order.status}
+Subtotal: ₦${(order.subtotal || 0).toLocaleString()}
+Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
 Total Paid: ₦${order.total.toLocaleString()}
 
 We're now preparing your order for shipment. You'll receive another notification when your order ships.
@@ -346,7 +356,9 @@ Questions? Contact us at kays.apparel@gmail.com or 08136642570
               <h3>Shipping Information</h3>
               <p><strong>Order ID:</strong> ${order.id}</p>
               <p><strong>Status:</strong> ${order.status}</p>
+              <p><strong>Delivery Location:</strong> ${order.customerInfo?.deliveryZone || 'Not specified'}</p>
               <p><strong>Shipping Address:</strong> ${order.customerInfo?.address}</p>
+              <p><strong>Delivery Fee:</strong> ₦${(order.deliveryFee || 0).toLocaleString()}</p>
             </div>
             
             <p>You can track your order status on our website using your order ID.</p>
@@ -372,7 +384,9 @@ Exciting news! Your order #${order.id} has been shipped and is on its way to you
 
 Order ID: ${order.id}
 Status: ${order.status}
+Delivery Location: ${order.customerInfo?.deliveryZone || 'Not specified'}
 Shipping Address: ${order.customerInfo?.address}
+Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
 
 You can track your order status on our website using your order ID.
 

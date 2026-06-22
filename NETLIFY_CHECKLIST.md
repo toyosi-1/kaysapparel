@@ -10,7 +10,7 @@
 
 ### 2. Environment Variables
 - [x] Firebase configuration documented
-- [x] Resend API key ready: `re_P8FrUiXB_BVtJv9iyc2T5Kg16QQWgRxNk`
+- [x] Resend API key ready (set in Netlify dashboard, not in repo)
 - [ ] Add all environment variables to Netlify dashboard
 
 ### 3. Security & Performance
@@ -56,7 +56,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 
 **Email Service:**
 ```
-RESEND_API_KEY=re_P8FrUiXB_BVtJv9iyc2T5Kg16QQWgRxNk
+RESEND_API_KEY=your-resend-api-key-here
 NODE_ENV=production
 ```
 

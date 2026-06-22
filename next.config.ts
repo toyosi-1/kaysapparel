@@ -23,8 +23,6 @@ const nextConfig: NextConfig = {
   distDir: 'out',
   // Disable strict mode for production build
   reactStrictMode: false,
-  // Optimize for production
-  swcMinify: true,
   // Enable compression
   compress: true,
   // Environment variables for build time

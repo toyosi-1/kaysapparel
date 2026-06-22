@@ -2,11 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { orderService, Order } from "@/lib/firebase-services";
-import { formatPrice } from "@/lib/data";
+import { categories, formatPrice } from "@/lib/data";
+import { getDeliveryZoneInfo, suggestPrice } from "@/lib/delivery";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -35,7 +40,6 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
-import { categories, formatPrice } from "@/lib/data";
 import { toast } from "sonner";
 
 export default function AdminPage() {
@@ -267,13 +271,13 @@ export default function AdminPage() {
                 {[
                   {
                     name: "Elegant Midi Dress",
-                    price: 18000,
+                    price: 12000,
                     category: "Dresses",
                     stock: true,
                   },
                   {
                     name: "Ankara Print Blouse",
-                    price: 12000,
+                    price: 8000,
                     category: "Tops",
                     stock: true,
                   },
@@ -362,9 +366,14 @@ export default function AdminPage() {
                   <Label>Category *</Label>
                   <Select
                     value={newProduct.category}
-                    onValueChange={(value) =>
-                      setNewProduct({ ...newProduct, category: value })
-                    }
+                    onValueChange={(value) => {
+                      if (!value) return;
+                      setNewProduct({
+                        ...newProduct,
+                        category: value,
+                        price: newProduct.price || suggestPrice(value).toString()
+                      });
+                    }}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a category" />
@@ -574,6 +583,10 @@ export default function AdminPage() {
                                 <p className="text-muted-foreground">
                                   {order.items.length} item{order.items.length !== 1 ? 's' : ''}
                                 </p>
+                                <p className="text-xs text-muted-foreground">
+                                  {order.customerInfo?.deliveryZone ? 
+                                    getDeliveryZoneInfo(order.customerInfo.deliveryZone as any)?.label : 'No delivery zone'}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -642,6 +655,17 @@ export default function AdminPage() {
                       <MapPin className="h-4 w-4 text-gray-400" />
                       <span className="text-sm">{selectedOrder.customerInfo.address}</span>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-[#6B4C3B]">
+                        Delivery: {selectedOrder.customerInfo.deliveryZone ? 
+                          getDeliveryZoneInfo(selectedOrder.customerInfo.deliveryZone as any)?.label : 'Not selected'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">
+                        Delivery Fee: {formatPrice(selectedOrder.deliveryFee || 0)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               )}
@@ -661,6 +685,14 @@ export default function AdminPage() {
                       <p className="text-sm font-medium text-gray-900">{formatPrice(item.price * item.quantity)}</p>
                     </div>
                   ))}
+                  <div className="flex justify-between items-center pt-2 border-t border-gray-200">
+                    <p className="text-sm text-gray-600">Subtotal</p>
+                    <p className="text-sm font-medium text-gray-900">{formatPrice(selectedOrder.subtotal || 0)}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm text-gray-600">Delivery Fee</p>
+                    <p className="text-sm font-medium text-gray-900">{formatPrice(selectedOrder.deliveryFee || 0)}</p>
+                  </div>
                   <div className="flex justify-between items-center pt-2 border-t border-gray-200">
                     <p className="font-medium text-gray-900">Total</p>
                     <p className="font-semibold text-lg text-[#6B4C3B]">{formatPrice(selectedOrder.total)}</p>

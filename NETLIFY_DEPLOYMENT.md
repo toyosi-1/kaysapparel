@@ -25,7 +25,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=kaysapparel-3250f
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
-RESEND_API_KEY=re_P8FrUiXB_BVtJv9iyc2T5Kg16QQWgRxNk
+RESEND_API_KEY=your-resend-api-key-here
 ```
 
 ### 3. Deploy Configuration

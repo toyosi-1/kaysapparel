@@ -75,20 +75,20 @@ export function usePerformanceTracking(componentName: string) {
 // Image optimization utilities
 export const imageOptimization = {
   // Generate responsive image sizes
-  generateSrcSet(basePath: string, widths: number[]): string => {
+  generateSrcSet: (basePath: string, widths: number[]): string => {
     return widths
       .map(width => `${basePath}?w=${width} ${width}w`)
       .join(', ');
   },
 
   // Get optimal image size based on container
-  getOptimalSize(containerWidth: number, maxWidth: number = 1200): number {
+  getOptimalSize: (containerWidth: number, maxWidth: number = 1200): number => {
     const sizes = [320, 640, 768, 1024, 1200];
     return sizes.find(size => size >= containerWidth) || maxWidth;
   },
 
   // Lazy load intersection observer
-  createIntersectionObserver(callback: (entries: IntersectionObserverEntry[]) => void): IntersectionObserver {
+  createIntersectionObserver: (callback: (entries: IntersectionObserverEntry[]) => void): IntersectionObserver => {
     return new IntersectionObserver(callback, {
       rootMargin: '50px 0px',
       threshold: 0.1
@@ -101,17 +101,6 @@ export const bundleOptimization = {
   // Dynamic import helper
   lazyLoad: <T>(importFunction: () => Promise<T>) => {
     return importFunction();
-  },
-
-  // Code splitting for heavy components
-  loadComponent: async (componentPath: string) => {
-    try {
-      const module = await import(componentPath);
-      return module.default;
-    } catch (error) {
-      console.error(`Failed to load component: ${componentPath}`, error);
-      return null;
-    }
   }
 };
 

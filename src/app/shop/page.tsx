@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { categories } from "@/lib/data";
 import { getProducts, getProductsByCategory } from "@/lib/data-service";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "lucide-react";
 import { Product } from "@/lib/types";
 
-export default function ShopPage() {
+function ShopContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
@@ -56,7 +56,7 @@ export default function ShopPage() {
               : "Shop All"}
           </h1>
           <p className="text-sm text-gray-400 mt-2">
-            {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
+            {products.length} product{products.length !== 1 ? "s" : ""}
           </p>
         </div>
 
@@ -126,5 +126,27 @@ export default function ShopPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-white min-h-screen">
+        <div className="container mx-auto px-4 lg:px-8 py-8 md:py-12">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-gray-200 rounded w-1/4" />
+            <div className="h-4 bg-gray-200 rounded w-1/3" />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="h-64 bg-gray-200 rounded" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ShopContent />
+    </Suspense>
   );
 }

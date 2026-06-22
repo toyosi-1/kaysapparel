@@ -6,6 +6,7 @@ import { useCartStore } from "@/lib/store";
 import { formatPrice, BANK_DETAILS } from "@/lib/data";
 import { createOrder, CustomerInfo } from "@/lib/order-service";
 import { receiptService } from "@/lib/firebase-services";
+import { DELIVERY_ZONES, getDeliveryPrice, DeliveryZone } from "@/lib/delivery";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,6 +35,7 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
     address: "",
+    deliveryZone: "",
   });
 
   if (items.length === 0) {
@@ -81,7 +83,8 @@ export default function CheckoutPage() {
         lastName,
         email: formData.email || '',
         phone: formData.phone,
-        address: formData.address
+        address: formData.address,
+        deliveryZone: formData.deliveryZone
       };
 
       // Create order in Firebase - now includes comprehensive validation
@@ -185,6 +188,30 @@ export default function CheckoutPage() {
                     className="rounded-xl min-h-[100px]"
                   />
                 </div>
+                <div>
+                  <Label htmlFor="deliveryZone" className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">Delivery Location *</Label>
+                  <select
+                    id="deliveryZone"
+                    value={formData.deliveryZone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, deliveryZone: e.target.value })
+                    }
+                    required
+                    className="w-full h-11 rounded-xl border border-input bg-background px-3 text-sm"
+                  >
+                    <option value="">Select your delivery location</option>
+                    {DELIVERY_ZONES.map((zone) => (
+                      <option key={zone.id} value={zone.id}>
+                        {zone.label} — {zone.rangeLabel}
+                      </option>
+                    ))}
+                  </select>
+                  {formData.deliveryZone && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {DELIVERY_ZONES.find(z => z.id === formData.deliveryZone)?.description}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -243,7 +270,9 @@ export default function CheckoutPage() {
                     Amount to Pay
                   </span>
                   <span className="font-bold text-primary text-xl">
-                    {formatPrice(getTotal())}
+                    {formData.deliveryZone
+                      ? formatPrice(getTotal() + getDeliveryPrice(formData.deliveryZone as DeliveryZone))
+                      : formatPrice(getTotal())}
                   </span>
                 </div>
               </div>
@@ -330,12 +359,20 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Delivery</span>
-                  <span className="text-xs text-muted-foreground">To be confirmed</span>
+                  <span className="font-medium">
+                    {formData.deliveryZone
+                      ? formatPrice(getDeliveryPrice(formData.deliveryZone as DeliveryZone))
+                      : "Select location"}
+                  </span>
                 </div>
                 <Separator className="my-4" />
                 <div className="flex justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span className="text-primary">{formatPrice(getTotal())}</span>
+                  <span className="text-primary">
+                    {formData.deliveryZone
+                      ? formatPrice(getTotal() + getDeliveryPrice(formData.deliveryZone as DeliveryZone))
+                      : formatPrice(getTotal())}
+                  </span>
                 </div>
               </div>
               <Button

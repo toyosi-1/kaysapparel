@@ -44,9 +44,13 @@ export interface Order {
     email: string
     phone: string
     address: string
+    deliveryZone?: string
+    deliveryFee?: number
   }
   items: OrderItem[]
-  total: number // Total in kobo
+  total: number // Total in Naira
+  subtotal?: number // Items total before delivery
+  deliveryFee?: number
   status: 'pending' | 'paid' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
   paymentInfo?: {
     bank: string
