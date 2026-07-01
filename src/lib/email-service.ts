@@ -17,49 +17,38 @@ export class EmailService {
     return EmailService.instance;
   }
 
-  // Production email service using Resend API
+  // Send email via Netlify serverless function (keeps API key server-side)
   async sendEmail(data: EmailData): Promise<boolean> {
     try {
-      // Check if we're in development mode (using console logs)
-      if (process.env.NODE_ENV === 'development' || !process.env.RESEND_API_KEY) {
-        console.log('📧 [DEV MODE] Sending Email:', {
-          to: data.to,
-          subject: data.subject,
-          timestamp: new Date().toISOString()
-        });
-        
-        console.log('Email content preview:', data.html.substring(0, 200) + '...');
-        
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        console.log('✅ [DEV MODE] Email sent successfully to:', data.to);
+      const endpoint =
+        typeof window !== 'undefined'
+          ? '/.netlify/functions/send-email'
+          : null;
+
+      if (!endpoint) {
+        console.log('📧 [SERVER] Email skipped (server-side render context)');
         return true;
       }
 
-      // Production: Send via Resend API
-      const response = await fetch('https://api.resend.com/emails', {
+      const response = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          from: 'KaysApparel <noreply@kaysapparel.com>', // Update with your domain
-          to: [data.to],
+          to: data.to,
           subject: data.subject,
           html: data.html,
           text: data.text,
         }),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`Resend API error: ${error}`);
+        console.error('❌ Email function error:', result);
+        return false;
       }
 
-      const result = await response.json();
-      console.log('✅ Email sent successfully via Resend:', result.id);
+      console.log('✅ Email sent successfully:', result.id);
       return true;
     } catch (error) {
       console.error('❌ Failed to send email:', error);
@@ -118,6 +107,21 @@ export class EmailService {
 
     return this.sendEmail({
       to: order.customerInfo.email,
+      subject,
+      html,
+      text
+    });
+  }
+
+  async sendAdminOrderNotification(order: Order): Promise<boolean> {
+    const adminEmail = 'kays.apparel@gmail.com';
+    const subject = `New Order Received - KaysApparel #${order.id}`;
+    
+    const html = this.generateAdminOrderNotificationEmail(order);
+    const text = this.generateAdminOrderNotificationText(order);
+
+    return this.sendEmail({
+      to: adminEmail,
       subject,
       html,
       text
@@ -184,9 +188,9 @@ export class EmailService {
             <div class="payment-info">
               <h3>Payment Information</h3>
               <p>Please make payment to:</p>
-              <p><strong>Bank:</strong> Sterling Bank</p>
+              <p><strong>Bank:</strong> Moniepoint MFB</p>
               <p><strong>Account Name:</strong> Kaysapparel Global Concept</p>
-              <p><strong>Account Number:</strong> 0092419264</p>
+              <p><strong>Account Number:</strong> 5439334220</p>
               <p><strong>Amount:</strong> ₦${order.total.toLocaleString()}</p>
               <p>Upload your payment receipt on the checkout page to complete your order.</p>
             </div>
@@ -200,9 +204,9 @@ export class EmailService {
           </div>
           
           <div class="footer">
-            <p>Questions? Contact us at kays.apparel@gmail.com or 08136642570</p>
+            <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
             <p>Shop 45 Omololu Road, off Randle Avenue, Surulere, Lagos</p>
-            <p>&copy; 2024 KaysApparel. All rights reserved.</p>
+            <p>&copy; 2024 COG Services. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -236,9 +240,9 @@ Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
 Total: ₦${order.total.toLocaleString()}
 
 PAYMENT INFORMATION:
-Bank: Sterling Bank
+Bank: Moniepoint MFB
 Account Name: Kaysapparel Global Concept
-Account Number: 0092419264
+Account Number: 5439334220
 Amount: ₦${order.total.toLocaleString()}
 
 Please upload your payment receipt on the checkout page to complete your order.
@@ -248,9 +252,9 @@ Location: ${order.customerInfo?.deliveryZone || 'Not specified'}
 Address: ${order.customerInfo?.address}
 Phone: ${order.customerInfo?.phone}
 
-Questions? Contact us at kays.apparel@gmail.com or 08136642570
+Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 KaysApparel. All rights reserved.
+© 2024 COG Services. All rights reserved.
     `;
   }
 
@@ -294,8 +298,8 @@ Questions? Contact us at kays.apparel@gmail.com or 08136642570
           </div>
           
           <div class="footer">
-            <p>Questions? Contact us at kays.apparel@gmail.com or 08136642570</p>
-            <p>&copy; 2024 KaysApparel. All rights reserved.</p>
+            <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
+            <p>&copy; 2024 COG Services. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -319,9 +323,9 @@ Total Paid: ₦${order.total.toLocaleString()}
 
 We're now preparing your order for shipment. You'll receive another notification when your order ships.
 
-Questions? Contact us at kays.apparel@gmail.com or 08136642570
+Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 KaysApparel. All rights reserved.
+© 2024 COG Services. All rights reserved.
     `;
   }
 
@@ -365,8 +369,8 @@ Questions? Contact us at kays.apparel@gmail.com or 08136642570
           </div>
           
           <div class="footer">
-            <p>Questions? Contact us at kays.apparel@gmail.com or 08136642570</p>
-            <p>&copy; 2024 KaysApparel. All rights reserved.</p>
+            <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
+            <p>&copy; 2024 COG Services. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -390,9 +394,101 @@ Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
 
 You can track your order status on our website using your order ID.
 
-Questions? Contact us at kays.apparel@gmail.com or 08136642570
+Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 KaysApparel. All rights reserved.
+© 2024 COG Services. All rights reserved.
+    `;
+  }
+
+  private generateAdminOrderNotificationEmail(order: Order): string {
+    const orderDate = order.createdAt?.toDate?.() ? 
+      new Date(order.createdAt.toDate()).toLocaleDateString() : 
+      'Unknown';
+
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>New Order Received - KaysApparel</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #6B4C3B; color: white; padding: 20px; text-align: center; }
+          .content { background: #f9f9f9; padding: 20px; }
+          .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+          .item { border-bottom: 1px solid #eee; padding: 10px 0; }
+          .total { font-size: 18px; font-weight: bold; color: #6B4C3B; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>New Order Received</h1>
+            <p>Order #${order.id}</p>
+          </div>
+          
+          <div class="content">
+            <p><strong>Order Date:</strong> ${orderDate}</p>
+            <p><strong>Customer:</strong> ${order.customerInfo?.firstName} ${order.customerInfo?.lastName}</p>
+            <p><strong>Email:</strong> ${order.customerInfo?.email}</p>
+            <p><strong>Phone:</strong> ${order.customerInfo?.phone}</p>
+            <p><strong>Address:</strong> ${order.customerInfo?.address}</p>
+            <p><strong>Delivery Zone:</strong> ${order.customerInfo?.deliveryZone || 'Not specified'}</p>
+            
+            <h3>Items Ordered:</h3>
+            ${order.items.map(item => `
+              <div class="item">
+                <p><strong>${item.productName}</strong></p>
+                <p>Size: ${item.size} | Color: ${item.color} | Qty: ${item.quantity}</p>
+                <p>Price: ₦${item.price.toLocaleString()}</p>
+              </div>
+            `).join('')}
+            
+            <p class="total">Subtotal: ₦${(order.subtotal || 0).toLocaleString()}</p>
+            <p>Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}</p>
+            <p class="total">Total: ₦${order.total.toLocaleString()}</p>
+            
+            <p>Please log in to the admin dashboard to confirm payment and update the order status.</p>
+          </div>
+          
+          <div class="footer">
+            <p>Admin Dashboard: kaysapparel.com/admin</p>
+            <p>&copy; 2024 COG Services. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  private generateAdminOrderNotificationText(order: Order): string {
+    const orderDate = order.createdAt?.toDate?.() ? 
+      new Date(order.createdAt.toDate()).toLocaleDateString() : 
+      'Unknown';
+
+    return `
+NEW ORDER RECEIVED - KAYSAPPAREL
+
+Order ID: ${order.id}
+Order Date: ${orderDate}
+Customer: ${order.customerInfo?.firstName} ${order.customerInfo?.lastName}
+Email: ${order.customerInfo?.email}
+Phone: ${order.customerInfo?.phone}
+Address: ${order.customerInfo?.address}
+Delivery Zone: ${order.customerInfo?.deliveryZone || 'Not specified'}
+
+Items Ordered:
+${order.items.map(item => `- ${item.productName} | Size: ${item.size} | Color: ${item.color} | Qty: ${item.quantity} | ₦${item.price.toLocaleString()}`).join('\n')}
+
+Subtotal: ₦${(order.subtotal || 0).toLocaleString()}
+Delivery Fee: ₦${(order.deliveryFee || 0).toLocaleString()}
+Total: ₦${order.total.toLocaleString()}
+
+Please log in to the admin dashboard to confirm payment and update the order status.
+Admin Dashboard: kaysapparel.com/admin
+
+© 2024 COG Services. All rights reserved.
     `;
   }
 }

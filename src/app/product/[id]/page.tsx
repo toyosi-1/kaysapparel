@@ -1,9 +1,14 @@
-import { notFound } from "next/navigation";
-import { getProducts, getProductById } from "@/lib/data-service";
-import { ProductDetail } from "./product-detail";
+import type { Metadata } from "next";
+import { getProducts } from "@/lib/data-service";
+import { ProductDetailFetcher } from "./product-detail-fetcher";
+
+export const metadata: Metadata = {
+  title: "Product Details | KaysApparel",
+  description: "Shop premium women's fashion at KaysApparel. Fast delivery across Nigeria.",
+};
 
 export async function generateStaticParams() {
-  const products = await getProducts();
+  const products = getProducts();
   return products
     .filter((product) => product.id)
     .map((product) => ({
@@ -17,11 +22,5 @@ export default async function ProductPage({
   params: Promise<{ id: string }> | { id: string };
 }) {
   const resolvedParams = await params;
-  const product = await getProductById(resolvedParams.id);
-
-  if (!product) {
-    notFound();
-  }
-
-  return <ProductDetail product={product} />;
+  return <ProductDetailFetcher productId={resolvedParams.id} />;
 }

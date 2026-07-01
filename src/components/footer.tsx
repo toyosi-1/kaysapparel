@@ -10,13 +10,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="space-y-5">
-            <div className="bg-[#2C2220] inline-block">
+            <div className="inline-block">
               <Image
-                src="/images/logo.jpeg"
+                src="/images/logo_cropped.png"
                 alt="KaysApparel Fashion Store"
-                width={180}
-                height={65}
-                className="h-16 w-auto object-contain mix-blend-lighten"
+                width={407}
+                height={310}
+                className="w-[160px] h-auto object-contain brightness-0 invert"
               />
             </div>
             <p className="text-sm text-white/60 leading-relaxed">
@@ -64,6 +64,9 @@ export function Footer() {
               <Link href="/shop" className="text-sm text-white/70 hover:text-white transition-colors">
                 Shop All
               </Link>
+              <Link href="/contact" className="text-sm text-white/70 hover:text-white transition-colors">
+                Contact Us
+              </Link>
               <Link href="/account" className="text-sm text-white/70 hover:text-white transition-colors">
                 My Account
               </Link>
@@ -103,7 +106,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <Phone className="h-4 w-4 text-[#C4A882] flex-shrink-0" />
-                <span>08136642570</span>
+                <span>+234 813 664 2570</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <Mail className="h-4 w-4 text-[#C4A882] flex-shrink-0" />
@@ -115,7 +118,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} KaysApparel. All rights reserved.
+            &copy; {new Date().getFullYear()} COG Services. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
             Lagos, Nigeria

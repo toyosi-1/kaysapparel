@@ -6,7 +6,7 @@ import { useCartStore } from "@/lib/store";
 import { formatPrice } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Lock } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ArrowLeft, Lock } from "lucide-react";
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, getTotal } = useCartStore();
@@ -46,8 +46,10 @@ export default function CartPage() {
               {items.reduce((c, i) => c + i.quantity, 0)} item{items.length !== 1 ? "s" : ""} in your cart
             </p>
           </div>
-          <Link href="/shop" className="text-sm text-[#6B4C3B] hover:underline font-medium hidden sm:block">
-            Continue Shopping
+          <Link href="/shop">
+            <Button variant="outline" className="gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white px-4">
+              <ArrowLeft className="h-4 w-4" /> Continue Shopping
+            </Button>
           </Link>
         </div>
 
@@ -168,6 +170,11 @@ export default function CartPage() {
               <Link href="/checkout">
                 <Button className="w-full mt-6 gap-2 bg-[#6B4C3B] hover:bg-[#5a3f31] text-white rounded-none h-12 font-medium" size="lg">
                   Proceed to Checkout <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/shop" className="block sm:hidden">
+                <Button variant="outline" className="w-full mt-3 gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white h-12 font-medium">
+                  <ArrowLeft className="h-4 w-4" /> Continue Shopping
                 </Button>
               </Link>
               <div className="flex items-center justify-center gap-1.5 mt-4 text-xs text-gray-400">

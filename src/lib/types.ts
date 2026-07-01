@@ -8,6 +8,7 @@ export interface Product {
   images: string[];
   description: string;
   inStock: boolean;
+  _isStatic?: boolean;
 }
 
 export interface CartItem {

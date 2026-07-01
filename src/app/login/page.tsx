@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/contexts/auth-context";
-import { Eye, EyeOff, LogIn, ShoppingBag, User } from "lucide-react";
+import { Eye, EyeOff, LogIn, User } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -36,16 +37,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 lg:px-8 py-16">
+    <div className="bg-white min-h-[calc(100vh-64px)] flex flex-col">
+      <div className="flex-1 overflow-y-auto">
+      <div className="container mx-auto px-4 lg:px-8 py-10">
         <div className="max-w-md mx-auto">
           {/* Logo/Brand */}
           <div className="text-center mb-8">
             <Link href="/" className="inline-block">
-              <div className="w-16 h-16 mx-auto mb-4 bg-[#6B4C3B] rounded-full flex items-center justify-center">
-                <ShoppingBag className="h-8 w-8 text-white" />
-              </div>
-              <h1 className="text-2xl font-light text-gray-900">KaysApparel</h1>
+              <Image
+                src="/images/logo_cropped.png"
+                alt="KaysApparel"
+                width={100}
+                height={76}
+                className="mx-auto mb-2 h-20 w-auto object-contain"
+              />
               <p className="text-sm text-gray-500 mt-1">Fashion for the Modern Woman</p>
             </Link>
           </div>
@@ -62,7 +67,7 @@ export default function LoginPage() {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
+                <div className="space-y-1.5">
                   <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
@@ -75,7 +80,7 @@ export default function LoginPage() {
                   />
                 </div>
 
-                <div>
+                <div className="space-y-1.5">
                   <Label htmlFor="password">Password</Label>
                   <div className="relative">
                     <Input
@@ -157,6 +162,7 @@ export default function LoginPage() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

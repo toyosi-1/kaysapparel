@@ -30,13 +30,11 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     
-    // Orders - authenticated users can create and read their own orders
-    // Admins can read and update all orders
+    // Orders - anyone can create (guest checkout) and read by ID (order tracking)
+    // Order IDs are random Firestore IDs and act as unguessable tracking tokens
     match /orders/{orderId} {
-      allow create: if isAuthenticated() || true; // Allow guest checkout too
-      allow read: if isAuthenticated() && 
-        resource.data.customerInfo.email == request.auth.token.email ||
-        isAdmin();
+      allow create: if true; // Guest checkout supported — rate limiting handled in app
+      allow read: if true; // Order ID acts as a secret token for tracking
       allow update: if isAdmin();
       allow delete: if isAdmin();
     }
@@ -44,6 +42,19 @@ service cloud.firestore {
     // Categories - publicly readable, only admins can write
     match /categories/{categoryId} {
       allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Receipts - admins read all, guests can create a receipt for a specific order
+    match /receipts/{receiptId} {
+      allow read: if isAdmin();
+      allow create: if true; // Guest upload after checkout
+      allow update, delete: if isAdmin();
+    }
+    
+    // Admin settings - only admins
+    match /settings/{settingsId} {
+      allow read: if isAdmin();
       allow write: if isAdmin();
     }
   }

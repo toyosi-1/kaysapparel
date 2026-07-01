@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { orderService, Order } from "@/lib/firebase-services";
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
+import { productService, Order, Product, Receipt } from "@/lib/firebase-services";
 import { categories, formatPrice } from "@/lib/data";
+import { resizeImages, formatBytes, ResizeResult } from "@/lib/image-utils";
 import { getDeliveryZoneInfo, suggestPrice } from "@/lib/delivery";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,12 +41,20 @@ import {
   MapPin,
   Phone,
   Mail,
+  Trash2,
+  Download,
 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
+  const adminPasswordRef = useRef("kaysadmin2025");
+
+  // Settings State
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
 
   // Order Management State
   const [orders, setOrders] = useState<Order[]>([]);
@@ -53,6 +63,12 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [selectedOrderReceipts, setSelectedOrderReceipts] = useState<Receipt[]>([]);
+  const [loadingReceipts, setLoadingReceipts] = useState(false);
+
+  // Product Management State
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
 
   // Add Product State
   const [newProduct, setNewProduct] = useState({
@@ -64,11 +80,15 @@ export default function AdminPage() {
     description: "",
   });
   const [productImages, setProductImages] = useState<File[]>([]);
+  const [resizeResults, setResizeResults] = useState<ResizeResult[]>([]);
+  const [resizing, setResizing] = useState(false);
+  const [addingProduct, setAddingProduct] = useState(false);
 
-  // Load orders from Firebase
+  // Load orders and products from Firebase
   useEffect(() => {
     if (isAuthenticated) {
       loadOrders();
+      loadProducts();
     }
   }, [isAuthenticated]);
 
@@ -96,7 +116,7 @@ export default function AdminPage() {
 
   const loadOrders = async () => {
     try {
-      const ordersData = await orderService.getAll();
+      const ordersData = await adminApi("getOrders", {});
       setOrders(ordersData);
     } catch (error) {
       console.error("Failed to load orders:", error);
@@ -106,11 +126,109 @@ export default function AdminPage() {
     }
   };
 
+  const loadProducts = async () => {
+    try {
+      setLoadingProducts(true);
+      const productsData = await productService.getAll();
+      setProducts(productsData);
+    } catch (error) {
+      console.error("Failed to load products:", error);
+      toast.error("Failed to load products");
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+
+  const adminApi = async (action: string, payload: Record<string, unknown>) => {
+    const response = await fetch("/.netlify/functions/admin-products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action, adminPassword: adminPasswordRef.current, ...payload }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: "Request failed" }));
+      throw new Error(errorData.error || `Request failed: ${response.status}`);
+    }
+    return response.json();
+  };
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const toggleProductStock = async (productId: string, currentStock: boolean) => {
+    try {
+      await adminApi("update", { productId, updates: { inStock: !currentStock } });
+      await loadProducts();
+      toast.success(`Product marked as ${!currentStock ? "in stock" : "sold out"}`);
+    } catch (error) {
+      console.error("Failed to update stock status:", error);
+      toast.error("Failed to update stock status");
+    }
+  };
+
+  const deleteProduct = async (productId: string, productName: string) => {
+    if (!confirm(`Are you sure you want to delete "${productName}"?`)) return;
+    try {
+      await adminApi("delete", { productId });
+      await loadProducts();
+      toast.success(`"${productName}" deleted`);
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+      toast.error("Failed to delete product");
+    }
+  };
+
+  const loadReceipts = async (orderId: string) => {
+    try {
+      setLoadingReceipts(true);
+      const receipts = await adminApi("getReceipts", { orderId });
+      setSelectedOrderReceipts(receipts);
+    } catch (error) {
+      console.error("Failed to load receipts:", error);
+      toast.error("Failed to load receipts");
+    } finally {
+      setLoadingReceipts(false);
+    }
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    try {
+      setChangingPassword(true);
+      await adminApi("updatePassword", { newPassword });
+      adminPasswordRef.current = newPassword;
+      setNewPassword("");
+      setConfirmPassword("");
+      toast.success("Admin password updated successfully");
+    } catch (error) {
+      console.error("Failed to change password:", error);
+      toast.error("Failed to change password");
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
   const updateOrderStatus = async (orderId: string, newStatus: Order['status']) => {
     try {
-      await orderService.updateStatus(orderId, newStatus);
+      await adminApi("updateOrder", { orderId, updates: { status: newStatus } });
       await loadOrders(); // Refresh orders
-      setSelectedOrder(null);
+      if (selectedOrder?.id === orderId) {
+        setSelectedOrder({ ...selectedOrder, status: newStatus });
+      }
       toast.success(`Order status updated to ${newStatus}`);
     } catch (error) {
       console.error("Failed to update order status:", error);
@@ -136,17 +254,37 @@ export default function AdminPage() {
       .reduce((total, order) => total + order.total, 0);
   };
 
-  const handleAdminLogin = (e: React.FormEvent) => {
+  const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminPassword === "kaysadmin2025") {
+    adminPasswordRef.current = adminPassword;
+    try {
+      await adminApi("getOrders", {});
       setIsAuthenticated(true);
       toast.success("Welcome, Admin!");
-    } else {
+    } catch {
       toast.error("Incorrect password");
     }
   };
 
-  const handleAddProduct = (e: React.FormEvent) => {
+  const handleImageSelect = async (files: File[]) => {
+    if (files.length === 0) return;
+    setResizing(true);
+    setResizeResults([]);
+    try {
+      const results = await resizeImages(files, { maxDimension: 900, quality: 0.82 });
+      setResizeResults(results);
+      setProductImages(results.map((r) => r.file));
+      const totalSaved = results.reduce((s, r) => s + r.savedPercent, 0);
+      const avgSaved = Math.round(totalSaved / results.length);
+      toast.success(`${files.length} image${files.length > 1 ? "s" : ""} compressed — avg ${avgSaved}% smaller`);
+    } catch {
+      toast.error("Image processing failed");
+    } finally {
+      setResizing(false);
+    }
+  };
+
+  const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
       !newProduct.name ||
@@ -157,16 +295,41 @@ export default function AdminPage() {
       toast.error("Please fill in all required fields");
       return;
     }
-    toast.success(`Product "${newProduct.name}" added successfully!`);
-    setNewProduct({
-      name: "",
-      price: "",
-      category: "",
-      sizes: [],
-      colors: "",
-      description: "",
-    });
-    setProductImages([]);
+    setAddingProduct(true);
+    try {
+      // Convert images to base64 data URLs
+      const images = await Promise.all(
+        productImages.map(async (file) => ({
+          name: file.name,
+          data: await fileToBase64(file),
+        }))
+      );
+
+      // Save product via secure admin function
+      await adminApi("create", {
+        product: {
+          name: newProduct.name,
+          price: Number(newProduct.price),
+          category: newProduct.category,
+          sizes: newProduct.sizes,
+          colors: newProduct.colors.split(",").map((c) => c.trim()).filter(Boolean),
+          description: newProduct.description,
+          inStock: true,
+        },
+        images,
+      });
+
+      toast.success(`"${newProduct.name}" added to the store!`);
+      setNewProduct({ name: "", price: "", category: "", sizes: [], colors: "", description: "" });
+      setProductImages([]);
+      setResizeResults([]);
+      await loadProducts();
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to add product. Check Firebase connection.");
+    } finally {
+      setAddingProduct(false);
+    }
   };
 
   const toggleSize = (size: string) => {
@@ -180,33 +343,49 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-sm mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 justify-center">
-                <LogIn className="h-5 w-5" /> Admin Login
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="w-full max-w-sm space-y-4">
+          {/* Header */}
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-[#6B4C3B] text-white mb-4">
+              <LogIn className="h-7 w-7" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">KaysApparel</h1>
+            <p className="text-sm text-[#6B4C3B] font-semibold tracking-wide uppercase mt-1">Admin Dashboard</p>
+          </div>
+
+          {/* Warning: not customer login */}
+          <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 text-xs text-amber-800 text-center">
+            ⚠️ This is the <strong>admin-only</strong> area. Customer accounts are at{" "}
+            <a href="/login" className="underline font-medium">/login</a>.
+          </div>
+
+          <Card className="shadow-md">
+            <CardContent className="pt-6">
               <form onSubmit={handleAdminLogin} className="space-y-4">
                 <div>
-                  <Label htmlFor="admin-pass">Admin Password</Label>
+                  <Label htmlFor="admin-pass" className="text-sm font-medium">Admin Password</Label>
                   <Input
                     id="admin-pass"
                     type="password"
                     placeholder="Enter admin password"
                     value={adminPassword}
                     onChange={(e) => setAdminPassword(e.target.value)}
+                    className="mt-1.5"
                     required
+                    autoFocus
                   />
                 </div>
-                <Button type="submit" className="w-full">
-                  Sign In
+                <Button type="submit" className="w-full bg-[#6B4C3B] hover:bg-[#5a3f31] text-white rounded-none h-11 font-semibold">
+                  Access Dashboard
                 </Button>
               </form>
             </CardContent>
           </Card>
+
+          <p className="text-center text-xs text-gray-400">
+            This page is restricted to store administrators only.
+          </p>
         </div>
       </div>
     );
@@ -258,68 +437,85 @@ export default function AdminPage() {
           <TabsTrigger value="products">Products</TabsTrigger>
           <TabsTrigger value="add-product">Add Product</TabsTrigger>
           <TabsTrigger value="orders">Orders</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         {/* Products List */}
         <TabsContent value="products" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>All Products</CardTitle>
+              <CardTitle>All Products ({products.length})</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {[
-                  {
-                    name: "Elegant Midi Dress",
-                    price: 12000,
-                    category: "Dresses",
-                    stock: true,
-                  },
-                  {
-                    name: "Ankara Print Blouse",
-                    price: 8000,
-                    category: "Tops",
-                    stock: true,
-                  },
-                  {
-                    name: "High-Waist Pencil Skirt",
-                    price: 10000,
-                    category: "Skirts",
-                    stock: true,
-                  },
-                  {
-                    name: "Wide-Leg Palazzo Pants",
-                    price: 15000,
-                    category: "Trousers",
-                    stock: true,
-                  },
-                ].map((product, i) => (
+              {loadingProducts ? (
+                <div className="text-center py-12">
+                  <Package className="h-8 w-8 mx-auto text-gray-300 mb-3 animate-spin" />
+                  <p className="text-sm text-gray-500">Loading products...</p>
+                </div>
+              ) : (
+              <div className="space-y-2">
+                {products.map((product) => (
                   <div
-                    key={i}
-                    className="flex items-center justify-between p-3 border rounded-lg"
+                    key={product.id}
+                    className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 border rounded-lg hover:bg-gray-50"
                   >
-                    <div>
-                      <p className="font-medium text-sm">{product.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {product.category}
-                      </p>
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      {/* Thumbnail */}
+                      {product.images[0] && (
+                        <div className="w-12 h-14 rounded-md overflow-hidden flex-shrink-0 bg-gray-100 relative">
+                          <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        </div>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-sm truncate">{product.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {categories.find(c => c.slug === product.category)?.name ?? product.category}
+                        </p>
+                        <p className="text-sm font-medium mt-0.5 sm:hidden">
+                          {formatPrice(product.price)}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-medium text-sm">
-                        {formatPrice(product.price)}
-                      </span>
-                      <Badge
-                        variant={product.stock ? "default" : "destructive"}
-                      >
-                        {product.stock ? "In Stock" : "Out"}
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 sm:flex-shrink-0">
+                      <span className="font-medium text-sm hidden sm:inline">{formatPrice(product.price)}</span>
+                      <Badge variant={product.inStock ? "default" : "destructive"} className="text-xs">
+                        {product.inStock ? "In Stock" : "Out"}
                       </Badge>
-                      <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4" />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => product.id && toggleProductStock(product.id, product.inStock)}
+                        className="text-xs h-8"
+                      >
+                        {product.inStock ? "Mark Sold Out" : "Restock"}
+                      </Button>
+                      <a href={`/product?id=${product.id}`} target="_blank" rel="noopener noreferrer">
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0"><Eye className="h-4 w-4" /></Button>
+                      </a>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 h-8 w-8 p-0"
+                        onClick={() => product.id && deleteProduct(product.id, product.name)}
+                      >
+                        <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
                 ))}
+
+                {products.length === 0 && (
+                  <div className="text-center py-12">
+                    <Package className="h-12 w-12 mx-auto text-gray-300 mb-4" />
+                    <p className="text-gray-500">No products found</p>
+                  </div>
+                )}
               </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -438,7 +634,7 @@ export default function AdminPage() {
                   />
                 </div>
 
-                {/* Image Upload */}
+                {/* Image Upload with auto-compress */}
                 <div>
                   <Label>Product Images</Label>
                   <div className="border-2 border-dashed rounded-lg p-6 text-center mt-2 hover:border-primary/50 transition-colors">
@@ -446,33 +642,43 @@ export default function AdminPage() {
                       type="file"
                       accept="image/*"
                       multiple
-                      onChange={(e) =>
-                        setProductImages(
-                          e.target.files ? Array.from(e.target.files) : []
-                        )
-                      }
+                      onChange={(e) => {
+                        const files = e.target.files ? Array.from(e.target.files) : [];
+                        handleImageSelect(files);
+                      }}
                       className="hidden"
                       id="product-images"
                     />
-                    <label htmlFor="product-images" className="cursor-pointer">
-                      {productImages.length > 0 ? (
+                    <label htmlFor="product-images" className="cursor-pointer block">
+                      {resizing ? (
                         <div className="space-y-2">
+                          <div className="h-8 w-8 mx-auto border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                          <p className="text-sm font-medium text-primary">Compressing images...</p>
+                        </div>
+                      ) : resizeResults.length > 0 ? (
+                        <div className="space-y-3">
                           <Check className="h-8 w-8 mx-auto text-green-600" />
-                          <p className="text-sm font-medium text-green-600">
-                            {productImages.length} image(s) selected
+                          <p className="text-sm font-semibold text-green-600">
+                            {resizeResults.length} image{resizeResults.length > 1 ? "s" : ""} ready
                           </p>
-                          <p className="text-xs text-muted-foreground">
-                            Click to change
-                          </p>
+                          <div className="space-y-1">
+                            {resizeResults.map((r, i) => (
+                              <p key={i} className="text-xs text-muted-foreground">
+                                {r.file.name} — {formatBytes(r.originalSize)} → {formatBytes(r.compressedSize)}
+                                {r.savedPercent > 0 && (
+                                  <span className="text-green-600 font-medium ml-1">({r.savedPercent}% saved)</span>
+                                )}
+                              </p>
+                            ))}
+                          </div>
+                          <p className="text-xs text-muted-foreground">Click to change</p>
                         </div>
                       ) : (
                         <div className="space-y-2">
                           <Upload className="h-8 w-8 mx-auto text-muted-foreground" />
-                          <p className="text-sm font-medium">
-                            Click to upload images
-                          </p>
+                          <p className="text-sm font-medium">Click to upload images</p>
                           <p className="text-xs text-muted-foreground">
-                            PNG, JPG up to 5MB each
+                            PNG, JPG, WebP — auto-compressed before upload
                           </p>
                         </div>
                       )}
@@ -480,8 +686,12 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg">
-                  <Plus className="h-4 w-4 mr-2" /> Add Product
+                <Button type="submit" className="w-full" size="lg" disabled={addingProduct || resizing}>
+                  {addingProduct ? (
+                    <><div className="h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" /> Saving Product...</>
+                  ) : (
+                    <><Plus className="h-4 w-4 mr-2" /> Add Product</>
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -553,21 +763,34 @@ export default function AdminPage() {
 
                     return (
                       <div key={order.id} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <p className="font-medium text-sm">#{order.id}</p>
-                              <Badge className={statusColors[order.status]}>
-                                <StatusIcon className="h-3 w-3 mr-1" />
-                                {order.status}
-                              </Badge>
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                              <p className="font-medium text-sm truncate">#{order.id}</p>
+                              <Select
+                                value={order.status}
+                                onValueChange={(value) => order.id && updateOrderStatus(order.id, value as Order['status'])}
+                              >
+                                <SelectTrigger className={`h-7 text-xs px-2 py-0 w-auto border-0 ${statusColors[order.status]} hover:opacity-90`}>
+                                  <StatusIcon className="h-3 w-3 mr-1" />
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="pending">Pending</SelectItem>
+                                  <SelectItem value="paid">Paid</SelectItem>
+                                  <SelectItem value="processing">Processing</SelectItem>
+                                  <SelectItem value="shipped">Shipped</SelectItem>
+                                  <SelectItem value="delivered">Delivered</SelectItem>
+                                  <SelectItem value="cancelled">Cancelled</SelectItem>
+                                </SelectContent>
+                              </Select>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
                               <div>
                                 <p className="font-medium">
                                   {order.customerInfo?.firstName} {order.customerInfo?.lastName}
                                 </p>
-                                <p className="text-muted-foreground">{order.customerInfo?.email}</p>
+                                <p className="text-muted-foreground truncate">{order.customerInfo?.email}</p>
                                 <p className="text-muted-foreground">{order.customerInfo?.phone}</p>
                               </div>
                               <div>
@@ -590,13 +813,38 @@ export default function AdminPage() {
                               </div>
                             </div>
                           </div>
-                          <div className="flex gap-2 ml-4">
+                          <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2 sm:ml-4 shrink-0">
+                            {order.status === "pending" && (
+                              <Button
+                                size="sm"
+                                onClick={() => order.id && updateOrderStatus(order.id, "paid")}
+                                className="bg-green-600 hover:bg-green-700 text-white h-8 text-xs whitespace-nowrap"
+                              >
+                                <Check className="h-3 w-3 mr-1" />
+                                Confirm
+                              </Button>
+                            )}
+                            {(order.status === "paid" || order.status === "processing") && (
+                              <Button
+                                size="sm"
+                                onClick={() => order.id && updateOrderStatus(order.id, "shipped")}
+                                className="bg-purple-600 hover:bg-purple-700 text-white h-8 text-xs whitespace-nowrap"
+                              >
+                                <Truck className="h-3 w-3 mr-1" />
+                                Ship
+                              </Button>
+                            )}
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => setSelectedOrder(order)}
+                              onClick={() => {
+                                setSelectedOrder(order);
+                                if (order.id) loadReceipts(order.id);
+                              }}
+                              className="h-8 gap-1 whitespace-nowrap"
                             >
                               <Eye className="h-4 w-4" />
+                              View
                             </Button>
                           </div>
                         </div>
@@ -615,6 +863,51 @@ export default function AdminPage() {
             </CardContent>
           </Card>
         </TabsContent>
+
+        {/* Settings */}
+        <TabsContent value="settings" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Admin Settings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleChangePassword} className="max-w-md space-y-4">
+                <h3 className="font-medium text-gray-900">Change Admin Password</h3>
+                <div>
+                  <Label htmlFor="new-password">New Password</Label>
+                  <Input
+                    id="new-password"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter new password"
+                    required
+                    minLength={6}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="confirm-password">Confirm Password</Label>
+                  <Input
+                    id="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm new password"
+                    required
+                    minLength={6}
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  disabled={changingPassword}
+                  className="bg-[#6B4C3B] hover:bg-[#5a3f31] text-white"
+                >
+                  {changingPassword ? "Updating..." : "Update Password"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
 
       {/* Order Detail Modal */}
@@ -626,6 +919,16 @@ export default function AdminPage() {
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Order Details</h2>
                   <p className="text-sm text-gray-500">Order ID: {selectedOrder.id}</p>
+                  {!loadingReceipts && selectedOrderReceipts.length > 0 && (
+                    <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      <Check className="h-3 w-3" /> Receipt Attached
+                    </span>
+                  )}
+                  {!loadingReceipts && selectedOrderReceipts.length === 0 && (
+                    <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                      <Clock className="h-3 w-3" /> No Receipt Yet
+                    </span>
+                  )}
                 </div>
                 <Button
                   variant="ghost"
@@ -700,26 +1003,100 @@ export default function AdminPage() {
                 </div>
               </div>
 
+              {/* Payment Receipt */}
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-medium text-gray-900">Payment Receipt</h3>
+                  {selectedOrderReceipts.length > 0 && (
+                    <span className="text-xs text-green-700 bg-green-100 px-2 py-1 rounded-full font-medium">
+                      {selectedOrderReceipts.length} uploaded
+                    </span>
+                  )}
+                </div>
+                {loadingReceipts ? (
+                  <p className="text-sm text-muted-foreground">Loading receipt...</p>
+                ) : selectedOrderReceipts.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {selectedOrderReceipts.map((receipt) => (
+                      <div key={receipt.id} className="border rounded-lg overflow-hidden bg-white hover:ring-2 hover:ring-[#6B4C3B] transition-all">
+                        <a
+                          href={receipt.fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <div className="relative aspect-[4/3] w-full bg-gray-100">
+                            <Image
+                              src={receipt.fileUrl}
+                              alt={receipt.fileName}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                            />
+                          </div>
+                        </a>
+                        <div className="p-3">
+                          <p className="text-xs text-muted-foreground truncate mb-2">
+                            {receipt.fileName}
+                          </p>
+                          <a
+                            href={receipt.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="inline-flex items-center gap-1 text-xs font-medium text-[#6B4C3B] hover:underline"
+                          >
+                            <Download className="h-3 w-3" /> Download / Open Receipt
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">No receipt uploaded for this order yet.</p>
+                )}
+              </div>
+
               {/* Status Update */}
               <div>
                 <h3 className="font-medium text-gray-900 mb-3">Update Status</h3>
-                <div className="flex flex-wrap gap-2">
-                  {["pending", "paid", "processing", "shipped", "delivered", "cancelled"].map((status) => (
+                <div className="flex flex-wrap items-center gap-3">
+                  <Select
+                    value={selectedOrder.status}
+                    onValueChange={(value) => updateOrderStatus(selectedOrder.id!, value as Order['status'])}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="paid">Paid</SelectItem>
+                      <SelectItem value="processing">Processing</SelectItem>
+                      <SelectItem value="shipped">Shipped</SelectItem>
+                      <SelectItem value="delivered">Delivered</SelectItem>
+                      <SelectItem value="cancelled">Cancelled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {selectedOrder.status === "pending" && (
                     <Button
-                      key={status}
-                      variant={selectedOrder.status === status ? "default" : "outline"}
+                      onClick={() => updateOrderStatus(selectedOrder.id!, "paid")}
+                      className="bg-green-600 hover:bg-green-700 text-white"
                       size="sm"
-                      onClick={() => updateOrderStatus(selectedOrder.id!, status as Order['status'])}
-                      className={`rounded-none ${
-                        selectedOrder.status === status 
-                          ? "bg-[#6B4C3B] hover:bg-[#5a3f31] text-white" 
-                          : ""
-                      }`}
-                      disabled={selectedOrder.status === status}
                     >
-                      {status}
+                      <Check className="h-4 w-4 mr-1" />
+                      Confirm Payment
                     </Button>
-                  ))}
+                  )}
+                  {(selectedOrder.status === "paid" || selectedOrder.status === "processing") && (
+                    <Button
+                      onClick={() => updateOrderStatus(selectedOrder.id!, "shipped")}
+                      className="bg-purple-600 hover:bg-purple-700 text-white"
+                      size="sm"
+                    >
+                      <Truck className="h-4 w-4 mr-1" />
+                      Mark Shipped
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>

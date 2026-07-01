@@ -22,8 +22,8 @@ export interface PaymentInfo {
 
 export async function createOrder(customerInfo: CustomerInfo): Promise<Order> {
   try {
-    // Rate limiting check
-    const rateLimitIdentifier = `order:${customerInfo.email}`;
+    // Rate limiting check (use email if available, otherwise phone)
+    const rateLimitIdentifier = `order:${customerInfo.email || customerInfo.phone}`;
     if (!checkRateLimit(rateLimitIdentifier)) {
       throw new Error('Too many order attempts. Please try again later.');
     }
@@ -82,24 +82,29 @@ export async function createOrder(customerInfo: CustomerInfo): Promise<Order> {
       total,
       status: 'pending',
       paymentInfo: {
-        bank: 'Sterling Bank',
+        bank: 'Moniepoint MFB',
         accountName: 'Kaysapparel Global Concept',
-        accountNumber: '0092419264'
+        accountNumber: '5439334220'
       }
     }
 
     const createdOrder = await orderService.create(order)
     
-    // Send order confirmation email
-    try {
-      await emailService.sendOrderConfirmation(createdOrder)
-    } catch (emailError) {
-      console.error('Failed to send order confirmation email:', emailError)
-      // Don't fail the order if email fails
-    }
-    
-    // Clear cart after order is created
+    // Clear cart immediately after order is created
     useCartStore.getState().clearCart()
+    
+    // Send emails in the background so the redirect happens immediately
+    // Don't await — if email fails, the order is still placed
+    Promise.allSettled([
+      emailService.sendOrderConfirmation(createdOrder),
+      emailService.sendAdminOrderNotification(createdOrder)
+    ]).then((results) => {
+      results.forEach((result, index) => {
+        if (result.status === 'rejected') {
+          console.error(`Failed to send ${index === 0 ? 'customer' : 'admin'} email:`, result.reason)
+        }
+      })
+    })
     
     return createdOrder
   } catch (error) {
@@ -134,9 +139,9 @@ export async function updateOrderStatus(orderId: string, status: Order['status']
 
 export async function markOrderAsPaid(orderId: string): Promise<void> {
   await orderService.markAsPaid(orderId, {
-    bank: 'Sterling Bank',
+    bank: 'Moniepoint MFB',
     accountName: 'Kaysapparel Global Concept',
-    accountNumber: '0092419264'
+    accountNumber: '5439334220'
   })
   
   // Send payment confirmation email

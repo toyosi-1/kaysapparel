@@ -92,7 +92,7 @@ function OrderSuccessContent() {
                   <p className="font-semibold text-lg text-[#6B4C3B]">{formatPrice(order.total)}</p>
                   
                   <p className="text-sm text-gray-500 mb-1 mt-3">Payment Method</p>
-                  <p className="text-sm">Bank Transfer - Sterling Bank</p>
+                  <p className="text-sm">Bank Transfer — Moniepoint MFB</p>
                 </div>
               </div>
 

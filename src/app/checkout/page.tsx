@@ -20,6 +20,7 @@ import {
   Upload,
   ArrowLeft,
   ShoppingBag,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -64,6 +65,8 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (submitting) return;
 
     if (!receipt) {
       toast.error("Please upload your payment receipt");
@@ -115,12 +118,26 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-8 md:py-12">
+    <div className="container mx-auto px-4 lg:px-8 py-8 md:py-12 relative">
+      {submitting && (
+        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+          <Loader2 className="h-10 w-10 animate-spin text-[#6B4C3B] mb-4" />
+          <p className="text-lg font-medium text-gray-900">Placing your order...</p>
+          <p className="text-sm text-muted-foreground mt-1">Please wait</p>
+        </div>
+      )}
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-        <Link href="/cart" className="hover:text-foreground transition-colors">Cart</Link>
-        <span>/</span>
-        <span className="text-foreground font-medium">Checkout</span>
+      <nav className="flex items-center justify-between gap-2 text-sm text-muted-foreground mb-8">
+        <div className="flex items-center gap-2">
+          <Link href="/cart" className="hover:text-foreground transition-colors">Cart</Link>
+          <span>/</span>
+          <span className="text-foreground font-medium">Checkout</span>
+        </div>
+        <Link href="/shop">
+          <Button type="button" variant="outline" className="gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white px-4">
+            <ArrowLeft className="h-4 w-4" /> Continue Shopping
+          </Button>
+        </Link>
       </nav>
 
       <h1 className="text-2xl md:text-3xl font-bold mb-2">Checkout</h1>
@@ -163,7 +180,7 @@ export default function CheckoutPage() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="email" className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">Email (optional)</Label>
+                  <Label htmlFor="email" className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">Email *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -172,6 +189,7 @@ export default function CheckoutPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
+                    required
                     className="h-11 rounded-xl"
                   />
                 </div>
@@ -293,7 +311,16 @@ export default function CheckoutPage() {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setReceipt(e.target.files?.[0] || null)}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] || null;
+                    if (file && file.size > 5 * 1024 * 1024) {
+                      toast.error("Receipt must be 5MB or smaller");
+                      e.target.value = "";
+                      setReceipt(null);
+                      return;
+                    }
+                    setReceipt(file);
+                  }}
                   className="hidden"
                   id="receipt-upload"
                 />
@@ -381,7 +408,13 @@ export default function CheckoutPage() {
                 size="lg"
                 disabled={submitting}
               >
-                {submitting ? "Placing Order..." : "Confirm Order"}
+                {submitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" /> Placing Order...
+                  </>
+                ) : (
+                  "Confirm Order"
+                )}
               </Button>
               <p className="text-[11px] text-center text-muted-foreground mt-4 leading-relaxed">
                 By placing your order, you confirm that you have made the
