@@ -14,6 +14,15 @@ interface CartStore {
   getItemCount: () => number;
 }
 
+interface WishlistStore {
+  items: Product[];
+  addItem: (product: Product) => void;
+  removeItem: (productId: string) => void;
+  toggleItem: (product: Product) => void;
+  isInWishlist: (productId: string) => boolean;
+  getCount: () => number;
+}
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -77,5 +86,35 @@ export const useCartStore = create<CartStore>()(
         get().items.reduce((count, item) => count + item.quantity, 0),
     }),
     { name: "kaysapparel-cart" }
+  )
+);
+
+export const useWishlistStore = create<WishlistStore>()(
+  persist(
+    (set, get) => ({
+      items: [],
+      addItem: (product) => {
+        const exists = get().items.find((item) => item.id === product.id);
+        if (!exists) {
+          set({ items: [...get().items, product] });
+        }
+      },
+      removeItem: (productId) => {
+        set({ items: get().items.filter((item) => item.id !== productId) });
+      },
+      toggleItem: (product) => {
+        const exists = get().items.find((item) => item.id === product.id);
+        if (exists) {
+          set({ items: get().items.filter((item) => item.id !== product.id) });
+        } else {
+          set({ items: [...get().items, product] });
+        }
+      },
+      isInWishlist: (productId) => {
+        return get().items.some((item) => item.id === productId);
+      },
+      getCount: () => get().items.length,
+    }),
+    { name: "kaysapparel-wishlist" }
   )
 );

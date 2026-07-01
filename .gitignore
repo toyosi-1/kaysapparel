@@ -48,3 +48,6 @@ next-env.d.ts
 
 # sensitive configuration files
 firebase-config.txt
+
+# Local Netlify folder
+.netlify

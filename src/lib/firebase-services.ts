@@ -33,6 +33,7 @@ export interface Product {
   inStock: boolean
   createdAt?: Timestamp
   updatedAt?: Timestamp
+  _isStatic?: boolean
 }
 
 export interface Order {
@@ -176,13 +177,13 @@ export const orderService = {
   },
 
   async create(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Promise<Order> {
+    const now = Timestamp.now()
     const docRef = await addDoc(collection(db, ORDERS_COLLECTION), {
       ...order,
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now()
+      createdAt: now,
+      updatedAt: now
     })
-    const docSnap = await getDoc(docRef)
-    return { id: docRef.id, ...docSnap.data() } as Order
+    return { id: docRef.id, ...order, createdAt: now, updatedAt: now } as Order
   },
 
   async updateStatus(id: string, status: Order['status']): Promise<void> {
@@ -247,9 +248,9 @@ export const userService = {
 // Receipt services
 export const receiptService = {
   async upload(orderId: string, file: File): Promise<Receipt> {
-    // Upload file to Firebase Storage
-    const fileName = `${orderId}_${Date.now()}_${file.name}`
-    const storageRef = ref(storage, `receipts/${fileName}`)
+    // Upload file to Firebase Storage under order folder to match security rules
+    const fileName = `${Date.now()}_${file.name}`
+    const storageRef = ref(storage, `receipts/${orderId}/${fileName}`)
     await uploadBytes(storageRef, file)
     const fileUrl = await getDownloadURL(storageRef)
 

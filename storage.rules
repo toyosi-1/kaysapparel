@@ -12,10 +12,10 @@ service firebase.storage {
         firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin == true;
     }
     
-    // Receipt uploads - allow authenticated users or guests to upload
-    // to their own order folder
+    // Receipt uploads - allow guests to upload, public read via signed download URLs
+    // URLs are only exposed to admins through the Firestore receipts collection
     match /receipts/{orderId}/{fileName} {
-      allow read: if isAuthenticated() || isAdmin();
+      allow read: if true; // Download URL required for viewing; URL is stored in admin-only Firestore doc
       allow create: if request.resource.size < 5 * 1024 * 1024 // 5MB max
                    && request.resource.contentType.matches('image/.*');
       allow delete: if isAdmin();

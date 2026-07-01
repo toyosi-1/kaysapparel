@@ -6,9 +6,20 @@ import {
   User,
   UserCredential
 } from 'firebase/auth'
-import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from './firebase'
 import { validateCustomerRegistration, validateLogin, validateProfileUpdate, checkRateLimit, ValidationResult } from './validation'
+
+export interface SavedAddress {
+  id: string
+  label: string       // e.g. "Home", "Office"
+  fullName: string
+  phone: string
+  address: string
+  city: string
+  state: string
+  isDefault: boolean
+}
 
 export interface UserProfile {
   uid: string
@@ -209,6 +220,32 @@ export class AuthService {
       }, { merge: true })
     } catch (error) {
       console.error('Update user profile error:', error)
+      throw error
+    }
+  }
+
+  // Get saved addresses
+  async getAddresses(uid: string): Promise<SavedAddress[]> {
+    try {
+      const docRef = doc(db, 'users', uid)
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        return (docSnap.data().addresses as SavedAddress[]) || []
+      }
+      return []
+    } catch (error) {
+      console.error('Get addresses error:', error)
+      throw error
+    }
+  }
+
+  // Save addresses array back to user doc
+  async saveAddresses(uid: string, addresses: SavedAddress[]): Promise<void> {
+    try {
+      const docRef = doc(db, 'users', uid)
+      await updateDoc(docRef, { addresses, updatedAt: serverTimestamp() })
+    } catch (error) {
+      console.error('Save addresses error:', error)
       throw error
     }
   }

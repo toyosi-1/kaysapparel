@@ -3,85 +3,184 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/types";
-import { formatPrice } from "@/lib/data";
-import { Badge } from "@/components/ui/badge";
-import { Heart, ShoppingBag } from "lucide-react";
+import { formatPrice, categories } from "@/lib/data";
+import { Heart, ShoppingBag, Eye, Plus, X } from "lucide-react";
+import { useWishlistStore, useCartStore } from "@/lib/store";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
 }
 
+const NEW_PRODUCT_IDS = new Set(["9", "10", "11", "12", "13", "14", "15"]);
+const POPULAR_PRODUCT_IDS = new Set(["19", "25", "26", "29", "46"]);
+
 export function ProductCard({ product }: ProductCardProps) {
   const imageUrl = product.images[0];
   const isExternal = imageUrl?.startsWith("http");
+  const toggleWishlist = useWishlistStore((s) => s.toggleItem);
+  const isInWishlist = useWishlistStore((s) => s.isInWishlist(product.id));
+  const addToCart = useCartStore((s) => s.addItem);
+  const [mounted, setMounted] = useState(false);
+  const [quickAddOpen, setQuickAddOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
+
+  const categoryName = categories.find((c) => c.slug === product.category)?.name ?? product.category;
+  const isNew = NEW_PRODUCT_IDS.has(product.id);
+  const isPopular = POPULAR_PRODUCT_IDS.has(product.id);
+
+  useEffect(() => setMounted(true), []);
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(product);
+    toast.success(isInWishlist ? "Removed from wishlist" : "Saved to wishlist");
+  };
+
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!product.inStock) return;
+    setQuickAddOpen(true);
+    setSelectedSize("");
+  };
+
+  const handleSizeSelect = (e: React.MouseEvent, size: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedSize(size);
+    addToCart(product, size, product.colors[0] || "");
+    toast.success(`${product.name} (${size}) added to cart!`);
+    setQuickAddOpen(false);
+  };
+
+  const handleCloseQuickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setQuickAddOpen(false);
+  };
 
   return (
-    <Link href={`/product/${product.id}`} className="group block">
-      <div className="overflow-hidden rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-        {/* Image */}
-        <div className="aspect-[3/4] relative overflow-hidden bg-gray-50">
+    <div className="group w-full">
+      {/* ── IMAGE BLOCK ── */}
+      <div className="relative w-full aspect-[2/3] overflow-hidden bg-[#F5F5F5]">
+        <Link
+          href={`/product?id=${product.id}`}
+          className="absolute inset-0 block"
+          aria-label={`View ${product.name}`}
+        >
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={product.name}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               unoptimized={!isExternal}
+              loading="lazy"
+              decoding="async"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-100 to-stone-200">
-              <ShoppingBag className="h-8 w-8 text-stone-300" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ShoppingBag className="h-10 w-10 text-stone-300" />
             </div>
           )}
+        </Link>
 
-          {/* Sold out overlay */}
-          {!product.inStock && (
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center">
-              <Badge className="bg-white text-black font-medium rounded-full px-3 py-1 text-xs">
-                Sold Out
-              </Badge>
-            </div>
-          )}
+        {/* Badge */}
+        {!product.inStock ? (
+          <span className="absolute top-2.5 left-2.5 bg-black text-white text-[9px] font-bold px-2 py-1 tracking-widest uppercase z-10">
+            SOLD OUT
+          </span>
+        ) : isNew ? (
+          <span className="absolute top-2.5 left-2.5 bg-[#6B4C3B] text-white text-[9px] font-bold px-2 py-1 tracking-widest uppercase z-10">
+            NEW
+          </span>
+        ) : isPopular ? (
+          <span className="absolute top-2.5 left-2.5 bg-[#C4A882] text-[#2C2220] text-[9px] font-bold px-2 py-1 tracking-widest uppercase z-10">
+            HOT
+          </span>
+        ) : null}
 
-          {/* Wishlist button */}
-          <button className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:scale-110">
-            <Heart className="h-3.5 w-3.5 text-gray-600" />
-          </button>
+        {/* Wishlist */}
+        <button
+          onClick={handleWishlist}
+          className={`absolute top-2.5 right-2.5 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-200 z-10 ${
+            mounted && isInWishlist
+              ? "bg-[#6B4C3B] text-white"
+              : "bg-white/80 text-gray-500 opacity-0 group-hover:opacity-100 hover:bg-white hover:text-[#6B4C3B]"
+          }`}
+          aria-label="Wishlist"
+        >
+          <Heart className={`h-3.5 w-3.5 ${mounted && isInWishlist ? "fill-current" : ""}`} />
+        </button>
 
-          {/* Quick add */}
-          <div className="absolute bottom-0 inset-x-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <div className="bg-black text-white text-center py-2.5 rounded-lg text-xs font-medium hover:bg-black/90 transition-colors cursor-pointer">
-              Add to Cart
-            </div>
-          </div>
-        </div>
-
-        {/* Info */}
-        <div className="p-3 md:p-4">
-          <p className="text-[10px] text-stone-400 uppercase tracking-widest font-medium mb-1">
-            {product.category}
-          </p>
-          <h3 className="font-medium text-sm text-gray-900 line-clamp-1 group-hover:text-[#6B4C3B] transition-colors">
-            {product.name}
-          </h3>
-          <div className="flex items-center justify-between mt-2">
-            <p className="font-semibold text-[#6B4C3B]">
-              {formatPrice(product.price)}
-            </p>
-            <div className="flex gap-1">
-              {product.sizes.slice(0, 3).map((size) => (
-                <span
+        {/* Quick Add overlay — size picker */}
+        {quickAddOpen && (
+          <div
+            className="absolute inset-0 bg-white/96 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-30 p-4"
+            onClick={handleCloseQuickAdd}
+          >
+            <button
+              onClick={handleCloseQuickAdd}
+              className="absolute top-2.5 right-2.5 h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">Select Size</p>
+            <div className="flex flex-wrap gap-2 justify-center" onClick={(e) => e.stopPropagation()}>
+              {product.sizes.map((size) => (
+                <button
                   key={size}
-                  className="text-[9px] bg-gray-100 rounded px-1.5 py-0.5 text-gray-500 font-medium"
+                  onClick={(e) => handleSizeSelect(e, size)}
+                  className="h-9 min-w-[2.5rem] px-3 border-2 border-[#6B4C3B] text-[#6B4C3B] text-xs font-bold hover:bg-[#6B4C3B] hover:text-white transition-colors rounded-sm"
                 >
                   {size}
-                </span>
+                </button>
               ))}
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Bottom bar: Quick view + Quick add */}
+        {!quickAddOpen && (
+          <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex z-20">
+            <Link
+              href={`/product?id=${product.id}`}
+              className="flex items-center justify-center gap-1.5 flex-1 bg-[#2C2220] hover:bg-[#6B4C3B] text-white text-[10px] font-semibold tracking-wider py-3 transition-colors"
+            >
+              <Eye className="h-3 w-3" /> VIEW
+            </Link>
+            {product.inStock && (
+              <button
+                onClick={handleQuickAdd}
+                className="flex items-center justify-center gap-1.5 px-4 bg-[#6B4C3B] hover:bg-[#5a3f31] text-white text-[10px] font-semibold tracking-wider py-3 transition-colors border-l border-white/20"
+                aria-label="Quick add to cart"
+              >
+                <Plus className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+        )}
       </div>
-    </Link>
+
+      {/* ── INFO BLOCK ── */}
+      <Link href={`/product?id=${product.id}`} className="block pt-3 pb-4 px-1">
+        <p className="text-[10px] text-[#9B8070] uppercase tracking-[0.18em] font-semibold mb-1">
+          {categoryName}
+        </p>
+        <h3 className="text-[13px] font-medium text-gray-800 leading-snug line-clamp-2 group-hover:text-[#6B4C3B] transition-colors mb-2">
+          {product.name}
+        </h3>
+        <p className="text-[15px] font-bold text-[#6B4C3B] mb-2">
+          {formatPrice(product.price)}
+        </p>
+        <p className="text-[11px] text-gray-400">
+          {product.sizes.join(", ")}
+        </p>
+      </Link>
+    </div>
   );
 }
