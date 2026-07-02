@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const sharp = require("sharp");
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "kaysadmin2025";
 const FUNCTION_URL = "https://frabjous-sfogliatella-fff3f2.netlify.app/.netlify/functions/admin-products";
@@ -29,22 +30,22 @@ const images = [
   },
 ];
 
-function fileToBase64(filePath) {
-  const buffer = fs.readFileSync(filePath);
-  return `data:image/png;base64,${buffer.toString("base64")}`;
+async function fileToWebPBase64(filePath) {
+  const webpBuffer = await sharp(filePath).webp({ quality: 85 }).toBuffer();
+  return `data:image/webp;base64,${webpBuffer.toString("base64")}`;
 }
 
 async function main() {
-  console.log("Uploading images and creating product via Netlify function...");
+  console.log("Converting images to WebP and uploading via Netlify function...");
 
   const payload = {
     action: "create",
     adminPassword: ADMIN_PASSWORD,
     product,
-    images: images.map((img) => ({
-      name: img.name,
-      data: fileToBase64(img.path),
-    })),
+    images: await Promise.all(images.map(async (img) => ({
+      name: img.name.replace(/\.png$/, ".webp"),
+      data: await fileToWebPBase64(img.path),
+    }))),
   };
 
   const response = await fetch(FUNCTION_URL, {
