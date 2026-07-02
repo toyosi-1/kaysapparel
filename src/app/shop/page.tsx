@@ -36,7 +36,16 @@ function ShopContent() {
       setLoading(true);
       try {
         const fetchedProducts = await productService.getAll() as Product[];
-        setAllProducts(fetchedProducts.length > 0 ? fetchedProducts : staticProducts);
+        const merged = [...staticProducts];
+        for (const fetched of fetchedProducts) {
+          const index = merged.findIndex((p) => p.id === fetched.id);
+          if (index >= 0) {
+            merged[index] = fetched;
+          } else {
+            merged.push(fetched);
+          }
+        }
+        setAllProducts(merged);
       } catch (error) {
         console.error("Failed to load products:", error);
         toast.error("Failed to load products from server. Showing local catalog.");
