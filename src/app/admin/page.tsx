@@ -43,6 +43,7 @@ import {
   Mail,
   Trash2,
   Download,
+  Pencil,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -70,7 +71,7 @@ export default function AdminPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
 
-  // Add Product State
+  // Add/Edit Product State
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
@@ -83,6 +84,8 @@ export default function AdminPage() {
   const [resizeResults, setResizeResults] = useState<ResizeResult[]>([]);
   const [resizing, setResizing] = useState(false);
   const [addingProduct, setAddingProduct] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [activeTab, setActiveTab] = useState("products");
 
   // Load orders and products from Firebase
   useEffect(() => {
@@ -182,6 +185,29 @@ export default function AdminPage() {
       console.error("Failed to delete product:", error);
       toast.error("Failed to delete product");
     }
+  };
+
+  const startEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setNewProduct({
+      name: product.name || "",
+      price: product.price ? product.price.toString() : "",
+      category: product.category || "",
+      sizes: product.sizes || [],
+      colors: product.colors ? product.colors.join(", ") : "",
+      description: product.description || "",
+    });
+    setProductImages([]);
+    setResizeResults([]);
+    setActiveTab("add-product");
+  };
+
+  const cancelEditProduct = () => {
+    setEditingProduct(null);
+    setNewProduct({ name: "", price: "", category: "", sizes: [], colors: "", description: "" });
+    setProductImages([]);
+    setResizeResults([]);
+    setActiveTab("products");
   };
 
   const loadReceipts = async (orderId: string) => {
@@ -297,36 +323,45 @@ export default function AdminPage() {
     }
     setAddingProduct(true);
     try {
-      // Convert images to base64 data URLs
-      const images = await Promise.all(
-        productImages.map(async (file) => ({
-          name: file.name,
-          data: await fileToBase64(file),
-        }))
-      );
+      const baseUpdates = {
+        name: newProduct.name,
+        price: Number(newProduct.price),
+        category: newProduct.category,
+        sizes: newProduct.sizes,
+        colors: newProduct.colors.split(",").map((c) => c.trim()).filter(Boolean),
+        description: newProduct.description,
+      };
 
-      // Save product via secure admin function
-      await adminApi("create", {
-        product: {
-          name: newProduct.name,
-          price: Number(newProduct.price),
-          category: newProduct.category,
-          sizes: newProduct.sizes,
-          colors: newProduct.colors.split(",").map((c) => c.trim()).filter(Boolean),
-          description: newProduct.description,
-          inStock: true,
-        },
-        images,
-      });
+      if (editingProduct?.id) {
+        await adminApi("update", {
+          productId: editingProduct.id,
+          updates: baseUpdates,
+        });
+        toast.success(`"${newProduct.name}" updated successfully!`);
+        setEditingProduct(null);
+      } else {
+        // Convert images to base64 data URLs
+        const images = await Promise.all(
+          productImages.map(async (file) => ({
+            name: file.name,
+            data: await fileToBase64(file),
+          }))
+        );
 
-      toast.success(`"${newProduct.name}" added to the store!`);
+        await adminApi("create", {
+          product: { ...baseUpdates, inStock: true },
+          images,
+        });
+        toast.success(`"${newProduct.name}" added to the store!`);
+      }
+
       setNewProduct({ name: "", price: "", category: "", sizes: [], colors: "", description: "" });
       setProductImages([]);
       setResizeResults([]);
       await loadProducts();
     } catch (err) {
       console.error(err);
-      toast.error("Failed to add product. Check Firebase connection.");
+      toast.error("Failed to save product. Check Firebase connection.");
     } finally {
       setAddingProduct(false);
     }
@@ -432,10 +467,10 @@ export default function AdminPage() {
         </Card>
       </div>
 
-      <Tabs defaultValue="products">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           <TabsTrigger value="products">Products</TabsTrigger>
-          <TabsTrigger value="add-product">Add Product</TabsTrigger>
+          <TabsTrigger value="add-product">{editingProduct ? "Edit Product" : "Add Product"}</TabsTrigger>
           <TabsTrigger value="orders">Orders</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
@@ -493,6 +528,14 @@ export default function AdminPage() {
                       >
                         {product.inStock ? "Mark Sold Out" : "Restock"}
                       </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 w-8 p-0"
+                        onClick={() => startEditProduct(product)}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
                       <a href={`/product?id=${product.id}`} target="_blank" rel="noopener noreferrer">
                         <Button variant="ghost" size="sm" className="h-8 w-8 p-0"><Eye className="h-4 w-4" /></Button>
                       </a>
@@ -520,12 +563,13 @@ export default function AdminPage() {
           </Card>
         </TabsContent>
 
-        {/* Add Product */}
+        {/* Add / Edit Product */}
         <TabsContent value="add-product" className="mt-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Plus className="h-5 w-5" /> Add New Product
+                {editingProduct ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                {editingProduct ? `Edit "${editingProduct.name}"` : "Add New Product"}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -686,13 +730,22 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={addingProduct || resizing}>
-                  {addingProduct ? (
-                    <><div className="h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" /> Saving Product...</>
-                  ) : (
-                    <><Plus className="h-4 w-4 mr-2" /> Add Product</>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button type="submit" className="flex-1" size="lg" disabled={addingProduct || resizing}>
+                    {addingProduct ? (
+                      <><div className="h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" /> Saving...</>
+                    ) : editingProduct ? (
+                      <><Pencil className="h-4 w-4 mr-2" /> Save Changes</>
+                    ) : (
+                      <><Plus className="h-4 w-4 mr-2" /> Add Product</>
+                    )}
+                  </Button>
+                  {editingProduct && (
+                    <Button type="button" variant="outline" size="lg" onClick={cancelEditProduct} className="flex-1 sm:flex-initial">
+                      Cancel
+                    </Button>
                   )}
-                </Button>
+                </div>
               </form>
             </CardContent>
           </Card>
