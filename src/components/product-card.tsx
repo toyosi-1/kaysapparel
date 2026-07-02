@@ -86,16 +86,21 @@ export function ProductCard({ product }: ProductCardProps) {
                 decoding="async"
               />
               {hoverImageUrl && (
-                <Image
-                  src={hoverImageUrl}
-                  alt={`${product.name} - back view`}
-                  fill
-                  className="object-cover object-top transition-all duration-500 opacity-0 group-hover:opacity-100 scale-[1.04]"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  unoptimized={!hoverIsExternal}
-                  loading="lazy"
-                  decoding="async"
-                />
+                <>
+                  <Image
+                    src={hoverImageUrl}
+                    alt={`${product.name} - back view`}
+                    fill
+                    className="object-cover object-top transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    unoptimized={!hoverIsExternal}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="absolute bottom-3 left-3 bg-white/90 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Back view
+                  </span>
+                </>
               )}
             </>
           ) : (

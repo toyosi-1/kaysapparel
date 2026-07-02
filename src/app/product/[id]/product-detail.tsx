@@ -9,7 +9,7 @@ import { useCartStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingBag, Truck, RotateCcw, Shield, ArrowLeft } from "lucide-react";
+import { ShoppingBag, Truck, RotateCcw, Shield, ArrowLeft, FlipHorizontal } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { ProductReviews } from "@/components/product-reviews";
@@ -28,10 +28,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState(0);
+  const [showBack, setShowBack] = useState(false);
   const [hoveringImage, setHoveringImage] = useState(false);
   const [zoomPosition, setZoomPosition] = useState<{ x: number; y: number } | null>(null);
-
-  const displayIndex = hoveringImage && product.images.length > 1 ? 1 : selectedImage;
 
   useEffect(() => {
     addRecentlyViewed(product);
@@ -79,25 +78,47 @@ export function ProductDetail({ product }: ProductDetailProps) {
               setHoveringImage(false);
             }}
           >
-            {product.images[displayIndex] ? (
-              <Image
-                key={displayIndex}
-                src={product.images[displayIndex]}
-                alt={product.name}
-                fill
-                priority
-                className="object-contain transition-opacity duration-300"
-                style={
-                  zoomPosition
-                    ? {
-                        transform: "scale(2)",
-                        transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
-                      }
-                    : undefined
-                }
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized={!product.images[displayIndex].startsWith("http")}
-              />
+            {product.images[0] ? (
+              <>
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  priority
+                  className="object-contain transition-opacity duration-300"
+                  style={
+                    zoomPosition && !showBack && !hoveringImage
+                      ? {
+                          transform: "scale(2)",
+                          transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                        }
+                      : undefined
+                  }
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  unoptimized={!product.images[0].startsWith("http")}
+                />
+                {product.images[1] && (
+                  <Image
+                    src={product.images[1]}
+                    alt={`${product.name} - back view`}
+                    fill
+                    priority
+                    className={`object-contain transition-opacity duration-300 absolute inset-0 ${
+                      showBack || hoveringImage ? "opacity-100" : "opacity-0"
+                    }`}
+                    style={
+                      zoomPosition && (showBack || hoveringImage)
+                        ? {
+                            transform: "scale(2)",
+                            transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                          }
+                        : undefined
+                    }
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized={!product.images[1].startsWith("http")}
+                  />
+                )}
+              </>
             ) : (
               <div className="text-center p-8">
                 <div className="w-28 h-28 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -113,10 +134,25 @@ export function ProductDetail({ product }: ProductDetailProps) {
             )}
             {product.images.length > 1 && (
               <div className="absolute bottom-4 left-4 bg-white/90 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md text-gray-600 pointer-events-none">
-                Hover for back view
+                {showBack ? "Back view" : "Hover for back view"}
               </div>
             )}
           </div>
+
+          {product.images.length > 1 && (
+            <div className="flex justify-center">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowBack((s) => !s)}
+                className="gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white"
+              >
+                <FlipHorizontal className="h-4 w-4" />
+                {showBack ? "Show Front" : "Show Back"}
+              </Button>
+            </div>
+          )}
 
           {product.images.length > 1 && (
             <div className="flex gap-3 overflow-x-auto pb-2">
