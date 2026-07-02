@@ -506,7 +506,7 @@ export const products: Product[] = [
   {
     id: "48",
     name: "Blue & White Striped One-Shoulder Midi Dress",
-    price: 15000,
+    price: 28000,
     category: "dresses",
     sizes: ["S", "M", "L"],
     colors: ["Blue/White"],
