@@ -28,7 +28,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState(0);
+  const [hoveringImage, setHoveringImage] = useState(false);
   const [zoomPosition, setZoomPosition] = useState<{ x: number; y: number } | null>(null);
+
+  const displayIndex = hoveringImage && product.images.length > 1 ? 1 : selectedImage;
 
   useEffect(() => {
     addRecentlyViewed(product);
@@ -70,15 +73,20 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 y: ((e.clientY - rect.top) / rect.height) * 100,
               });
             }}
-            onMouseLeave={() => setZoomPosition(null)}
+            onMouseEnter={() => product.images.length > 1 && setHoveringImage(true)}
+            onMouseLeave={() => {
+              setZoomPosition(null);
+              setHoveringImage(false);
+            }}
           >
-            {product.images[selectedImage] ? (
+            {product.images[displayIndex] ? (
               <Image
-                src={product.images[selectedImage]}
+                key={displayIndex}
+                src={product.images[displayIndex]}
                 alt={product.name}
                 fill
                 priority
-                className="object-contain transition-transform duration-200"
+                className="object-contain transition-opacity duration-300"
                 style={
                   zoomPosition
                     ? {
@@ -88,7 +96,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     : undefined
                 }
                 sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized={!product.images[selectedImage].startsWith("http")}
+                unoptimized={!product.images[displayIndex].startsWith("http")}
               />
             ) : (
               <div className="text-center p-8">
@@ -101,6 +109,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             {!product.inStock && (
               <div className="absolute top-4 left-4">
                 <Badge variant="destructive" className="rounded-full">Sold Out</Badge>
+              </div>
+            )}
+            {product.images.length > 1 && (
+              <div className="absolute bottom-4 left-4 bg-white/90 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md text-gray-600 pointer-events-none">
+                Hover for back view
               </div>
             )}
           </div>

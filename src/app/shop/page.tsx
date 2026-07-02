@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { categories } from "@/lib/data";
+import { categories, products as staticProducts } from "@/lib/data";
 import { productService } from "@/lib/firebase-services";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
@@ -30,17 +30,17 @@ function ShopContent() {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Load products from Firestore
+  // Load products from Firestore, falling back to static catalog
   useEffect(() => {
     const loadProducts = async () => {
       setLoading(true);
       try {
         const fetchedProducts = await productService.getAll() as Product[];
-        setAllProducts(fetchedProducts);
+        setAllProducts(fetchedProducts.length > 0 ? fetchedProducts : staticProducts);
       } catch (error) {
         console.error("Failed to load products:", error);
-        toast.error("Failed to load products");
-        setAllProducts([]);
+        toast.error("Failed to load products from server. Showing local catalog.");
+        setAllProducts(staticProducts);
       } finally {
         setLoading(false);
       }

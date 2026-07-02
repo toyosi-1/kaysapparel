@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { productService } from "@/lib/firebase-services";
 import { Product } from "@/lib/types";
+import { getProductById } from "@/lib/data";
 import { ProductDetail } from "./product-detail";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,11 +25,21 @@ export function ProductDetailFetcher({ productId }: ProductDetailFetcherProps) {
         if (fetched) {
           setProduct(fetched);
         } else {
-          setError(true);
+          const fallback = getProductById(productId);
+          if (fallback) {
+            setProduct(fallback);
+          } else {
+            setError(true);
+          }
         }
       } catch (err) {
         console.error("Failed to load product:", err);
-        setError(true);
+        const fallback = getProductById(productId);
+        if (fallback) {
+          setProduct(fallback);
+        } else {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }

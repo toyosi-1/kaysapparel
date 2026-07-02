@@ -18,7 +18,9 @@ const POPULAR_PRODUCT_IDS = new Set(["19", "25", "26", "29", "46"]);
 
 export function ProductCard({ product }: ProductCardProps) {
   const imageUrl = product.images[0];
+  const hoverImageUrl = product.images[1];
   const isExternal = imageUrl?.startsWith("http");
+  const hoverIsExternal = hoverImageUrl?.startsWith("http");
   const toggleWishlist = useWishlistStore((s) => s.toggleItem);
   const isInWishlist = useWishlistStore((s) => s.isInWishlist(product.id));
   const addToCart = useCartStore((s) => s.addItem);
@@ -72,16 +74,30 @@ export function ProductCard({ product }: ProductCardProps) {
           aria-label={`View ${product.name}`}
         >
           {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={product.name}
-              fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              unoptimized={!isExternal}
-              loading="lazy"
-              decoding="async"
-            />
+            <>
+              <Image
+                src={imageUrl}
+                alt={product.name}
+                fill
+                className="object-cover object-top transition-all duration-500 group-hover:scale-[1.04] group-hover:opacity-0"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                unoptimized={!isExternal}
+                loading="lazy"
+                decoding="async"
+              />
+              {hoverImageUrl && (
+                <Image
+                  src={hoverImageUrl}
+                  alt={`${product.name} - back view`}
+                  fill
+                  className="object-cover object-top transition-all duration-500 opacity-0 group-hover:opacity-100 scale-[1.04]"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  unoptimized={!hoverIsExternal}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <ShoppingBag className="h-10 w-10 text-stone-300" />

@@ -503,6 +503,21 @@ export const products: Product[] = [
       "A bright yellow ombre floral jumpsuit with a relaxed fit. Bold and breezy for parties, vacations, and summer days.",
     inStock: true,
   },
+  {
+    id: "48",
+    name: "Blue & White Striped One-Shoulder Midi Dress",
+    price: 15000,
+    category: "dresses",
+    sizes: ["S", "M", "L"],
+    colors: ["Blue/White"],
+    images: [
+      "/images/products/blue-white-striped-one-shoulder-midi-dress-front.png",
+      "/images/products/blue-white-striped-one-shoulder-midi-dress-back.png",
+    ],
+    description:
+      "A stylish blue and white striped one-shoulder midi dress with a flattering fit. Elegant for brunch, beach outings, and semi-formal occasions.",
+    inStock: true,
+  },
 ];
 
 export const BANK_DETAILS = {
