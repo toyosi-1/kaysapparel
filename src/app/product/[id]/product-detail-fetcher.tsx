@@ -19,30 +19,30 @@ export function ProductDetailFetcher({ productId }: ProductDetailFetcherProps) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    // Show static product immediately so the page feels instant
+    const fallback = getProductById(productId);
+    if (fallback) {
+      setProduct(fallback);
+      setLoading(false);
+    }
+
+    // Fetch fresh data in the background to update if anything changed
     const loadProduct = async () => {
       try {
         const fetched = await Promise.race([
           productService.getById(productId) as Promise<Product | null>,
           new Promise<null>((_, reject) =>
-            setTimeout(() => reject(new Error("Firebase fetch timed out")), 5000)
+            setTimeout(() => reject(new Error("Firebase fetch timed out")), 3000)
           ),
         ]);
         if (fetched) {
           setProduct(fetched);
-        } else {
-          const fallback = getProductById(productId);
-          if (fallback) {
-            setProduct(fallback);
-          } else {
-            setError(true);
-          }
+        } else if (!fallback) {
+          setError(true);
         }
       } catch (err) {
         console.error("Failed to load product:", err);
-        const fallback = getProductById(productId);
-        if (fallback) {
-          setProduct(fallback);
-        } else {
+        if (!fallback) {
           setError(true);
         }
       } finally {

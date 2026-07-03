@@ -8,7 +8,6 @@ import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
 import { Product } from "@/lib/types";
-import { toast } from "sonner";
 
 type SortOption = "featured" | "price-low" | "price-high" | "name";
 
@@ -30,15 +29,17 @@ function ShopContent() {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Load products from Firestore, falling back to static catalog
+  // Show static products immediately, then fetch Firebase updates in background
   useEffect(() => {
+    setAllProducts(staticProducts);
+    setLoading(false);
+
     const loadProducts = async () => {
-      setLoading(true);
       try {
         const fetchedProducts = await Promise.race([
           productService.getAll() as Promise<Product[]>,
           new Promise<Product[]>((_, reject) =>
-            setTimeout(() => reject(new Error("Firebase fetch timed out")), 5000)
+            setTimeout(() => reject(new Error("Firebase fetch timed out")), 3000)
           ),
         ]);
         const merged = [...staticProducts];
@@ -53,10 +54,7 @@ function ShopContent() {
         setAllProducts(merged);
       } catch (error) {
         console.error("Failed to load products:", error);
-        toast.error("Failed to load products from server. Showing local catalog.");
-        setAllProducts(staticProducts);
-      } finally {
-        setLoading(false);
+        // Static products are already showing, no need to block UI
       }
     };
 

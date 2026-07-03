@@ -4,6 +4,8 @@ import { emailService } from './email-service'
 import { validateOrderData, checkRateLimit } from './validation'
 import { getDeliveryPrice, isValidDeliveryZone, DeliveryZone } from './delivery'
 
+const ORDER_STORAGE_KEY = 'kaysapparel_last_order'
+
 export interface CustomerInfo {
   firstName: string
   lastName: string
@@ -163,4 +165,128 @@ export async function getOrdersByCustomerEmail(email: string): Promise<Order[]> 
   return allOrders.filter(order => 
     order.customerInfo?.email === email
   )
+}
+
+export function saveLastOrder(order: Order): void {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(order))
+  } catch (error) {
+    console.error('Failed to save last order:', error)
+  }
+}
+
+export function getLastOrder(): Order | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const stored = sessionStorage.getItem(ORDER_STORAGE_KEY)
+    return stored ? JSON.parse(stored) : null
+  } catch (error) {
+    console.error('Failed to read last order:', error)
+    return null
+  }
+}
+
+export function clearLastOrder(): void {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.removeItem(ORDER_STORAGE_KEY)
+  } catch (error) {
+    console.error('Failed to clear last order:', error)
+  }
+}
+
+export async function createOrderFast(
+  customerInfo: CustomerInfo,
+  receipt: File | null
+): Promise<Order> {
+  // Rate limiting check (use email if available, otherwise phone)
+  const rateLimitIdentifier = `order:${customerInfo.email || customerInfo.phone}`;
+  if (!checkRateLimit(rateLimitIdentifier)) {
+    throw new Error('Too many order attempts. Please try again later.');
+  }
+
+  // Validate delivery zone
+  if (!customerInfo.deliveryZone || !isValidDeliveryZone(customerInfo.deliveryZone)) {
+    throw new Error('Please select a valid delivery location');
+  }
+
+  // Validate customer information
+  const validationResult = validateOrderData(customerInfo);
+  if (!validationResult.isValid) {
+    const errorMessages = Object.values(validationResult.errors);
+    throw new Error(errorMessages[0] || 'Invalid customer information');
+  }
+
+  const sanitizedCustomerInfo = validationResult.sanitizedData;
+  const deliveryZone = customerInfo.deliveryZone as DeliveryZone;
+  const deliveryFee = getDeliveryPrice(deliveryZone);
+
+  const cartItems = useCartStore.getState().items;
+  if (cartItems.length === 0) {
+    throw new Error('Cart is empty');
+  }
+
+  const orderItems: OrderItem[] = cartItems.map(item => ({
+    productId: item.product.id,
+    productName: item.product.name,
+    quantity: item.quantity,
+    size: item.size,
+    color: item.color,
+    price: item.product.price
+  }));
+
+  const subtotal = useCartStore.getState().getTotal();
+  const total = subtotal + deliveryFee;
+
+  let receiptPayload = null;
+  if (receipt) {
+    const base64 = await fileToBase64(receipt);
+    receiptPayload = {
+      data: base64,
+      name: receipt.name,
+      contentType: receipt.type || 'image/jpeg'
+    };
+  }
+
+  const response = await fetch('/.netlify/functions/create-order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      customerInfo: {
+        ...sanitizedCustomerInfo,
+        deliveryZone,
+        deliveryFee
+      },
+      items: orderItems,
+      subtotal,
+      deliveryFee,
+      total,
+      receipt: receiptPayload
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ error: 'Order request failed' }));
+    throw new Error(errorData.error || 'Failed to place order. Please try again.');
+  }
+
+  const { order } = await response.json();
+  
+  // Clear cart immediately after order is created
+  useCartStore.getState().clearCart();
+  
+  // Save order locally so success page renders instantly
+  saveLastOrder(order);
+  
+  return order as Order;
+}
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }

@@ -69,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* ── IMAGE BLOCK ── */}
       <div className="relative w-full aspect-[2/3] overflow-hidden bg-[#F5F5F5]">
         <Link
-          href={`/product?id=${product.id}`}
+          href={`/product/${product.id}`}
           className="absolute inset-0 block"
           aria-label={`View ${product.name}`}
         >
@@ -173,7 +173,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {!quickAddOpen && (
           <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex z-20">
             <Link
-              href={`/product?id=${product.id}`}
+              href={`/product/${product.id}`}
               className="flex items-center justify-center gap-1.5 flex-1 bg-[#2C2220] hover:bg-[#6B4C3B] text-white text-[10px] font-semibold tracking-wider py-3 transition-colors"
             >
               <Eye className="h-3 w-3" /> VIEW
@@ -192,7 +192,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* ── INFO BLOCK ── */}
-      <Link href={`/product?id=${product.id}`} className="block pt-3 pb-4 px-1">
+      <Link href={`/product/${product.id}`} className="block pt-3 pb-4 px-1">
         <p className="text-[10px] text-[#9B8070] uppercase tracking-[0.18em] font-semibold mb-1">
           {categoryName}
         </p>

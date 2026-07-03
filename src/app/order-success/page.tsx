@@ -8,6 +8,7 @@ import { CheckCircle, ArrowRight, Package, MapPin, Phone, Mail } from "lucide-re
 import { orderService, Order } from "@/lib/firebase-services";
 import { formatPrice } from "@/lib/data";
 import { getDeliveryZoneInfo } from "@/lib/delivery";
+import { getLastOrder } from "@/lib/order-service";
 
 function OrderSuccessContent() {
   const searchParams = useSearchParams();
@@ -16,22 +17,33 @@ function OrderSuccessContent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (orderId) {
-      const loadOrder = async () => {
-        try {
-          const orderData = await orderService.getById(orderId);
-          setOrder(orderData);
-        } catch (error) {
-          console.error("Failed to load order:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
+    if (!orderId) {
+      setLoading(false);
+      return;
+    }
 
-      loadOrder();
-    } else {
+    // Show cached order immediately so the page feels instant
+    const cachedOrder = getLastOrder();
+    if (cachedOrder && cachedOrder.id === orderId) {
+      setOrder(cachedOrder);
       setLoading(false);
     }
+
+    // Fetch fresh data in the background to update if anything changed
+    const loadOrder = async () => {
+      try {
+        const orderData = await orderService.getById(orderId);
+        if (orderData) {
+          setOrder(orderData);
+        }
+      } catch (error) {
+        console.error("Failed to load order:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadOrder();
   }, [orderId]);
 
   if (loading) {

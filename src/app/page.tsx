@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { categories } from "@/lib/data";
+import { categories, products as staticProducts } from "@/lib/data";
 import { productService } from "@/lib/firebase-services";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
@@ -50,7 +50,7 @@ function HeroCarousel({ products }: { products: Product[] }) {
       {slides.map((product, index) => (
         <Link
           key={product.id}
-          href={`/product?id=${product.id}`}
+          href={`/product/${product.id}`}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
         >
           <Image
@@ -107,16 +107,29 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
 
+  // Show static products immediately, then refresh from Firebase in background
   useEffect(() => {
+    setProducts(staticProducts);
+    setLoadingProducts(false);
+
     const loadProducts = async () => {
       try {
         const fetchedProducts = await productService.getAll() as Product[];
-        setProducts(fetchedProducts);
+        if (fetchedProducts && fetchedProducts.length > 0) {
+          const merged = [...staticProducts];
+          for (const fetched of fetchedProducts) {
+            const index = merged.findIndex((p) => p.id === fetched.id);
+            if (index >= 0) {
+              merged[index] = fetched;
+            } else {
+              merged.push(fetched);
+            }
+          }
+          setProducts(merged);
+        }
       } catch (error) {
         console.error("Failed to load products:", error);
-        setProducts([]);
-      } finally {
-        setLoadingProducts(false);
+        // Static products already showing
       }
     };
     loadProducts();

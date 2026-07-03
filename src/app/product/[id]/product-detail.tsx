@@ -296,7 +296,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               {product.inStock ? "Add to Cart" : "Out of Stock"}
             </Button>
             <a
-              href={`https://wa.me/2348136642570?text=${encodeURIComponent(`Hi! I'm interested in this item:\n\n*${product.name}*\nPrice: ${formatPrice(product.price)}\n\nhttps://kaysapparel.com/product?id=${product.id}`)}`}
+              href={`https://wa.me/2348136642570?text=${encodeURIComponent(`Hi! I'm interested in this item:\n\n*${product.name}*\nPrice: ${formatPrice(product.price)}\n\nhttps://kaysapparel.com/product/${product.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full h-11 rounded-xl border-2 border-[#25D366] text-[#25D366] text-sm font-semibold hover:bg-[#25D366] hover:text-white transition-all"

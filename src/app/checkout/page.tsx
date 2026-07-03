@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/lib/store";
 import { formatPrice, BANK_DETAILS } from "@/lib/data";
-import { createOrder, CustomerInfo } from "@/lib/order-service";
-import { receiptService } from "@/lib/firebase-services";
+import { createOrderFast, CustomerInfo } from "@/lib/order-service";
 import { DELIVERY_ZONES, getDeliveryPrice, DeliveryZone } from "@/lib/delivery";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 export default function CheckoutPage() {
-  const { items, getTotal, clearCart } = useCartStore();
+  const { items, getTotal } = useCartStore();
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [receipt, setReceipt] = useState<File | null>(null);
@@ -90,21 +89,9 @@ export default function CheckoutPage() {
         deliveryZone: formData.deliveryZone
       };
 
-      // Create order in Firebase - now includes comprehensive validation
-      const order = await createOrder(customerInfo);
+      // Single server-side request creates order, uploads receipt, and sends emails
+      const order = await createOrderFast(customerInfo, receipt);
       
-      // Upload receipt to Firebase Storage
-      if (receipt && order.id) {
-        try {
-          await receiptService.upload(order.id, receipt);
-          toast.success("Receipt uploaded successfully!");
-        } catch (receiptError) {
-          console.error('Receipt upload error:', receiptError);
-          toast.error("Order placed but receipt upload failed. Please contact support.");
-        }
-      }
-
-      clearCart();
       toast.success("Order placed successfully!");
       router.push(`/order-success?orderId=${order.id}`);
     } catch (error: any) {
@@ -119,13 +106,6 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8 md:py-12 relative">
-      {submitting && (
-        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
-          <Loader2 className="h-10 w-10 animate-spin text-[#6B4C3B] mb-4" />
-          <p className="text-lg font-medium text-gray-900">Placing your order...</p>
-          <p className="text-sm text-muted-foreground mt-1">Please wait</p>
-        </div>
-      )}
       {/* Breadcrumb */}
       <nav className="flex items-center justify-between gap-2 text-sm text-muted-foreground mb-8">
         <div className="flex items-center gap-2">
