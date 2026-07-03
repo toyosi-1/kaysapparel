@@ -1,0 +1,8 @@
+{
+  "name": "Blue & White Striped One-Shoulder Midi Dress",
+  "id": "48",
+  "images": [
+    "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783054647716_blue-white-striped-one-shoulder-midi-dress-front.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=B5B5ICRFcOx4Im5QPXzjzyhPlxkMVszSwYUVcaRDaZAGym0uuxuhXloHPRL%2B8RGJTOUd07%2Fd1v%2BRO2N0%2BW96b%2F7Z8D4u7iOtwNTPE9HkZHKP22KX5d8TweFBDtfUrxyXcZT2PvVQFPoffSdren4lEtms%2BcR70LTMozYwAjXlX%2FhyWwzFem9BvuM%2FzoE9fTQNoHzcy5oEqQt0PaQDGxVD0rnSZ02HZQiRcy6B4JbGeX%2BBoApGV53V0TmAZSDC%2Fk%2BEnw1dsxxf5GGLls8ef4RlFthYDrPULJgnYGQ2ml0X9qHefGIncrGnHrcSmsl6CETipvKj%2Bi8CX3CerkU76BmJyA%3D%3D",
+    "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783054649902_blue-white-striped-one-shoulder-midi-dress-back.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=ETT4x0iBBJwUqeeIkqSp%2BodpC5Bk36CFMqEuydP6gU6pYoQoqKtviL0rxQA6M0X6QvW7T%2BsvxOdwCqNkG%2FXGsIhzKSbYrCt%2F74xjHEKv6t3Ci5cxnr6Itd4LrLiheTFcR6q%2B%2FGi7%2FSBRJm0rUw8%2F%2B4b5VTLIbgb6OULn8fAk6imv%2BcDpBTCnuvZs0PMkEYjroYWRyBgnWa3QPv8WixSBGaNOjwSxj9Kvgt9OgKBBwBFK3VU0r4Gfg0lunbWpV%2FsotuYV%2BjvWImlLPARoFD65zuR2BEBHVsllJUoj7v6xqLyHVmg20LP5y0mz8FqSQiJNMJnxQd1Uy4kNSVX5b8pN%2FA%3D%3D"
+  ]
+}

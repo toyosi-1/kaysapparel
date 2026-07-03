@@ -35,7 +35,12 @@ function ShopContent() {
     const loadProducts = async () => {
       setLoading(true);
       try {
-        const fetchedProducts = await productService.getAll() as Product[];
+        const fetchedProducts = await Promise.race([
+          productService.getAll() as Promise<Product[]>,
+          new Promise<Product[]>((_, reject) =>
+            setTimeout(() => reject(new Error("Firebase fetch timed out")), 5000)
+          ),
+        ]);
         const merged = [...staticProducts];
         for (const fetched of fetchedProducts) {
           const index = merged.findIndex((p) => p.id === fetched.id);

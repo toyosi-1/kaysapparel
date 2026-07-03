@@ -21,7 +21,12 @@ export function ProductDetailFetcher({ productId }: ProductDetailFetcherProps) {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const fetched = await productService.getById(productId) as Product | null;
+        const fetched = await Promise.race([
+          productService.getById(productId) as Promise<Product | null>,
+          new Promise<null>((_, reject) =>
+            setTimeout(() => reject(new Error("Firebase fetch timed out")), 5000)
+          ),
+        ]);
         if (fetched) {
           setProduct(fetched);
         } else {

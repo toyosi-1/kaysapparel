@@ -61,7 +61,10 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("Product uploaded successfully:", data);
+  const urlFile = path.resolve(process.cwd(), "scripts/last-upload-urls.txt");
+  fs.writeFileSync(urlFile, JSON.stringify({ name: data.name, id: data.id, images: data.images }, null, 2));
+  console.log("Product uploaded successfully:", data.name || data.id);
+  console.log("URLs saved to:", urlFile);
 }
 
 main().catch((err) => {
