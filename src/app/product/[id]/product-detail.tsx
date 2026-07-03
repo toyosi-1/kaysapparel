@@ -76,7 +76,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         {/* Product Image Gallery */}
         <div className="space-y-4">
           <div
-            className="aspect-[3/4] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative cursor-crosshair"
+            className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative cursor-crosshair"
             onMouseMove={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               setZoomPosition({
