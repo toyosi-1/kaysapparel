@@ -9,7 +9,7 @@ import { useCartStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingBag, Truck, RotateCcw, Shield, ArrowLeft, FlipHorizontal } from "lucide-react";
+import { ShoppingBag, Truck, RotateCcw, Shield, ArrowLeft, FlipHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { ProductReviews } from "@/components/product-reviews";
@@ -28,9 +28,21 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState(0);
-  const [showBack, setShowBack] = useState(false);
   const [hoveringImage, setHoveringImage] = useState(false);
   const [zoomPosition, setZoomPosition] = useState<{ x: number; y: number } | null>(null);
+
+  const goToNextImage = () => {
+    setSelectedImage((prev) => (prev + 1) % product.images.length);
+  };
+
+  const goToPrevImage = () => {
+    setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
+  };
+
+  const showBack = selectedImage === 1;
+  const toggleFrontBack = () => {
+    setSelectedImage((prev) => (prev === 0 ? 1 : 0));
+  };
 
   useEffect(() => {
     addRecentlyViewed(product);
@@ -85,7 +97,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   alt={product.name}
                   fill
                   priority
-                  className="object-contain transition-opacity duration-300"
+                  className={`object-contain transition-all duration-500 ${
+                    showBack || hoveringImage
+                      ? "opacity-0 -translate-x-8"
+                      : "opacity-100 translate-x-0"
+                  }`}
                   style={
                     zoomPosition && !showBack && !hoveringImage
                       ? {
@@ -103,8 +119,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     alt={`${product.name} - back view`}
                     fill
                     priority
-                    className={`object-contain transition-opacity duration-300 absolute inset-0 ${
-                      showBack || hoveringImage ? "opacity-100" : "opacity-0"
+                    className={`object-contain transition-all duration-500 absolute inset-0 ${
+                      showBack || hoveringImage
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-8"
                     }`}
                     style={
                       zoomPosition && (showBack || hoveringImage)
@@ -137,6 +155,32 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 {showBack ? "Back view" : "Hover for back view"}
               </div>
             )}
+            {product.images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToPrevImage();
+                  }}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/90 hover:bg-[#6B4C3B] hover:text-white text-[#6B4C3B] shadow-sm flex items-center justify-center transition-colors z-20"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToNextImage();
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/90 hover:bg-[#6B4C3B] hover:text-white text-[#6B4C3B] shadow-sm flex items-center justify-center transition-colors z-20"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </>
+            )}
           </div>
 
           {product.images.length > 1 && (
@@ -145,7 +189,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => setShowBack((s) => !s)}
+                onClick={toggleFrontBack}
                 className="gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white"
               >
                 <FlipHorizontal className="h-4 w-4" />
