@@ -79,7 +79,11 @@ export function ProductCard({ product }: ProductCardProps) {
                 src={imageUrl}
                 alt={product.name}
                 fill
-                className="object-cover object-top transition-all duration-500 group-hover:scale-[1.04] group-hover:opacity-0"
+                className={`object-cover object-top transition-all duration-500 group-hover:scale-[1.04] ${
+                  hoverImageUrl
+                    ? "group-hover:opacity-0 group-hover:-translate-x-4"
+                    : ""
+                }`}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 unoptimized={!isExternal}
                 loading="lazy"
@@ -91,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
                     src={hoverImageUrl}
                     alt={`${product.name} - back view`}
                     fill
-                    className="object-cover object-top transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-[1.04]"
+                    className="object-cover object-top transition-all duration-500 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-[1.04]"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     unoptimized={!hoverIsExternal}
                     loading="lazy"
