@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { ProductReviews } from "@/components/product-reviews";
 import { RecentlyViewed } from "@/components/recently-viewed";
 import { addRecentlyViewed } from "@/lib/recently-viewed";
+import { SizeGuide } from "@/components/size-guide";
 
 interface ProductDetailProps {
   product: Product;
@@ -259,12 +260,15 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Size Selection */}
           <div>
-            <label className="text-sm font-semibold mb-3 block">
-              Size{" "}
-              {selectedSize && (
-                <span className="text-primary font-medium">— {selectedSize}</span>
-              )}
-            </label>
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-sm font-semibold">
+                Size{" "}
+                {selectedSize && (
+                  <span className="text-primary font-medium">— {selectedSize}</span>
+                )}
+              </label>
+              <SizeGuide sizes={product.sizes} />
+            </div>
             <div className="flex flex-wrap gap-2">
               {product.sizes.map((size) => (
                 <button
