@@ -30,7 +30,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [hoveringImage, setHoveringImage] = useState(false);
-  const [zoomPosition, setZoomPosition] = useState<{ x: number; y: number } | null>(null);
 
   const goToNextImage = () => {
     setSelectedImage((prev) => (prev + 1) % product.images.length);
@@ -77,19 +76,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
         {/* Product Image Gallery */}
         <div className="space-y-4">
           <div
-            className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative cursor-crosshair"
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              setZoomPosition({
-                x: ((e.clientX - rect.left) / rect.width) * 100,
-                y: ((e.clientY - rect.top) / rect.height) * 100,
-              });
-            }}
+            className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative"
             onMouseEnter={() => product.images.length > 1 && setHoveringImage(true)}
-            onMouseLeave={() => {
-              setZoomPosition(null);
-              setHoveringImage(false);
-            }}
+            onMouseLeave={() => setHoveringImage(false)}
           >
             {product.images[0] ? (
               <>
@@ -103,14 +92,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
                       ? "opacity-0 -translate-x-8"
                       : "opacity-100 translate-x-0"
                   }`}
-                  style={
-                    zoomPosition && !showBack && !hoveringImage
-                      ? {
-                          transform: "scale(2)",
-                          transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
-                        }
-                      : undefined
-                  }
                   sizes="(max-width: 768px) 100vw, 50vw"
                   unoptimized={!product.images[0].startsWith("http")}
                 />
@@ -125,14 +106,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
                         ? "opacity-100 translate-x-0"
                         : "opacity-0 translate-x-8"
                     }`}
-                    style={
-                      zoomPosition && (showBack || hoveringImage)
-                        ? {
-                            transform: "scale(2)",
-                            transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
-                          }
-                        : undefined
-                    }
                     sizes="(max-width: 768px) 100vw, 50vw"
                     unoptimized={!product.images[1].startsWith("http")}
                   />
