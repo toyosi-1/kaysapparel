@@ -50,7 +50,7 @@ function HeroCarousel({ products }: { products: Product[] }) {
       {slides.map((product, index) => (
         <Link
           key={product.id}
-          href={`/product/${product.id}`}
+          href={`/product?id=${product.id}`}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
         >
           <Image
