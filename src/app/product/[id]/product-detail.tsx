@@ -29,7 +29,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState(0);
-  const [hoveringImage, setHoveringImage] = useState(false);
 
   const goToNextImage = () => {
     setSelectedImage((prev) => (prev + 1) % product.images.length);
@@ -39,7 +38,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     setSelectedImage((prev) => (prev - 1 + product.images.length) % product.images.length);
   };
 
-  const showBack = selectedImage === 1;
+  const isBackView = selectedImage === 1 && product.images.length > 1;
   const toggleFrontBack = () => {
     setSelectedImage((prev) => (prev === 0 ? 1 : 0));
   };
@@ -75,42 +74,17 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
         {/* Product Image Gallery */}
         <div className="space-y-4">
-          <div
-            className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative"
-            onMouseEnter={() => product.images.length > 1 && setHoveringImage(true)}
-            onMouseLeave={() => setHoveringImage(false)}
-          >
-            {product.images[0] ? (
-              <>
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  priority
-                  className={`object-contain transition-all duration-500 ${
-                    showBack || hoveringImage
-                      ? "opacity-0 -translate-x-8"
-                      : "opacity-100 translate-x-0"
-                  }`}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  unoptimized={!product.images[0].startsWith("http")}
-                />
-                {product.images[1] && (
-                  <Image
-                    src={product.images[1]}
-                    alt={`${product.name} - back view`}
-                    fill
-                    priority
-                    className={`object-contain transition-all duration-500 absolute inset-0 ${
-                      showBack || hoveringImage
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-0 translate-x-8"
-                    }`}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    unoptimized={!product.images[1].startsWith("http")}
-                  />
-                )}
-              </>
+          <div className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative">
+            {product.images[selectedImage] ? (
+              <Image
+                src={product.images[selectedImage]}
+                alt={isBackView ? `${product.name} - back view` : product.name}
+                fill
+                priority
+                className="object-contain transition-all duration-500"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized={!product.images[selectedImage].startsWith("http")}
+              />
             ) : (
               <div className="text-center p-8">
                 <div className="w-28 h-28 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -126,7 +100,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             )}
             {product.images.length > 1 && (
               <div className="absolute bottom-4 left-4 bg-white/90 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md text-gray-600 pointer-events-none">
-                {showBack ? "Back view" : "Hover for back view"}
+                {isBackView ? "Back view" : "Front view"}
               </div>
             )}
             {product.images.length > 1 && (
@@ -167,7 +141,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 className="gap-2 rounded-none border-[#6B4C3B] text-[#6B4C3B] hover:bg-[#6B4C3B] hover:text-white"
               >
                 <FlipHorizontal className="h-4 w-4" />
-                {showBack ? "Show Front" : "Show Back"}
+                {isBackView ? "Show Front" : "Show Back"}
               </Button>
             </div>
           )}
