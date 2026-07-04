@@ -229,7 +229,7 @@ export default function Home() {
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          {categories.slice(0, 4).map((cat) => (
+          {categories.filter((cat) => products.some((p) => p.category === cat.slug)).slice(0, 4).map((cat) => (
             <Link
               key={cat.id}
               href={`/shop?category=${cat.slug}`}
