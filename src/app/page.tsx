@@ -104,14 +104,11 @@ function HeroCarousel({ products }: { products: Product[] }) {
 }
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loadingProducts, setLoadingProducts] = useState(true);
+  // Start with static products so the UI is never empty
+  const [products, setProducts] = useState<Product[]>(staticProducts);
 
-  // Show static products immediately, then refresh from Firebase in background
+  // Refresh from Firebase in the background
   useEffect(() => {
-    setProducts(staticProducts);
-    setLoadingProducts(false);
-
     const loadProducts = async () => {
       try {
         const fetchedProducts = await productService.getAll() as Product[];

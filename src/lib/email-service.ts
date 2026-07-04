@@ -206,7 +206,7 @@ export class EmailService {
           <div class="footer">
             <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
             <p>Shop 45 Omololu Road, off Randle Avenue, Surulere, Lagos</p>
-            <p>&copy; 2024 COG Services. All rights reserved.</p>
+            <p>&copy; 2026 KaysApparel. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -254,7 +254,7 @@ Phone: ${order.customerInfo?.phone}
 
 Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 COG Services. All rights reserved.
+© 2026 KaysApparel. All rights reserved.
     `;
   }
 
@@ -299,7 +299,7 @@ Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
           
           <div class="footer">
             <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
-            <p>&copy; 2024 COG Services. All rights reserved.</p>
+            <p>&copy; 2026 KaysApparel. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -325,7 +325,7 @@ We're now preparing your order for shipment. You'll receive another notification
 
 Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 COG Services. All rights reserved.
+© 2026 KaysApparel. All rights reserved.
     `;
   }
 
@@ -370,7 +370,7 @@ Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
           
           <div class="footer">
             <p>Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570</p>
-            <p>&copy; 2024 COG Services. All rights reserved.</p>
+            <p>&copy; 2026 KaysApparel. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -396,7 +396,7 @@ You can track your order status on our website using your order ID.
 
 Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
 
-© 2024 COG Services. All rights reserved.
+© 2026 KaysApparel. All rights reserved.
     `;
   }
 
@@ -454,7 +454,7 @@ Questions? Contact us at kays.apparel@gmail.com or +234 813 664 2570
           
           <div class="footer">
             <p>Admin Dashboard: kaysapparel.com/admin</p>
-            <p>&copy; 2024 COG Services. All rights reserved.</p>
+            <p>&copy; 2026 KaysApparel. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -488,7 +488,7 @@ Total: ₦${order.total.toLocaleString()}
 Please log in to the admin dashboard to confirm payment and update the order status.
 Admin Dashboard: kaysapparel.com/admin
 
-© 2024 COG Services. All rights reserved.
+© 2026 KaysApparel. All rights reserved.
     `;
   }
 }

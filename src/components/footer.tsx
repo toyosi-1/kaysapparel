@@ -118,7 +118,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} COG Services. All rights reserved.
+            &copy; {new Date().getFullYear()} KaysApparel. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
             Lagos, Nigeria

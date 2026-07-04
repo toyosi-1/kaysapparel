@@ -26,14 +26,12 @@ function ShopContent() {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Start with static products so the UI is never empty
+  const [allProducts, setAllProducts] = useState<Product[]>(staticProducts);
+  const [loading, setLoading] = useState(false);
 
-  // Show static products immediately, then fetch Firebase updates in background
+  // Refresh from Firebase in the background
   useEffect(() => {
-    setAllProducts(staticProducts);
-    setLoading(false);
-
     const loadProducts = async () => {
       try {
         const fetchedProducts = await Promise.race([
