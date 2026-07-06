@@ -177,7 +177,7 @@ export default function RegisterPage() {
                     </button>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    Must be at least 6 characters
+                    At least 6 characters, including 1 letter and 1 number
                   </p>
                 </div>
 
@@ -220,7 +220,7 @@ export default function RegisterPage() {
                 <Button 
                   type="submit" 
                   className="w-full bg-[#6B4C3B] hover:bg-[#5a3f31] text-white rounded-none"
-                  disabled={isLoading || !isFormValid()}
+                  disabled={isLoading || !isFormValid() || formData.password !== formData.confirmPassword}
                 >
                   {isLoading ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>

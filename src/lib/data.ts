@@ -1,4 +1,5 @@
 import { Product, Category } from "./types";
+import { firebaseProducts } from "./firebase-products";
 
 export const categories: Category[] = [
   { id: "1", name: "Accessories", slug: "accessories" },
@@ -535,9 +536,9 @@ export function formatPrice(price: number): string {
 }
 
 export function getProductsByCategory(category: string): Product[] {
-  return products.filter((p) => p.category === category);
+  return [...products, ...firebaseProducts].filter((p) => p.category === category);
 }
 
 export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id);
+  return products.find((p) => p.id === id) || firebaseProducts.find((p) => p.id === id);
 }
