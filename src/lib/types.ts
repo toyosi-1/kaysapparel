@@ -9,6 +9,7 @@ export interface Product {
   description: string;
   inStock: boolean;
   _isStatic?: boolean;
+  updatedAt?: string | number | Date | { seconds?: number; nanoseconds?: number };
 }
 
 export interface CartItem {

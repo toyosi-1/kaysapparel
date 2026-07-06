@@ -126,6 +126,7 @@ export default function Home() {
   // Subscribe to real-time Firebase product updates so admin edits reflect instantly
   useEffect(() => {
     const unsubscribe = productService.subscribeToAll((firebaseProducts) => {
+      console.log("[home realtime] received", firebaseProducts.length, "products");
       setProducts(mergeProductCatalog(staticProducts, firebaseProducts));
     });
     return () => unsubscribe();

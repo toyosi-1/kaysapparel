@@ -49,6 +49,7 @@ function ShopContent() {
   // Subscribe to real-time Firebase product updates so admin edits reflect instantly
   useEffect(() => {
     const unsubscribe = productService.subscribeToAll((firebaseProducts) => {
+      console.log("[shop realtime] received", firebaseProducts.length, "products");
       setAllProducts(mergeProductCatalog(staticProducts, firebaseProducts));
     });
     return () => unsubscribe();

@@ -76,6 +76,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {imageUrl ? (
             <>
               <Image
+                key={imageUrl}
                 src={imageUrl}
                 alt={product.name}
                 fill
@@ -85,19 +86,20 @@ export function ProductCard({ product }: ProductCardProps) {
                     : ""
                 }`}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                unoptimized={!isExternal}
+                unoptimized={isExternal}
                 loading="lazy"
                 decoding="async"
               />
               {hoverImageUrl && (
                 <>
                   <Image
+                    key={hoverImageUrl}
                     src={hoverImageUrl}
                     alt={`${product.name} - back view`}
                     fill
                     className="object-cover object-top transition-all duration-500 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-[1.04]"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    unoptimized={!hoverIsExternal}
+                    unoptimized={hoverIsExternal}
                     loading="lazy"
                     decoding="async"
                   />

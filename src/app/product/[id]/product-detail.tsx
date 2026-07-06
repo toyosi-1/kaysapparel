@@ -77,13 +77,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <div className="aspect-[2/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center relative">
             {product.images[selectedImage] ? (
               <Image
+                key={product.images[selectedImage]}
                 src={product.images[selectedImage]}
                 alt={isBackView ? `${product.name} - back view` : product.name}
                 fill
                 priority
                 className="object-contain transition-all duration-500"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized={!product.images[selectedImage].startsWith("http")}
+                unoptimized={product.images[selectedImage].startsWith("http")}
               />
             ) : (
               <div className="text-center p-8">
@@ -159,6 +160,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   }`}
                 >
                   <Image
+                    key={img}
                     src={img}
                     alt={`${product.name} - view ${index + 1}`}
                     fill
@@ -166,7 +168,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     decoding="async"
                     className="object-cover"
                     sizes="80px"
-                    unoptimized={!img.startsWith("http")}
+                    unoptimized={img.startsWith("http")}
                   />
                 </button>
               ))}

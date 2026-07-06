@@ -28,6 +28,7 @@ export function ProductDetailFetcher({ productId }: ProductDetailFetcherProps) {
 
     // Subscribe to real-time updates for this product so admin edits reflect instantly
     const unsubscribe = productService.subscribeToById(productId, (fetched) => {
+      console.log("[product realtime]", productId, fetched?.images?.[0]);
       if (fetched) {
         setProduct(fetched);
       } else if (!fallback) {
