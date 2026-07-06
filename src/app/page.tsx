@@ -4,11 +4,27 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { categories, products as staticProducts } from "@/lib/data";
+import { firebaseProducts } from "@/lib/firebase-products";
 import { productService } from "@/lib/firebase-services";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronLeft, ChevronRight, Truck, Shield, CreditCard, Star } from "lucide-react";
 import { Product } from "@/lib/types";
+
+function mergeProductCatalog(staticList: Product[], firebaseList: Product[]): Product[] {
+  const merged = [...staticList];
+  for (const product of firebaseList) {
+    const index = merged.findIndex((p) => p.id === product.id);
+    if (index >= 0) {
+      merged[index] = product;
+    } else {
+      merged.push(product);
+    }
+  }
+  return merged;
+}
+
+const initialProducts = mergeProductCatalog(staticProducts, firebaseProducts);
 
 const categoryFallbackImages: Record<string, string> = {
   dresses: "/images/products/teal-floral-mesh-maxi-dress.webp",
@@ -104,29 +120,20 @@ function HeroCarousel({ products }: { products: Product[] }) {
 }
 
 export default function Home() {
-  // Start with static products so the UI is never empty
-  const [products, setProducts] = useState<Product[]>(staticProducts);
+  // Start with static + synced Firebase products so everything appears instantly
+  const [products, setProducts] = useState<Product[]>(initialProducts);
 
-  // Refresh from Firebase in the background
+  // Refresh from Firebase in the background to catch any newer changes
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const fetchedProducts = await productService.getAll() as Product[];
         if (fetchedProducts && fetchedProducts.length > 0) {
-          const merged = [...staticProducts];
-          for (const fetched of fetchedProducts) {
-            const index = merged.findIndex((p) => p.id === fetched.id);
-            if (index >= 0) {
-              merged[index] = fetched;
-            } else {
-              merged.push(fetched);
-            }
-          }
-          setProducts(merged);
+          setProducts(mergeProductCatalog(staticProducts, fetchedProducts));
         }
       } catch (error) {
         console.error("Failed to load products:", error);
-        // Static products already showing
+        // Synced products already showing
       }
     };
     loadProducts();

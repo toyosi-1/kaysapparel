@@ -65,6 +65,14 @@ function serverError(message) {
   };
 }
 
+function triggerBuildHook() {
+  const hook = process.env.NETLIFY_BUILD_HOOK;
+  if (!hook) return;
+  fetch(hook, { method: "POST" }).catch((err) => {
+    console.error("Build hook trigger failed:", err);
+  });
+}
+
 async function uploadImage(image, fileName) {
   // If image is an object with a url, use it directly
   if (image && typeof image === "object" && image.url) {
@@ -139,6 +147,7 @@ exports.handler = async (event, context) => {
       await docRef.set(docData);
 
       const doc = await docRef.get();
+      triggerBuildHook();
       return {
         statusCode: 200,
         body: JSON.stringify({ id: docRef.id, ...doc.data() }),
@@ -146,7 +155,7 @@ exports.handler = async (event, context) => {
     }
 
     if (action === "update") {
-      const { productId, updates } = payload;
+      const { productId, updates, images = [] } = payload;
       if (!productId) {
         return badRequest("Missing productId");
       }
@@ -155,12 +164,26 @@ exports.handler = async (event, context) => {
       }
 
       const docRef = db.collection("products").doc(productId);
+      const finalUpdates = { ...updates };
+
+      // If new images were uploaded, replace the product images
+      if (images.length > 0) {
+        const imageUrls = [];
+        for (let i = 0; i < images.length; i++) {
+          const { data, url, name } = images[i];
+          const imageUrl = await uploadImage(url ? { url, name } : data, name || `image_${i}.webp`);
+          imageUrls.push(imageUrl);
+        }
+        finalUpdates.images = imageUrls;
+      }
+
       await docRef.update({
-        ...updates,
+        ...finalUpdates,
         updatedAt: FieldValue.serverTimestamp(),
       });
 
       const doc = await docRef.get();
+      triggerBuildHook();
       return {
         statusCode: 200,
         body: JSON.stringify({ id: doc.id, ...doc.data() }),
@@ -174,6 +197,7 @@ exports.handler = async (event, context) => {
       }
 
       await db.collection("products").doc(productId).delete();
+      triggerBuildHook();
       return {
         statusCode: 200,
         body: JSON.stringify({ success: true, id: productId }),

@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:netlify": "next build",
+    "sync": "node scripts/sync-firebase-products.js",
+    "build": "npm run sync && next build",
+    "build:netlify": "npm run sync && next build",
     "start": "next start",
     "lint": "eslint",
-    "export": "next build"
+    "export": "npm run sync && next build"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -32,6 +33,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "firebase-admin": "^14.1.0",

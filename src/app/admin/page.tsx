@@ -333,10 +333,23 @@ export default function AdminPage() {
       };
 
       if (editingProduct?.id) {
-        await adminApi("update", {
+        const updatePayload: Record<string, unknown> = {
           productId: editingProduct.id,
           updates: baseUpdates,
-        });
+        };
+
+        // If new images were selected during edit, replace the existing images
+        if (productImages.length > 0) {
+          const images = await Promise.all(
+            productImages.map(async (file) => ({
+              name: file.name,
+              data: await fileToBase64(file),
+            }))
+          );
+          updatePayload.images = images;
+        }
+
+        await adminApi("update", updatePayload);
         toast.success(`"${newProduct.name}" updated successfully!`);
         setEditingProduct(null);
       } else {

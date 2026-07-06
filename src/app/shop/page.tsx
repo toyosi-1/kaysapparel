@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { categories, products as staticProducts } from "@/lib/data";
+import { firebaseProducts } from "@/lib/firebase-products";
 import { productService } from "@/lib/firebase-services";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,21 @@ import { LayoutGrid, Search, SlidersHorizontal, X, ChevronDown } from "lucide-re
 import { Product } from "@/lib/types";
 
 type SortOption = "featured" | "price-low" | "price-high" | "name";
+
+function mergeProductCatalog(staticList: Product[], firebaseList: Product[]): Product[] {
+  const merged = [...staticList];
+  for (const product of firebaseList) {
+    const index = merged.findIndex((p) => p.id === product.id);
+    if (index >= 0) {
+      merged[index] = product;
+    } else {
+      merged.push(product);
+    }
+  }
+  return merged;
+}
+
+const initialProducts = mergeProductCatalog(staticProducts, firebaseProducts);
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -26,11 +42,11 @@ function ShopContent() {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
-  // Start with static products so the UI is never empty
-  const [allProducts, setAllProducts] = useState<Product[]>(staticProducts);
+  // Start with static + synced Firebase products so everything appears instantly
+  const [allProducts, setAllProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
 
-  // Refresh from Firebase in the background
+  // Refresh from Firebase in the background to catch any newer changes
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -40,19 +56,10 @@ function ShopContent() {
             setTimeout(() => reject(new Error("Firebase fetch timed out")), 3000)
           ),
         ]);
-        const merged = [...staticProducts];
-        for (const fetched of fetchedProducts) {
-          const index = merged.findIndex((p) => p.id === fetched.id);
-          if (index >= 0) {
-            merged[index] = fetched;
-          } else {
-            merged.push(fetched);
-          }
-        }
-        setAllProducts(merged);
+        setAllProducts(mergeProductCatalog(staticProducts, fetchedProducts));
       } catch (error) {
         console.error("Failed to load products:", error);
-        // Static products are already showing, no need to block UI
+        // Synced products are already showing, no need to block UI
       }
     };
 
