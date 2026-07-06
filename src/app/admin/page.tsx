@@ -352,6 +352,7 @@ export default function AdminPage() {
         await adminApi("update", updatePayload);
         toast.success(`"${newProduct.name}" updated successfully!`);
         setEditingProduct(null);
+        setActiveTab("products");
       } else {
         // Convert images to base64 data URLs
         const images = await Promise.all(

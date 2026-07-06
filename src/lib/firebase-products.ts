@@ -5,1017 +5,21 @@ import { Product } from './types';
 
 export const firebaseProducts: Product[] = [
   {
-    "id": "0MfXhz0aF6XvWOmHz0r2",
-    "name": "Monochromatic purple two-piece set",
-    "price": 18000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "XL",
-      "L"
-    ],
-    "colors": [
-      "Purple"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782895762177_1782753537726.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=ZsvTcQxSD1JctCAgeUj97kKTzdCXQkUfJ5IX7n%2BqvBFEv7U5BB86zJ%2FKzDbodRwII6cqCkLYBrpRvuq01qxG1JhOUXRaY9cQ5v17TH6Q2lx2LiMPa19iB%2FLoIMwwuVrePqDHx9pNfKaP8aQepO8rSmr%2BG6w8W0nu3%2FGeDPqUKeTCGjSpTM4CA9fp2o1El%2B4uAH4Ia26LMEKpGOenYvYr%2Fy4IXFFYb1rEUM1UPNJXV4eArr9D1I8Ze58BBdZTsKru25I6xYC6GgDDR1H3d%2FvfmkN0%2BgGipn8Rc0JDQip4%2Bm0SHEyDFLcuDUKPhu1TsXY1HnyutBKPEnrhkhQvycr4xQ%3D%3D"
-    ],
-    "description": "An oversized button-up shirt in a vibrant purple shade.\nFeatures a classic collar and front button closure.\nRelaxed fit with dropped shoulders for a modern, effortless style.\nWide elbow-length sleeves add to the comfortable, airy feel.",
-    "inStock": true
-  },
-  {
-    "id": "1",
-    "name": "Beige Tailored Wide-Leg Trouser",
-    "price": 15000,
-    "category": "trousers",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Beige"
-    ],
-    "images": [
-      "/images/products/beige-tailored-wide-leg-trouser.webp"
-    ],
-    "description": "A sophisticated beige tailored wide-leg trouser with a clean silhouette. Comfortable and polished for work, church, and smart-casual occasions.",
-    "inStock": true
-  },
-  {
-    "id": "10",
-    "name": "Black & White Contrast Sleeve Midi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black/White"
-    ],
-    "images": [
-      "/images/products/black-white-contrast-sleeve-midi-dress.webp"
-    ],
-    "description": "A sophisticated black midi dress with voluminous white bishop sleeves. The clean contrast and modest silhouette make it perfect for office wear, church, and elegant daytime occasions.",
-    "inStock": true
-  },
-  {
-    "id": "11",
-    "name": "Mauve Lace Pleated Midi Dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Mauve"
-    ],
-    "images": [
-      "/images/products/mauve-lace-pleated-midi-dress.webp"
-    ],
-    "description": "A graceful mauve midi dress with a crochet-lace bodice, flared pleated sleeves, and a sunburst pleated skirt. Feminine and refined for weddings, dinners, and special gatherings.",
-    "inStock": true
-  },
-  {
-    "id": "12",
-    "name": "Floral Chiffon Crop Top & Skirt Set",
-    "price": 12000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Multicolor"
-    ],
-    "images": [
-      "/images/products/floral-chiffon-crop-top-skirt-set.webp"
-    ],
-    "description": "A vibrant floral chiffon two-piece set featuring a square-neck long-sleeve crop top and a matching tiered ruffle mini skirt. Bold and breezy for vacations, parties, and sunny outings.",
-    "inStock": true
-  },
-  {
-    "id": "13",
-    "name": "Blue & White Striped Kaftan Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Blue/White"
-    ],
-    "images": [
-      "/images/products/blue-white-striped-kaftan-dress.webp"
-    ],
-    "description": "A relaxed blue and white striped kaftan maxi dress with a deep V-neck, wide sleeves, and front drawstring ties. Effortlessly stylish for beach days, resort wear, and casual errands.",
-    "inStock": true
-  },
-  {
-    "id": "14",
-    "name": "Black Chiffon Overlay Maxi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black"
-    ],
-    "images": [
-      "/images/products/black-chiffon-overlay-maxi-dress.webp"
-    ],
-    "description": "A flowing black chiffon overlay maxi dress with elegant draping and a lightweight feel. Perfect for evening events, dinners, and special occasions.",
-    "inStock": true
-  },
-  {
-    "id": "15",
-    "name": "Black Multicolor Floral Maxi Skirt",
-    "price": 12000,
-    "category": "skirts",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black/Multicolor"
-    ],
-    "images": [
-      "/images/products/black-multicolor-floral-maxi-skirt.webp"
-    ],
-    "description": "A bold black maxi skirt featuring a vibrant multicolor floral print. Comfortable and eye-catching for parties, vacations, and statement styling.",
-    "inStock": true
-  },
-  {
-    "id": "16",
-    "name": "Blue Gold Abstract Wrap Maxi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Blue/Gold"
-    ],
-    "images": [
-      "/images/products/blue-gold-abstract-wrap-maxi-dress.webp"
-    ],
-    "description": "A stunning blue and gold abstract wrap maxi dress with a flattering silhouette. Ideal for formal gatherings, weddings, and elegant outings.",
-    "inStock": true
-  },
-  {
-    "id": "17",
-    "name": "Beige Rainbow Fringe Knit Sweater",
-    "price": 12000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Beige/Rainbow"
-    ],
-    "images": [
-      "/images/products/beige-rainbow-fringe-knit-sweater.webp"
-    ],
-    "description": "A cozy beige knit sweater with playful rainbow fringe details. A fun and stylish pick for casual days, chilly evenings, and relaxed outings.",
-    "inStock": true
-  },
-  {
-    "id": "18",
-    "name": "Teal Velvet Maxi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Teal"
-    ],
-    "images": [
-      "/images/products/teal-velvet-maxi-dress.webp"
-    ],
-    "description": "A rich teal velvet maxi dress with a soft, luxurious feel. Elegant for dinners, parties, and special occasions.",
-    "inStock": true
-  },
-  {
-    "id": "19",
-    "name": "Navy Pink Floral Maxi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Navy/Pink"
-    ],
-    "images": [
-      "/images/products/navy-pink-floral-maxi-dress.webp"
-    ],
-    "description": "A graceful navy maxi dress with a pink floral print. Flowing and feminine for weddings, outings, and formal events.",
-    "inStock": true
-  },
-  {
-    "id": "1ADn3UttMrBqE5ZrlUI6",
-    "name": "Isla Bow Maxi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "L",
-      "XL",
-      "M"
-    ],
-    "colors": [
-      "Burgundy"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898983589_1782847452362.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=VAxb6Vpa6OUJvZezbtjnBYNYwBMc3tKMJ5E6wFKpj4RC5UWTdbaXdxw63PjPIvFW%2BoGZL6X86fTorv5l16Z4GIZesHKqtbmsSONYUyOkF%2B7KmiaKC8hr47C%2FVuozBL0AqAL5cjuZAPucOEh6xMjSce4lbvs8z6xWF0TfcsO9HbdYwOXvytyYh2YOH9OTVn7f8IVf4rx7rjVX1ykZLK0xWzOxBnyArazdbIeCdGZz2WTZM%2F95LxOFaGOpWUv4S9vKwR5kv2X87HISM2%2B8Dj64R21iM4sn3uBBSTBIlayKVLx65iHpSoQCtVKz%2FbJmRj1Bpkg4niAkIa7Jqf22m2NfgQ%3D%3D"
-    ],
-    "description": "Color: Soft red with fine vertical pinstripes.\nLength: Full-length maxi dress that falls to the ankles.\nNeckline: Flattering V-neckline.\nSleeves: Short kimono-style sleeves with turned-up cuffs.\nFit: Loose, flowing silhouette that prioritizes comfort while maintaining a chic appearance.\nStandout Feature\nA wide burgundy sash-like panel runs diagonally from the shoulder down the front.\nAttached to it is a large burgundy bow at the waist/chest area.\nLong ribbon tails hang from the bow, adding drama and visual interest.",
-    "inStock": true
-  },
-  {
-    "id": "2",
-    "name": "Cream Striped Patchwork Shirt",
-    "price": 10000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Cream",
-      "White"
-    ],
-    "images": [
-      "/images/products/cream-striped-patchwork-shirt.webp"
-    ],
-    "description": "A relaxed cream striped patchwork shirt with a unique mixed-print design. A stylish pick for casual Fridays and weekend outings.",
-    "inStock": true
-  },
-  {
-    "id": "20",
-    "name": "Grey Satin Mermaid Midi Skirt",
-    "price": 12000,
-    "category": "skirts",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Grey"
-    ],
-    "images": [
-      "/images/products/grey-satin-mermaid-midi-skirt.webp"
-    ],
-    "description": "A sleek grey satin mermaid midi skirt with a flattering silhouette. Perfect for evening wear and chic styling.",
-    "inStock": true
-  },
-  {
-    "id": "21",
-    "name": "Green Silk Blouse",
-    "price": 12000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Green"
-    ],
-    "images": [
-      "/images/products/green-silk-blouse.webp"
-    ],
-    "description": "A elegant green silk blouse with a soft, flowing drape. A refined choice for work, dinners, and casual elegance.",
-    "inStock": true
-  },
-  {
-    "id": "22",
-    "name": "Abstract Print Green Skirt Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Green/Multicolor"
-    ],
-    "images": [
-      "/images/products/abstract-print-green-skirt-dress.webp"
-    ],
-    "description": "A stylish green abstract print dress with a flattering skirt silhouette. Perfect for daytime events and casual elegance.",
-    "inStock": true
-  },
-  {
-    "id": "22MirmZx3clbUdgWvKrk",
-    "name": "Draped Royal Blue Blouse",
-    "price": 18000,
-    "category": "tops",
-    "sizes": [
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "blue"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063542139_Screenshot_20260701_190556_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=I1feJeU7Ye0NvpcFQtvz8EAEUh0pKzfs6Jr5N431%2FHTP1vlr31pMfKHvHGwFPh3KDapx7bEFgZXKFWLA7lasSrMVlaHZ9Z2m3QuAkNicnKcZf0FPdl9OEJd0fk9ufLVLDYmNpXXg6DJ%2B5cQfvaVnyj0z3d5d2q5kNwJrbu7XZhU90WhboH6v0r%2BUuiMuYqhMynPUyXv2R%2BUBXUuyzhcqrPOUJk5hNehMLRzABdJWlsqOp4ct6pMy5tj0OfmoVIv%2Fyv%2BN30MVlCgXE0ZBBWdBIqsrAkA70oJPZDu5cEEMI8A%2FDijarWeblIU26Z3RW%2Bl8rSvF1ZcXflJIEw5MNqM9SQ%3D%3D"
-    ],
-    "description": "Vibrant royal blue color that stands out.\nSoft, flowing fabric with a draped cowl-style front that creates graceful folds.\nAsymmetrical hemline that overlaps and tapers toward the center, adding visual interest.\nLoose, comfortable fit that skims the body rather than clinging to it.\nElbow-length sleeves with a relaxed cut.\nModest round or boat-style neckline.",
-    "inStock": true
-  },
-  {
-    "id": "23",
-    "name": "Abstract Print Pant Set",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Multicolor"
-    ],
-    "images": [
-      "/images/products/abstract-print-pant-set.webp"
-    ],
-    "description": "A bold abstract print two-piece set with matching pants. Comfortable and statement-making for parties and outings.",
-    "inStock": true
-  },
-  {
-    "id": "24",
-    "name": "Abstract Print Pleated Skirt Set",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Multicolor"
-    ],
-    "images": [
-      "/images/products/abstract-print-pleated-skirt-set.webp"
-    ],
-    "description": "A coordinated abstract print top and pleated skirt set. Feminine and polished for special occasions and gatherings.",
-    "inStock": true
-  },
-  {
-    "id": "25",
-    "name": "Black Off-Shoulder Ball Gown",
-    "price": 20000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black"
-    ],
-    "images": [
-      "/images/products/black-off-shoulder-ball-gown.webp"
-    ],
-    "description": "A dramatic black off-shoulder ball gown with a voluminous skirt. The ultimate choice for gala nights, weddings, and formal celebrations.",
-    "inStock": true
-  },
-  {
-    "id": "26",
-    "name": "Black Rhinestone Mesh Midi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black"
-    ],
-    "images": [
-      "/images/products/black-rhinestone-mesh-midi-dress.webp"
-    ],
-    "description": "A glamorous black mesh midi dress with rhinestone embellishments. Perfect for evening parties, dinners, and red-carpet moments.",
-    "inStock": true
-  },
-  {
-    "id": "27",
-    "name": "Black & White Striped Handbag",
-    "price": 12000,
-    "category": "accessories",
-    "sizes": [
-      "One Size"
-    ],
-    "colors": [
-      "Black/White"
-    ],
-    "images": [
-      "/images/products/black-white-striped-handbag.webp"
-    ],
-    "description": "A chic black and white striped handbag with structured shape. A stylish accessory to complete any outfit.",
-    "inStock": true
-  },
-  {
-    "id": "28",
-    "name": "Black & White Striped Polo Set",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black/White"
-    ],
-    "images": [
-      "/images/products/black-white-striped-polo-set.webp"
-    ],
-    "description": "A matching black and white striped polo top and bottom set. Sporty yet elegant for casual and semi-formal settings.",
-    "inStock": true
-  },
-  {
-    "id": "29",
-    "name": "Blue Mesh Ruffle Maxi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Blue"
-    ],
-    "images": [
-      "/images/products/blue-mesh-ruffle-maxi-dress.webp"
-    ],
-    "description": "A flowing blue mesh maxi dress with delicate ruffle details. Elegant for weddings, dinners, and summer events.",
-    "inStock": true
-  },
-  {
-    "id": "30",
-    "name": "Brown Wave Print Maxi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Brown/Multicolor"
-    ],
-    "images": [
-      "/images/products/brown-wave-print-maxi-dress.webp"
-    ],
-    "description": "A relaxed brown wave print maxi dress with effortless movement. Ideal for vacations, beach days, and casual outings.",
-    "inStock": true
-  },
-  {
-    "id": "31",
-    "name": "Cream Floral Chiffon Midi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Cream/Floral"
-    ],
-    "images": [
-      "/images/products/cream-floral-chiffon-midi-dress.webp"
-    ],
-    "description": "A romantic cream chiffon midi dress with a soft floral print. Light and airy for brunches, garden parties, and daytime events.",
-    "inStock": true
-  },
-  {
-    "id": "32",
-    "name": "Cream Striped Belted Midi Dress",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Cream"
-    ],
-    "images": [
-      "/images/products/cream-striped-belted-midi-dress.webp"
-    ],
-    "description": "A refined cream striped midi dress with a waist belt. Polished and flattering for work, church, and elegant outings.",
-    "inStock": true
-  },
-  {
-    "id": "33",
-    "name": "Floral Ruffle Dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Multicolor"
-    ],
-    "images": [
-      "/images/products/floral-ruffle-dress.webp"
-    ],
-    "description": "A cheerful floral ruffle dress with playful tiered details. A lovely pick for parties, vacations, and sunny days.",
-    "inStock": true
-  },
-  {
-    "id": "34",
-    "name": "Grey Chain Strap Handbag",
-    "price": 12000,
-    "category": "accessories",
-    "sizes": [
-      "One Size"
-    ],
-    "colors": [
-      "Grey"
-    ],
-    "images": [
-      "/images/products/grey-chain-strap-handbag.webp"
-    ],
-    "description": "A sleek grey handbag with a chain strap detail. A versatile accessory that elevates both casual and formal looks.",
-    "inStock": true
-  },
-  {
-    "id": "35",
-    "name": "Grey Ribbed Polo Midi Dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Grey"
-    ],
-    "images": [
-      "/images/products/grey-ribbed-polo-midi-dress.webp"
-    ],
-    "description": "A fitted grey ribbed polo midi dress with a collar detail. Smart and sporty for everyday wear and casual Fridays.",
-    "inStock": true
-  },
-  {
-    "id": "36",
-    "name": "Mixed Print Kaftan",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Multicolor"
-    ],
-    "images": [
-      "/images/products/mixed-print-kaftan.webp"
-    ],
-    "description": "A relaxed mixed-print kaftan with wide sleeves and a flowing cut. Perfect for resort wear, Fridays, and effortless style.",
-    "inStock": true
-  },
-  {
-    "id": "37",
-    "name": "Pink Stripe Oversized Shirt Set",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Pink/White"
-    ],
-    "images": [
-      "/images/products/pink-stripe-oversized-shirt-set.webp"
-    ],
-    "description": "A breezy pink striped oversized shirt set with matching bottoms. Comfortable and stylish for casual outings and travel.",
-    "inStock": true
-  },
-  {
-    "id": "38",
-    "name": "Pink Striped Polo Top",
+    "id": "QxYZ9Zz8dsfEx4gpRmLs",
+    "name": "Abstract Watercolor Print Blouse",
     "price": 9000,
     "category": "tops",
     "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Pink/White"
-    ],
-    "images": [
-      "/images/products/pink-striped-polo-top.webp"
-    ],
-    "description": "A preppy pink striped polo top with a classic collar. Great for casual days paired with jeans or skirts.",
-    "inStock": true
-  },
-  {
-    "id": "39",
-    "name": "Pinstripe Bell Sleeve Blouse",
-    "price": 10000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Pinstripe"
-    ],
-    "images": [
-      "/images/products/pinstripe-bell-sleeve-blouse.webp"
-    ],
-    "description": "A chic pinstripe blouse with dramatic bell sleeves. A polished choice for office wear and smart-casual occasions.",
-    "inStock": true
-  },
-  {
-    "id": "40",
-    "name": "Red Layered Pinstripe Collar Top",
-    "price": 10000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Red"
-    ],
-    "images": [
-      "/images/products/red-layered-pinstripe-collar-top.webp"
-    ],
-    "description": "A bold red layered top with pinstripe collar details. Eye-catching and modern for work, church, and evening events.",
-    "inStock": true
-  },
-  {
-    "id": "41",
-    "name": "Red Teal Abstract Skirt Set",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Red/Teal"
-    ],
-    "images": [
-      "/images/products/red-teal-abstract-skirt-set.webp"
-    ],
-    "description": "A vibrant red and teal abstract print skirt set. Matching top and skirt for a coordinated, standout look.",
-    "inStock": true
-  },
-  {
-    "id": "42",
-    "name": "Rust Beaded Shoulder Blouse",
-    "price": 12000,
-    "category": "tops",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Rust"
-    ],
-    "images": [
-      "/images/products/rust-beaded-shoulder-blouse.webp"
-    ],
-    "description": "A warm rust blouse with delicate beaded shoulder details. Elegant for dinners, parties, and cultural celebrations.",
-    "inStock": true
-  },
-  {
-    "id": "43",
-    "name": "Tan Structured Handbag",
-    "price": 12000,
-    "category": "accessories",
-    "sizes": [
-      "One Size"
-    ],
-    "colors": [
-      "Tan"
-    ],
-    "images": [
-      "/images/products/tan-structured-handbag.webp"
-    ],
-    "description": "A classic tan structured handbag with clean lines. A timeless accessory that pairs with almost any outfit.",
-    "inStock": true
-  },
-  {
-    "id": "44",
-    "name": "Teal Double Breasted Midi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Teal"
-    ],
-    "images": [
-      "/images/products/teal-double-breasted-midi-dress.webp"
-    ],
-    "description": "A sophisticated teal double-breasted midi dress with a tailored silhouette. Perfect for office, church, and formal events.",
-    "inStock": true
-  },
-  {
-    "id": "45",
-    "name": "Teal Floral Mesh Maxi Dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Teal/Floral"
-    ],
-    "images": [
-      "/images/products/teal-floral-mesh-maxi-dress.webp"
-    ],
-    "description": "A dreamy teal floral mesh maxi dress with soft draping. Ideal for weddings, evening events, and elegant occasions.",
-    "inStock": true
-  },
-  {
-    "id": "46",
-    "name": "Yellow Kaftan Gold Brooch Dress",
-    "price": 20000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Yellow/Gold"
-    ],
-    "images": [
-      "/images/products/yellow-kaftan-gold-brooch-dress.webp"
-    ],
-    "description": "A stunning yellow kaftan dress with a gold brooch accent. Regal and perfect for celebrations, weddings, and special events.",
-    "inStock": true
-  },
-  {
-    "id": "47",
-    "name": "Yellow Ombre Floral Jumpsuit",
-    "price": 15000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Yellow/Ombre"
-    ],
-    "images": [
-      "/images/products/yellow-ombre-floral-jumpsuit.webp"
-    ],
-    "description": "A bright yellow ombre floral jumpsuit with a relaxed fit. Bold and breezy for parties, vacations, and summer days.",
-    "inStock": true
-  },
-  {
-    "id": "48",
-    "name": "Blue & White Striped One-Shoulder Midi Dress",
-    "price": 28000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Blue/White"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062399225_blue-white-striped-one-shoulder-midi-dress-front.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=hjkCNFojfl9gVuzN5iu5SR740KELDNf7N%2BpB8zGv11ALfrr33VjhnCsLuw8xPY9ADpVZTO0l8eOv88ryHQ9uYlbOaZ1p1MEnoEUaaLP5zirxKXqeldgViTZjxxDhlQmUgU2N5QzuIcxWV7917KznLWKzBLNYXe6%2BW%2B3IO%2BfpAI0BFv7UvYk%2FSQu5XqZpIHHb2%2BuDMSAcg0mstRPdcSiioW7D1SIpbdv88sj7WhwCEDJeeLJ1oFGlYpS%2FAUyHJgUcO911wLHYASvM4niLMKTxlqzJw%2BSYBg3tb5XDDVQT9t9Lm%2BEvUymRdRKWaLih0PxrmnS1gXtUpTvyy0lXX4wwmw%3D%3D",
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062401424_blue-white-striped-one-shoulder-midi-dress-back.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=UJodnpT%2Br1ZUTPgAgOozBWjIjoN249znuShHTBL%2Fts57Vux5SEl9A7Dada%2Fuu15YbHEdp09f9590oIG31VdAUgCySsCGiG1kqbQqAg9LJGqAG8GQDRgcE5K%2BDm8cC0fCoY8hcrPqKfK3SIitpNxFMK0A1j0tbeA6ZcZHKAxkE1tWbTl3YiP2vkPTmH%2BjS8g6iYokMk9gXJIrB6cDC%2BsO%2FHE87ug5sVZI2bFKEsFpZkURXD8IkCfxtostzMX9XXXXd5bBEXD77UAw798VyLCf1aCDFw1RsRxL9r2goHZQyursJ%2FNrmj2E029vrF3eVaWHB68eSNkY8lCrj2%2FrOgEmhA%3D%3D"
-    ],
-    "description": "A stylish blue and white striped one-shoulder midi dress with a flattering fit. Elegant for brunch, beach outings, and semi-formal occasions.",
-    "inStock": true
-  },
-  {
-    "id": "8qFarseTBOgjCqZ1Yw9M",
-    "name": "Coordinated three-piece ensemble",
-    "price": 20000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "XL",
-      "XXL"
-    ],
-    "colors": [
-      "brown",
-      "white",
-      "pink"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148103641_1783065216583.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=IIK30OyfzYS2v3Yh9KN5N%2BzePjDtmKL7yQzqZPpfFCOpI6qayXlRIDhXMx7exrKnZ%2BFonfX2OvJzsKnftWlEIH7OrnlugZDkHk%2Fy2vIu1RMBHZj8uQUSHdcx7UM1Mo3ixJ1XMvR5VyiG%2FKeCZkt3YufxDcE8g%2BW1pFQpmD53sukyTO0ojcvz09TeHev1yvEgf393bsRTkGiLKnq0fQplwcqF%2BiDXHjeNrnd%2F10FjiZvmANTHxnXZcbKiK86gZ5GATHgFpSCXlK7pgwWVmHx7Qx9aFwA4AhIgkNQ%2BqfUjJwH6LP4L9Wv0pDAaJRkFHkDGhEryU%2BKAMP%2FeRfesz6W9dw%3D%3D"
-    ],
-    "description": "Exude effortless elegance in this two-piece coordinated set featuring a floral-print blouse, flowing wide-leg trousers, and a lightweight kimono overlay with a matching waist tie. Designed in soft blush and neutral tones, this sophisticated ensemble combines comfort, versatility, and timeless style, making it perfect for both special occasions and elevated everyday wear.",
-    "inStock": true
-  },
-  {
-    "id": "9",
-    "name": "Black & White Button Collar Midi Dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black/White"
-    ],
-    "images": [
-      "/images/products/black-white-button-collar-midi-dress.webp"
-    ],
-    "description": "A chic sleeveless black midi dress with a white Peter Pan collar trim, button-front detail, and contrast pocket outlines. A polished choice for work, church, and semi-formal events.",
-    "inStock": true
-  },
-  {
-    "id": "9fHBOa4TxgEf5t5ueNOA",
-    "name": "Pink shirt",
-    "price": 10000,
-    "category": "tops",
-    "sizes": [
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Pink"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898807144_1782847216114.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=Do8L3Nh10uJm0%2BVadiPJZWKglkNhxINXzuIP5hw6joTi4uLfnzcdITIFVtm9zfpb0EtQkPBupHYdS8QHAMZErnUMDgjoLpkgFE5fjDdhdsJ%2BlKJxSnyTvMAU0%2B3DBXo%2B6Ezme%2BUX%2F36xdv7UqJpfOO5%2BzGJFjQxx%2FPy1cwDTsxCky87%2BVZ%2BQ4MFp4ATgoXhxptTn98gS9KhtTWW0RpcG%2BycLE3kl%2FcOAZT3MzWziIaDH1R7jf8BDrAkkOkd8LZ2TlMm1ocDPvG0RtbCSU7B8q%2F%2BLVzUddKaVfq9u%2BvdUVtirhR4q34kaIfazGjQwwm2toAVNKkbHeixLtlOad1FE0Q%3D%3D"
-    ],
-    "description": "The blouse blends a classic shirt design with a playful, contemporary fashion element. The dramatic black bow makes it a statement piece",
-    "inStock": true
-  },
-  {
-    "id": "BN56XQdan4UCAcSmXnYM",
-    "name": "Red plaid midi dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
       "M"
     ],
     "colors": [
-      "red"
+      "Multi"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782894834297_1782742670171.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=cPlbqHZuSQUc9kZSVR9cf76Yw77%2FqXWnj6UzOsvHN2Rdqn7vT2N3yLrcPPq9QwazbzCTLaDjDP4Je6O964i700YdVn5GYdCFBA7uGUa5srGHmCqClL236REEU8%2FC9D6%2BtOHNEVpfz7m9EVFGRzuoL%2BMVJiMgvd3JO4ywf4qubuSEOnIcD1acxgmtaBuVd7BCvF1h9OAR1Cd7ydqV3vpOJNYfiYhHZ%2Fsd1T4shtyLykXzRuJUotnvnM%2B43Q760n%2BOca3YMgFCEVTmeJsT%2BleEa3ti7XGuVYocnqIiEhOTlvkiEJAv%2FDG4YmeHIZFIOkX5wxQtmMvyWPpVPphPbDYA9A%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783337897873_abstract-watercolor-print-blouse-front.png?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=hGkpiem1iJ5bkewswlyNCiQ7VUV0SU02MWhd6Iff%2FmEmkFj5r4n%2Fp%2BYEaiSTTOYT8f9w6zBzB%2Bwy%2FeIKkWWXa60Yb5EDyV3cXlqastulzN2y5wfjWl%2FXXzaw4tehD%2FBhArv1OigAw7BExY48BiJs70Jc2Gw%2B3hIgSAsXqLd%2BJsPR%2B%2Fb2uTGv3hafTFFb7ET3f7P8bgrQ4qTm5bpNLxYOSZqTibCv%2FXDtbhHo%2Bn%2B8%2Bi9R5wouxUynbgen%2BpjbdxGDJZK%2F8VDCpfw3BMwQEgeFl6Gn2Rn%2FM%2Fo1XNeWzCTQlkeRiU1fjgdhGV4AqXiVrfBqBmrnheTxMlew5kwDkYWYXg%3D%3D",
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783337901771_abstract-watercolor-print-blouse-back.png?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=XDk%2B4EkJ7LK%2B%2FI5Y8a5R2%2BoDylIndWwpXsg24rP3vH7QtSGF4NmW0gtnJKQTrqZFGulCbHTavoeDwqhkArTeBfoOZ%2BKwEcpq6vCOjT8GQmb1O8LFmSESEX1Mbw8Ox0YsXFKcVQAQ2%2BaEU7DfWUU%2BMAay2auPiTgynGw4OP8gUQOo1v6OqjM%2BzQbjVJH0YTBSJKmsapg9vyhE3wU3a1sQ7OMWiWp%2FwSe916uU1FNCpTGLfl%2F7Fjap8kcv7dD0mQYnGgs95SrO17RY1cfH3Q7H20dmjfn1dKESvk0dHY%2BcSmNQTXBZX3ALwzFUCczUhnpqsa5lBH9bTE0g1w3OXkh1%2FQ%3D%3D"
     ],
-    "description": "The outfit is a red plaid midi dress with a stylish, modern design.\n\nKey Features\nPattern: Red, white, and black plaid/checkered print.\nNeckline: Collared shirt-style neckline with a partial button-front look.\nSleeves: Long sleeves with fitted cuffs.\nWaist Detail: A twisted knot detail at the front waist creates a flattering gathered effect.\nLength: Midi length, falling below the knees.\nSkirt: Features a front slit/opening created by the wrap-style draping, adding movement and style.\nFit: Fitted around the waist with a more relaxed fit through the upper body and skirt.",
-    "inStock": true
-  },
-  {
-    "id": "D04Yqu0cLdxAvIXYTrWV",
-    "name": "Black bodycon midi dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Black"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148479382_1783065458255.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=GNEZ%2BXo7AS%2BJ6X7ujihEHDFvHpWfu8rSww%2F7gJs6N3NRUknKJ6Kzh0MgQUmJhQivYj%2Fj3U6YmyX8oWa%2F6V1LQyz7swIJXMLEJlLqokjJCDOfuq3irb0%2Fk%2BFWQOveITUXOAmOTzGQQYPquzwK040FttkJCzcbrgK4Y6iR%2Fsk2510DuMvMDy9gek2XCKPbokJfz82GIDCc9T2CNGX5MTAE%2Fb%2Br19qjuOYH93GV7DjSMW%2Bxw2CzJdBHFe9AII3JnU%2BTyB4de5SP9MA9WjZCx3AJWm2Rz8%2BZxmd9javFccrGlE2ynz36THozlxYqiEFadNYqV%2BU5ulumLrHsCAr2XHotcA%3D%3D"
-    ],
-    "description": "Elegant and effortlessly chic, this black bodycon midi dress features a flattering square neckline accented with delicate white ruffle trim. Designed with long sleeves, ruffled cuffs, and a curve-enhancing silhouette, this timeless piece offers the perfect balance of sophistication and femininity, making it an essential choice for both special occasions and elevated everyday style.",
-    "inStock": true
-  },
-  {
-    "id": "EnrOvyRsnyf2rbM8vSON",
-    "name": "matching printed style",
-    "price": 15000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Brown"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783061458358_Screenshot_20260629_173145_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=XVJLk%2F2I0fmBVE3%2B%2FvxwUZ24L%2F2kfER%2Bi0mSpZq9cAV%2Bpc2Bayp%2B%2FhZvYf6auB5UrsGeH2f6sLwkRCnjW2Gb3zuWA4HoaINJUkoah76n3y%2F5BgsX8OKsR2075iDehVB%2FZEH0Wtdv%2BqoupgyajthWRV3VlXxGmw0O20MvQbCqF0QVvIirxSvsFHslw9Kx1nnJplKLn01HUqNfo9f1nbqcYGZQu%2ByDrUgKD9qIasm%2BP2tgE2iZffS8QRsX9G7RZGjtHoJx03v6UIdGlTSq%2B9C0OHzQU0QQcEiAVUzwU0OeZCGWBAdgm7Lkz4%2FO5hBkS8uotxqYLGn17TnxKQUGW02wdg%3D%3D"
-    ],
-    "description": "A loose-fitting button-front shirt with a relaxed silhouette.\nLong sleeves that are casually rolled up.\nFeatures a warm rust-orange base color with repeating burgundy and pink ornamental motifs.\nContrasting patterned trim runs along the button placket and collar, adding visual interest.",
-    "inStock": true
-  },
-  {
-    "id": "FKYhKwmwnZEeCTfPusVT",
-    "name": "Royal blue bodycon midi dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "M",
-      "L"
-    ],
-    "colors": [
-      "blue"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783145187096_1782916658200.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=cwKMJUisO8pIRRzcMh%2BKdveYeHhY4oIydWb7CGv6RdrAKWoJ%2BQXfEYJyUwGrBKyFOfx9MIxLu7s3PGrI8KPEPq8P%2F151U7gQe0lmf0isIZmOXoYqpfb%2BKMZkn31RpxX3gzu7ZdyIt2u0itUXQu5Nc8lV3De8jIQ1SQJGBcCQHoTsnvef0NdrkhJ4xUCM86SQFSnsTGjMpCdKEy4wz7xuZ8XpTBYgdpvbG6eKVLo5tAZS3%2F6KdtWCJcGaohugfm%2B66cNBeDZNBsC%2BnT5nabHvPaBqcleVuIq8OYDDXm702Z8cn6%2FqKVJMAMjj4wy6uMuMgcoPfakOhNeMwFKaROjGHQ%3D%3D"
-    ],
-    "description": "Silhouette: A fitted bodycon shape that contours the body and highlights the waist and curves.\nNeckline: A feminine V-neckline that elongates the neck and adds a touch of sophistication.\nSleeves: Long, fitted sleeves that provide coverage while maintaining a sleek appearance.\nEmbellishments: The upper bodice and sleeves are adorned with sparkling rhinestone or stud detailing arranged in elegant curved patterns. These embellishments create a visually slimming effect and add glamour without overwhelming the design.",
-    "inStock": true
-  },
-  {
-    "id": "HWOYHEGUmffXcG2WxUuS",
-    "name": "Mustard-gold shift dress",
-    "price": 18000,
-    "category": "dresses",
-    "sizes": [
-      "L",
-      "M"
-    ],
-    "colors": [
-      "mustard"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148821611_1783065296888.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=a516VrHM7IxrzLgZ5%2Fqu8d1kQq76uAXNo9nW6kCuH%2F2ZW8wni2yT%2Bqyvd1qfETDMxWZfA5ajuGYc2DhfYA9u2Me4cZfIn4C6JAOSca%2FABUgry690NLjmZtdxXA3NAeShUfCLBuyjwVoYYIFy%2BetClW5Yg5HtB2akVQkcDMFzy49I3fNprguMVTOFBfbKXwLLTYUzCX28Dz4H%2FcnvpPRfJUJdCVZwyKFldtrX7UIbQgPmnhPj5KIpvNhEehziv5ASd9TsJ9DuLE8XroTPNRYMNPwrAK2mtLv8xOzSk8FkC6cT6UfoXcpky1y9TRjRtVtbSxaVjltgj3BzGTn3WmnaJg%3D%3D"
-    ],
-    "description": "mustard-gold shift dress, designed with a striking asymmetrical floral overlay that adds movement and charm. Featuring a classic round neckline, relaxed short sleeves, and a luxurious satin-like finish, this sophisticated piece effortlessly blends modern style with feminine elegance for any special occasion.",
-    "inStock": true
-  },
-  {
-    "id": "I3P0yaoTp6umIeZBeIin",
-    "name": "Color-block maxi dress",
-    "price": 22000,
-    "category": "dresses",
-    "sizes": [
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Pink"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783147192912_1782918753477.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=RovJ8ZsAtJtd3ZnNwjudrRvbyQf90ittxY4aqgIxdbteicCjI3nUZ3sn8YF8mLMqDF7rdcMFjXIXfDlZ1ngq0wEIF6bnf198Ly6fWK5TDUnq4ffLbsdUExkhu1y13FAAImp24XM%2BmsRYubjYGj5lYTGxda9oVyc0zAN5OkTyoNut%2BG4Mmb07N0JYNqJ0WUDsv7E1fcElvUlJpxfuObshn0WVKIKz6oMoGS%2Ft7vZn1Bjgd6rxjPohNMMdLiAgOtufHR%2FXt5DtamKJduoY2xhRDrQc%2FqYUTYspGJT0mgokkGZcrjPgi4qM9e3gMqRfIWf3Oxdzmd4NHBV%2FhdAylHDaDw%3D%3D"
-    ],
-    "description": "Neckline: A structured collared shirt neckline that adds a polished and sophisticated touch.\nSleeves: Short sleeves with subtle gathered detailing, creating a soft and feminine silhouette.\nPrint Panel: The bodice features a striking multicolored geometric print with vertical dash-like motifs in bright shades of blue, yellow, green, orange, red, and purple against a dark background.\nWaist Detail: A peplum-style overlay extends from the printed bodice, adding shape and creating a flattering waistline.",
-    "inStock": true
-  },
-  {
-    "id": "OSKkpeDypa6AY2xR5KqO",
-    "name": "Copper-brown satin maxi dress",
-    "price": 25000,
-    "category": "dresses",
-    "sizes": [
-      "L"
-    ],
-    "colors": [
-      "copper brown"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783065890902_1782912804920.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=YxKP5d%2FTXv6g7MWENv4BzLhwMPgS%2BmF6gv3ix7fNfHZFnApNEggKfsrmvOPRNo9hrJVnOYAW2Wi4NDJ0GBUktIWyUt47s1twdNyhuUwWSDcevB%2FsDVEIuZcBKpIYV86JLg7mYWAYQAt7kMYGLJEGjxeCtlvCXK45ENwthfgASCJBqd8ZZdYO0Bfx8g%2FXFOj%2F7jMp5R4RBaL50Tbv%2BjwXsghEFtOdrH%2BI7uZQWL71iPA2EeDTr8eh7baey2DqZIkH669yvTu9A5ISaiT5L93bFM7o%2BhlqNkaLV5uDSxKEyCfJmP%2Bx4By%2Bs3E1C3wf8IbQYaoiIwTdJhJulvG94BjazA%3D%3D"
-    ],
-    "description": "Lustrous satin-like fabric with a subtle sheen that catches the light beautifully.\nWarm copper/rust brown color with a soft textured pattern.\nModest round neckline for a timeless appearance.\nLong sleeves with gathered elastic cuffs that add volume and elegance.\nMatching self-tie belt at the waist, creating a flattering, feminine silhouette.\nStraight, floor-length skirt with a front slit for ease of movement and a touch of sophistication.\nRelaxed yet tailored fit that balances comfort and elegance.",
+    "description": "Vibrant abstract watercolor print blouse with a unique artistic design.",
     "inStock": true
   },
   {
@@ -1055,60 +59,6 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "QxYZ9Zz8dsfEx4gpRmLs",
-    "name": "Abstract Watercolor Print Blouse",
-    "price": 9000,
-    "category": "tops",
-    "sizes": [
-      "M"
-    ],
-    "colors": [
-      "Multi"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783337897873_abstract-watercolor-print-blouse-front.png?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=hGkpiem1iJ5bkewswlyNCiQ7VUV0SU02MWhd6Iff%2FmEmkFj5r4n%2Fp%2BYEaiSTTOYT8f9w6zBzB%2Bwy%2FeIKkWWXa60Yb5EDyV3cXlqastulzN2y5wfjWl%2FXXzaw4tehD%2FBhArv1OigAw7BExY48BiJs70Jc2Gw%2B3hIgSAsXqLd%2BJsPR%2B%2Fb2uTGv3hafTFFb7ET3f7P8bgrQ4qTm5bpNLxYOSZqTibCv%2FXDtbhHo%2Bn%2B8%2Bi9R5wouxUynbgen%2BpjbdxGDJZK%2F8VDCpfw3BMwQEgeFl6Gn2Rn%2FM%2Fo1XNeWzCTQlkeRiU1fjgdhGV4AqXiVrfBqBmrnheTxMlew5kwDkYWYXg%3D%3D",
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783337901771_abstract-watercolor-print-blouse-back.png?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=XDk%2B4EkJ7LK%2B%2FI5Y8a5R2%2BoDylIndWwpXsg24rP3vH7QtSGF4NmW0gtnJKQTrqZFGulCbHTavoeDwqhkArTeBfoOZ%2BKwEcpq6vCOjT8GQmb1O8LFmSESEX1Mbw8Ox0YsXFKcVQAQ2%2BaEU7DfWUU%2BMAay2auPiTgynGw4OP8gUQOo1v6OqjM%2BzQbjVJH0YTBSJKmsapg9vyhE3wU3a1sQ7OMWiWp%2FwSe916uU1FNCpTGLfl%2F7Fjap8kcv7dD0mQYnGgs95SrO17RY1cfH3Q7H20dmjfn1dKESvk0dHY%2BcSmNQTXBZX3ALwzFUCczUhnpqsa5lBH9bTE0g1w3OXkh1%2FQ%3D%3D"
-    ],
-    "description": "Vibrant abstract watercolor print blouse with a unique artistic design.",
-    "inStock": true
-  },
-  {
-    "id": "R4uxw97lojjCmR5l2KWk",
-    "name": "Black embellished maxi dress",
-    "price": 22000,
-    "category": "dresses",
-    "sizes": [
-      "L",
-      "XL",
-      "M"
-    ],
-    "colors": [
-      "Black"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783146406650_1782914449127.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mH3a77U3KAaB7x%2FDq3fcRE5U0lfxN%2BvKjUzomKiyexjZwJS%2B3lZBjjhcNgUw2jiL7sH4cVFCoR3Wfyck6QaP3IU%2FRnzkggczXCuNNyFx%2FOEDrNNSs8tXBJNdtYo9aIG0sgYxIxUi1pJp%2B5%2BjucOf8FtbD%2B33IoCeoJ7HRSCegPVvlGwi9vnmricxUZ01CB%2F6%2F1nDWlpn5LOmU8O9Z70o0E2M%2FiWERWQb0UXYZH1LkEWWxCJn0fd34bJSfcXF%2BmhpE%2FBmy4vFekEn1V2X%2FA0QugnQWozYo67HHWzmsWa4Ob4zPGqjyPPjv3VsbWDxmjKAJsV9dBtVTh1PNUai9q2Rew%3D%3D"
-    ],
-    "description": "Silhouette: A flowing A-line maxi silhouette that skims the body gracefully and offers both comfort and elegance.\nNeckline: A modest round neckline that creates a refined and classic look.\nSleeves: Three-quarter-length sleeves with embellished cuffs, providing balanced coverage and a polished finish.\nWaist Detail: A matching self-tie belt cinches the waist, allowing for a flattering, adjustable fit.\nEmbellishments: Intricate metallic stud or rhinestone patterns adorn the bodice, sleeves, and skirt. The geometric, cascading motifs create a luxurious visual effect and draw the eye vertically, enhancing the dress's elegant silhouette.",
-    "inStock": true
-  },
-  {
-    "id": "Tli7Npq2pX9QKbwqTtn2",
-    "name": "Royal blue bodycon dress",
-    "price": 36000,
-    "category": "dresses",
-    "sizes": [
-      "M"
-    ],
-    "colors": [
-      "blue"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063406392_Screenshot_20260701_190509_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=SlgcLbvj00FR7RRCPeGvuUiuLXcIt3F25FDY4nUZteoOeuThaKbsCJYnAkXJQLn9E2J0mxGk58Z6o%2BKm8gD3YD5nYDFmn8VxG%2BtvYzYqJxacU9TId%2BhVM36k0so%2FhRyl16UtgVTnpkyXtBYL0uZMVnh6FdAxgpjzminKyvOPQtQlfcjYEkFsW5YJh%2Fu2xsxSqYisbae9GB%2FA50%2FHdV6ojRrXOam%2BC30XBKb4D9kup4b%2B%2BGwnXlTDbuynkgi4S5iIkUbYJOP5tqdn3jbeWvohIU9%2BzYaiN1C%2BVvzp%2FDEhqLjBGUjbGrooZJHP%2FBgnmYxFa%2FOagAc5qQlA%2BqnPoZ5rMA%3D%3D"
-    ],
-    "description": "Deep royal blue fabric with a subtle glittery, star-like shimmer throughout.\nLong fitted sleeves for an elegant silhouette.\nA unique twist-knot neckline that creates a stylish focal point at the chest.\nCutout details across the upper chest and shoulders, adding a modern and sophisticated touch.\nFigure-hugging, bodycon fit that accentuates the waist and curves.\nStraight, ankle-length skirt that gives the dress a sleek and streamlined appearance.",
-    "inStock": true
-  },
-  {
     "id": "UiW0TidXWy3GiLn3V6At",
     "name": "Color-block midi dress",
     "price": 15000,
@@ -1129,22 +79,57 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "Yo0pVh9jqLK6347aNB51",
-    "name": "Crop top and maxi skirt set",
-    "price": 20000,
-    "category": "two-piece-sets",
+    "id": "HWOYHEGUmffXcG2WxUuS",
+    "name": "Mustard-gold shift dress",
+    "price": 18000,
+    "category": "dresses",
     "sizes": [
-      "XXL",
-      "XL"
+      "L",
+      "M"
     ],
     "colors": [
-      "red",
-      "white"
+      "mustard"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783147051902_1782918582099.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=dX9lsgcKN8Hq%2FTBm0WwcuY2C5XRh%2BzXmko92nb1vBZeZbVKJfIcPl6LrNNtH1rht13IG572Ck3rXJy1hqxXbXkeP1b0wJP1wD0YX6kRnME7Gl9ky24OA3Fz0NH33ZfU%2FbmZ%2B%2FWGip1dum%2FQcl1%2FYxIvIRlvxB8nn8z80I3f2JkgA4gpOGvIW1H3Zubw1r%2B3dVOhI9t6Un5kqK7XgOGnJdrZN4XX41jCVO9%2FmEGFXUxXw52izNdR4waR%2F36UWc0B8vL2nt9fivEONZ4KwASotEbJ4iuBLYBsLLeIBLhx1hcqmNt7h%2BO1bA33a6dO28mM%2B4tFXKmc2AOFsPMxm2DpnaQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148821611_1783065296888.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=a516VrHM7IxrzLgZ5%2Fqu8d1kQq76uAXNo9nW6kCuH%2F2ZW8wni2yT%2Bqyvd1qfETDMxWZfA5ajuGYc2DhfYA9u2Me4cZfIn4C6JAOSca%2FABUgry690NLjmZtdxXA3NAeShUfCLBuyjwVoYYIFy%2BetClW5Yg5HtB2akVQkcDMFzy49I3fNprguMVTOFBfbKXwLLTYUzCX28Dz4H%2FcnvpPRfJUJdCVZwyKFldtrX7UIbQgPmnhPj5KIpvNhEehziv5ASd9TsJ9DuLE8XroTPNRYMNPwrAK2mtLv8xOzSk8FkC6cT6UfoXcpky1y9TRjRtVtbSxaVjltgj3BzGTn3WmnaJg%3D%3D"
     ],
-    "description": "Top\nStyle: A fitted crop top with a structured silhouette that sits just above the waist.\nNeckline: A modern square neckline that beautifully frames the shoulders and collarbone.\nStraps: Wide shoulder straps provide support while complementing the overall design.\nPrint: Intricate red ornamental motifs inspired by traditional tile, floral, and baroque patterns.\nFit: Tailored and flattering, creating a balanced contrast with the flowing skirt.\nSkirt\nSilhouette: A full-length A-line maxi skirt that drapes gracefully and creates elegant movement.\nWaistband: A high-waisted design that accentuates the waist and elongates the figure.\nPrint Placement: Features a mix of ornate decorative borders, scrollwork, and symmetrical patterns that add richness and visual depth.",
+    "description": "mustard-gold shift dress, designed with a striking asymmetrical floral overlay that adds movement and charm. Featuring a classic round neckline, relaxed short sleeves, and a luxurious satin-like finish, this sophisticated piece effortlessly blends modern style with feminine elegance for any special occasion.",
+    "inStock": true
+  },
+  {
+    "id": "ovzH4qv3Bpk42D3c9Jky",
+    "name": "Bodycon mini dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148624491_1783065411821.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=CA8xqi8Av6GwbrxQ9beuuXNl6NiLxeqz9OouEwTin8PKQtCMlk3EuMWzyRGbqUdVGkQ5V0zxeZ21%2B5M1VtmXp%2F5vRi7DSJ4EQJJ%2FX%2BUOx5CfARA08Pr2z1Qlna90xj1jwznLDjZpLCIllAxDa%2B6oFH9hV0bTVt%2BOCX3xOAXJQD8oDXYH5b3aF5beBPbIe1WBsNEqFUAFEvNl7Hm2fwl1REsX9A4doydBC9yMJxUO5aJqR6v%2BlB89xLVxKUbfCU%2FBpnpyJmLeZAg1Gekdmd6FlcS9JlWvO5RZFfhV2JVXnQAjqOp%2Bl3Cor88GthjOEwUAaZxK2sCpDS6Y4iHBLiZkcw%3D%3D"
+    ],
+    "description": "stunning black bodycon mini dress, featuring a flattering square neckline and elegant sheer patterned sleeves. Designed to contour the figure while offering a sophisticated edge, this versatile piece combines timeless simplicity with modern detailing, making it the perfect choice for any special occasion.",
+    "inStock": true
+  },
+  {
+    "id": "D04Yqu0cLdxAvIXYTrWV",
+    "name": "Black bodycon midi dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148479382_1783065458255.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=GNEZ%2BXo7AS%2BJ6X7ujihEHDFvHpWfu8rSww%2F7gJs6N3NRUknKJ6Kzh0MgQUmJhQivYj%2Fj3U6YmyX8oWa%2F6V1LQyz7swIJXMLEJlLqokjJCDOfuq3irb0%2Fk%2BFWQOveITUXOAmOTzGQQYPquzwK040FttkJCzcbrgK4Y6iR%2Fsk2510DuMvMDy9gek2XCKPbokJfz82GIDCc9T2CNGX5MTAE%2Fb%2Br19qjuOYH93GV7DjSMW%2Bxw2CzJdBHFe9AII3JnU%2BTyB4de5SP9MA9WjZCx3AJWm2Rz8%2BZxmd9javFccrGlE2ynz36THozlxYqiEFadNYqV%2BU5ulumLrHsCAr2XHotcA%3D%3D"
+    ],
+    "description": "Elegant and effortlessly chic, this black bodycon midi dress features a flattering square neckline accented with delicate white ruffle trim. Designed with long sleeves, ruffled cuffs, and a curve-enhancing silhouette, this timeless piece offers the perfect balance of sophistication and femininity, making it an essential choice for both special occasions and elevated everyday style.",
     "inStock": true
   },
   {
@@ -1167,6 +152,26 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
+    "id": "8qFarseTBOgjCqZ1Yw9M",
+    "name": "Coordinated three-piece ensemble",
+    "price": 20000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "XL",
+      "XXL"
+    ],
+    "colors": [
+      "brown",
+      "white",
+      "pink"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148103641_1783065216583.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=IIK30OyfzYS2v3Yh9KN5N%2BzePjDtmKL7yQzqZPpfFCOpI6qayXlRIDhXMx7exrKnZ%2BFonfX2OvJzsKnftWlEIH7OrnlugZDkHk%2Fy2vIu1RMBHZj8uQUSHdcx7UM1Mo3ixJ1XMvR5VyiG%2FKeCZkt3YufxDcE8g%2BW1pFQpmD53sukyTO0ojcvz09TeHev1yvEgf393bsRTkGiLKnq0fQplwcqF%2BiDXHjeNrnd%2F10FjiZvmANTHxnXZcbKiK86gZ5GATHgFpSCXlK7pgwWVmHx7Qx9aFwA4AhIgkNQ%2BqfUjJwH6LP4L9Wv0pDAaJRkFHkDGhEryU%2BKAMP%2FeRfesz6W9dw%3D%3D"
+    ],
+    "description": "Exude effortless elegance in this two-piece coordinated set featuring a floral-print blouse, flowing wide-leg trousers, and a lightweight kimono overlay with a matching waist tie. Designed in soft blush and neutral tones, this sophisticated ensemble combines comfort, versatility, and timeless style, making it perfect for both special occasions and elevated everyday wear.",
+    "inStock": true
+  },
+  {
     "id": "bQATgX958czrUutYrKGq",
     "name": "White and black zebra-striped midi dress",
     "price": 22000,
@@ -1183,6 +188,80 @@ export const firebaseProducts: Product[] = [
       "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783147830694_1782918973379.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=ejbVM2Uz16BNuOl5aWIFlso9t%2FKXQvOFNw6EomkUlJeJrJI9ixFiJGjqmytS9nWlGU8DGLuQu4E0j6v87H8JfRgZ6MgA9zSWkHsYU3VkHDB76QY0m9up1AAJrc7i37y2rWWMd75nR213knv%2Fx8ZpJttt%2FG%2FyG2rWsapYHZtFXx25b5VDJkTRPA9OWAUMzz2cUs5n885%2Fqm2wewRpDR7eQjL0nQMS9oD1nsqHAZmFpDlTFgdctAndBD5Wtd%2FFm2tCEzTHWJt6%2FRHEDFLd1gZ65%2B9GdFhLd%2Be%2Fb7au7SAyW%2B39ljZyrwpVgNB%2FqyVobRY7HT%2BXfwlG1qDV85PPnxy6iA%3D%3D"
     ],
     "description": "The dress features a distinct, vertical zebra-print pattern composed of textured black stripes over a soft, light blue fabric.\nIt has a collared, button-down shirt-style neckline.\nThe short, cuffed sleeves extend slightly past the shoulders.\nA structured waistband in the matching pattern emphasizes the silhouette.\nThe skirt section features heavy ruching or gathering down the center front seam, creating dramatic drapes along the hips before narrowing toward a midi length.",
+    "inStock": true
+  },
+  {
+    "id": "I3P0yaoTp6umIeZBeIin",
+    "name": "Color-block maxi dress",
+    "price": 22000,
+    "category": "dresses",
+    "sizes": [
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Pink"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783147192912_1782918753477.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=RovJ8ZsAtJtd3ZnNwjudrRvbyQf90ittxY4aqgIxdbteicCjI3nUZ3sn8YF8mLMqDF7rdcMFjXIXfDlZ1ngq0wEIF6bnf198Ly6fWK5TDUnq4ffLbsdUExkhu1y13FAAImp24XM%2BmsRYubjYGj5lYTGxda9oVyc0zAN5OkTyoNut%2BG4Mmb07N0JYNqJ0WUDsv7E1fcElvUlJpxfuObshn0WVKIKz6oMoGS%2Ft7vZn1Bjgd6rxjPohNMMdLiAgOtufHR%2FXt5DtamKJduoY2xhRDrQc%2FqYUTYspGJT0mgokkGZcrjPgi4qM9e3gMqRfIWf3Oxdzmd4NHBV%2FhdAylHDaDw%3D%3D"
+    ],
+    "description": "Neckline: A structured collared shirt neckline that adds a polished and sophisticated touch.\nSleeves: Short sleeves with subtle gathered detailing, creating a soft and feminine silhouette.\nPrint Panel: The bodice features a striking multicolored geometric print with vertical dash-like motifs in bright shades of blue, yellow, green, orange, red, and purple against a dark background.\nWaist Detail: A peplum-style overlay extends from the printed bodice, adding shape and creating a flattering waistline.",
+    "inStock": true
+  },
+  {
+    "id": "Yo0pVh9jqLK6347aNB51",
+    "name": "Crop top and maxi skirt set",
+    "price": 20000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "XXL",
+      "XL"
+    ],
+    "colors": [
+      "red",
+      "white"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783147051902_1782918582099.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=dX9lsgcKN8Hq%2FTBm0WwcuY2C5XRh%2BzXmko92nb1vBZeZbVKJfIcPl6LrNNtH1rht13IG572Ck3rXJy1hqxXbXkeP1b0wJP1wD0YX6kRnME7Gl9ky24OA3Fz0NH33ZfU%2FbmZ%2B%2FWGip1dum%2FQcl1%2FYxIvIRlvxB8nn8z80I3f2JkgA4gpOGvIW1H3Zubw1r%2B3dVOhI9t6Un5kqK7XgOGnJdrZN4XX41jCVO9%2FmEGFXUxXw52izNdR4waR%2F36UWc0B8vL2nt9fivEONZ4KwASotEbJ4iuBLYBsLLeIBLhx1hcqmNt7h%2BO1bA33a6dO28mM%2B4tFXKmc2AOFsPMxm2DpnaQ%3D%3D"
+    ],
+    "description": "Top\nStyle: A fitted crop top with a structured silhouette that sits just above the waist.\nNeckline: A modern square neckline that beautifully frames the shoulders and collarbone.\nStraps: Wide shoulder straps provide support while complementing the overall design.\nPrint: Intricate red ornamental motifs inspired by traditional tile, floral, and baroque patterns.\nFit: Tailored and flattering, creating a balanced contrast with the flowing skirt.\nSkirt\nSilhouette: A full-length A-line maxi skirt that drapes gracefully and creates elegant movement.\nWaistband: A high-waisted design that accentuates the waist and elongates the figure.\nPrint Placement: Features a mix of ornate decorative borders, scrollwork, and symmetrical patterns that add richness and visual depth.",
+    "inStock": true
+  },
+  {
+    "id": "rlfvkFJAv8rafzrELBCA",
+    "name": "Royal blue shift dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "M",
+      "L"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783146863044_1782917401580.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=NNVk7qB7DC%2B6yRNdtPUkbD%2FGUyEMgeo8jWcNbiVVGLY8%2B%2Fok%2B%2BJ51bAYVZP1bJBhws%2B%2F2r7GUnpj1j3d27Nc6%2BLQ2B4SrK4oUfJR%2F0bvjnlpZilrAfWCFWDSqoXL3s65XwPWZPpK1fSrYwqJtOmuC1HNiBqCapSl7iCVMslsWKxxVUq2YPRruXYw%2FXmr2D6dMELJmAoqu7e2tsMUiI6Fsld1XfgNFjqxg5mKPW6vMAFO3uYs85r7s%2F1G9EH%2FrdmsyWai01MRLg6bpGYnBoT1hqSjqL4Q7Aqn%2BclBFgB32YvXOCjY96r4d2T85DhxuP7Sl2FiEumG%2FRCfnWGp6dXPnA%3D%3D"
+    ],
+    "description": "Silhouette: A relaxed shift-style silhouette that skims the body comfortably, offering a flattering and easy-to-wear fit.\nNeckline: A simple round neckline that keeps the design clean and elegant.\nSleeves: Short to elbow-length sleeves with a loose, comfortable cut that enhances the dress's effortless appeal.\nStatement Detail: The standout feature is the oversized decorative bow across the chest. Crafted in a contrasting white fabric with subtle pinstripes, the bow creates a bold, feminine focal point.",
+    "inStock": true
+  },
+  {
+    "id": "R4uxw97lojjCmR5l2KWk",
+    "name": "Black embellished maxi dress",
+    "price": 22000,
+    "category": "dresses",
+    "sizes": [
+      "L",
+      "XL",
+      "M"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783146406650_1782914449127.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mH3a77U3KAaB7x%2FDq3fcRE5U0lfxN%2BvKjUzomKiyexjZwJS%2B3lZBjjhcNgUw2jiL7sH4cVFCoR3Wfyck6QaP3IU%2FRnzkggczXCuNNyFx%2FOEDrNNSs8tXBJNdtYo9aIG0sgYxIxUi1pJp%2B5%2BjucOf8FtbD%2B33IoCeoJ7HRSCegPVvlGwi9vnmricxUZ01CB%2F6%2F1nDWlpn5LOmU8O9Z70o0E2M%2FiWERWQb0UXYZH1LkEWWxCJn0fd34bJSfcXF%2BmhpE%2FBmy4vFekEn1V2X%2FA0QugnQWozYo67HHWzmsWa4Ob4zPGqjyPPjv3VsbWDxmjKAJsV9dBtVTh1PNUai9q2Rew%3D%3D"
+    ],
+    "description": "Silhouette: A flowing A-line maxi silhouette that skims the body gracefully and offers both comfort and elegance.\nNeckline: A modest round neckline that creates a refined and classic look.\nSleeves: Three-quarter-length sleeves with embellished cuffs, providing balanced coverage and a polished finish.\nWaist Detail: A matching self-tie belt cinches the waist, allowing for a flattering, adjustable fit.\nEmbellishments: Intricate metallic stud or rhinestone patterns adorn the bodice, sleeves, and skirt. The geometric, cascading motifs create a luxurious visual effect and draw the eye vertically, enhancing the dress's elegant silhouette.",
     "inStock": true
   },
   {
@@ -1204,39 +283,21 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "fChzurCtCMa5zHuPwevv",
-    "name": "Floor-length gown",
-    "price": 12000,
+    "id": "FKYhKwmwnZEeCTfPusVT",
+    "name": "Royal blue bodycon midi dress",
+    "price": 18000,
     "category": "dresses",
     "sizes": [
+      "M",
       "L"
     ],
     "colors": [
-      "teal",
-      "blush pink",
-      "black"
+      "blue"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062883281_1783061344674.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=eF9rm67y%2BNmOotc6EV%2FOSKj42JefDa8MtMLI2FvdyvO4kiQSESkAXTyw77sLVuVEjparsTJdKF%2FzLQ%2BRDcm8R04z0gA7nVVfubmqp1TZlZ1CEPlvGrRcHf%2FGh%2B3xStN1gNLfEp%2FUbGvFsuTMklJ5sX9CaZJK%2FARTep7WLQm85NKC0Jsf3c3otEzeI1%2FN8L6pdWtt%2FyPjxFmSpjjWTdKlfqfhr5A%2FzrsascopiC6cf1pdRrF0KhI4RosPH6%2BaMlRVRmUiiWvscpPtKsKOhx2znvpNz%2FIynweogjlHWLnk9h9Z1sN%2FsU8zMyBVHT%2BiXZk39gWNbNiDDL1DWUrXrKXtFw%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783145187096_1782916658200.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=cwKMJUisO8pIRRzcMh%2BKdveYeHhY4oIydWb7CGv6RdrAKWoJ%2BQXfEYJyUwGrBKyFOfx9MIxLu7s3PGrI8KPEPq8P%2F151U7gQe0lmf0isIZmOXoYqpfb%2BKMZkn31RpxX3gzu7ZdyIt2u0itUXQu5Nc8lV3De8jIQ1SQJGBcCQHoTsnvef0NdrkhJ4xUCM86SQFSnsTGjMpCdKEy4wz7xuZ8XpTBYgdpvbG6eKVLo5tAZS3%2F6KdtWCJcGaohugfm%2B66cNBeDZNBsC%2BnT5nabHvPaBqcleVuIq8OYDDXm702Z8cn6%2FqKVJMAMjj4wy6uMuMgcoPfakOhNeMwFKaROjGHQ%3D%3D"
     ],
-    "description": "Bodice\nFeatures a black base with an intricate floral and paisley-inspired pattern.\nAccented with shades of teal, blush pink, silver, and beige.\nRound neckline for a classic and refined look.\nLong fitted sleeves with black cuffs.\nThe detailed print adds texture and sophistication.\nWaist\nDefined by a black waistband, which creates a flattering separation between the bodice and skirt.\nHelps accentuate the waist and create an elegant silhouette.\nSkirt\nFull-length maxi skirt in a soft peach-blush color.\nGently gathered at the waist, creating graceful volume and flow.\nMade from a lightweight fabric that drapes beautifully to the floor.",
-    "inStock": true
-  },
-  {
-    "id": "hDGTjNn9RA5iWmjzFROT",
-    "name": "Bold green matching two-piece set",
-    "price": 18000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "L"
-    ],
-    "colors": [
-      "green"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062249156_1782751487594.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mOPPP7MSElNcChCFJa645xHUmDpGuZWRPP8DpuTa2YFNh8YiwcbT6XK8BhBAOaAj1Bl7zJI51zqTvcueiV1BkPGkPcpOXIwRIZHEbJ9N2b35CMWx0KLJHyMWMTXsdTmUiIwYumKDVE9LZlGN7itNfDrB7bdIqbksSISAwsEzTFrXLUnajWpDueuZoUsuYj3HB7AHNil1KNB16%2FcJvkBPgAhjxKWqGqn6pAdZVyXPE9dSu5gaqh%2F4pWQndBseUQ%2B6DZQaYUhATN5H2Ymf2uAnHWOE6XTzsmLlXugffR3ytnugHTyy8cD%2BTA3rup35uMe9lGAz93Owx3DJix0iGS%2B28g%3D%3D"
-    ],
-    "description": "A short-sleeve button-up shirt with a classic collar.\nRelaxed, slightly boxy fit for comfort and ease.\nFeatures a striking print with large turquoise flowers, olive-green swirls, black panels, and small white accents.\nThe shirt is worn untucked, giving it a casual-chic feel.\nBottoms\nMatching wide-leg trousers in the same print.\nFull-length design that elongates the silhouette.\nFlowing cut adds movement and sophistication.",
+    "description": "Silhouette: A fitted bodycon shape that contours the body and highlights the waist and curves.\nNeckline: A feminine V-neckline that elongates the neck and adds a touch of sophistication.\nSleeves: Long, fitted sleeves that provide coverage while maintaining a sleek appearance.\nEmbellishments: The upper bodice and sleeves are adorned with sparkling rhinestone or stud detailing arranged in elegant curved patterns. These embellishments create a visually slimming effect and add glamour without overwhelming the design.",
     "inStock": true
   },
   {
@@ -1260,38 +321,143 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "iWeOrsCgxo4sozZ3QjOi",
-    "name": "Playful pink mini dress",
-    "price": 15000,
-    "category": "dresses",
+    "id": "wgcOTOFZubv0zc12nFHZ",
+    "name": "Wrap-style maxi dress",
+    "price": 18000,
+    "category": "two-piece-sets",
     "sizes": [
-      "M",
-      "L"
-    ],
-    "colors": [
-      "Pink"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782899320634_1782847871937.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=LuC2%2FyceVRCtXYGTkUB%2FGpcxU8gRjt6LMgiyddRV2X3vEEW8ETF11VE04wOA%2F%2Fq5j%2Bo3dB9yRjYIeHNYi%2FYSCnRuDLhdWxGaKGhFe86vHQK8ttGQKcy2b2lylV9eAnXQCsaVS5V9Fn39BgSTj%2FWI0qr1cl1eJBo3mHxDj0sMGFePLuL8adq%2Fis5ksx9GI7FaLEDCwol1fjAJLzSOz1d4ut3mQUi3gPyhoK0PIJlsQisq3ssQ6Yy2JIT6l2diwxyE7pFBMQk9inpFGVbsg1GL21RrF9658hjtvZO6JaACUbb%2BWDcIee6nVh6mvd9pgoygYIg6UJjOJoDUJPAjUDg4Zw%3D%3D"
-    ],
-    "description": "Color: A pink ombré effect, transitioning from a vibrant fuchsia pink at the top to a softer blush pink toward the skirt.\nNeckline: Simple round neckline.\nBodice: Pleated texture throughout the upper portion, adding dimension and elegance.\nSleeves: Short cap sleeves with a relaxed fit.\nWaist: Wide fitted waistband in a deeper pink shade that defines the waist.\nSkirt: Short pleated skirt that flares gently from the waist, creating movement and a fun, airy silhouette.\nLength: Mini length, ending well above the knees.",
-    "inStock": true
-  },
-  {
-    "id": "jEvSibSAIdogOPBqAnhc",
-    "name": "casual summer green dress",
-    "price": 12000,
-    "category": "dresses",
-    "sizes": [
+      "L",
       "XL"
     ],
     "colors": [
-      "green"
+      "Brown"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782851033079_1782742488507.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=e5QPsIzSfqP2l%2Fpiah94HVGB7XTGkreaS6TO3w0cmZD4NZlG9a2q4P4hCGhIx585HZurTPhnf%2BpiwYJyF1hk%2BZwZ3DvYByHqiLtz69KRBtsgGX3GWLCZ%2BAWx3O62rFpck69fRWAdgvCxhw1guKJoc8h0fHY8qcdwx6P78THax2oHqKih5W0y%2B269K6PtTa2c1p2k%2BSy%2FO5Q95ELjkDPzWoLsz2fK%2FI1aIxmj9acle4zbNbi0WySwDiOnJ7HpVKOX6iefih%2F%2B0gnRhHzwWacoeiHKULmvn0J2jNRIHjWbFm2%2B%2B%2B6PtdfdgTWrVRR0aHCWiN%2BdcIwxEJGP%2B0i4uGvrMw%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783144837755_1782914184396.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=PTW4MZbJb97rZS23MLZ%2BJsq%2FuHCkkaz5XLf2p4ACsXv4MkDe1zA9po207tSO3BpH20fHTyp1Xhej5JbE7zPwfDvs%2F%2FCKX8CJ5YzQUj8P3mzmADX9cyuOQnM12xWLJm6sTHOWhNemsyFJlizTivI0E62VFgMMFgJEEnxXZb%2BfnuEqRqGAauV3NGGSjo1Nc6Wj2q434NVXrgz9JIAvqvTpY2h6jNVNJe3aJAvcrJBz%2FntpiHb8Xms6cnovDUpmDcsh2GkGTbqNixFZydTQaeoTTdwSP5MlinwU9GhI36nt%2BS5HBUHWzUH5bwWMkK5g%2FnIfyvP5PsUS4FHAQsatLPpnng%3D%3D"
     ],
-    "description": "green knee-length dress with a small white floral pattern",
+    "description": "Silhouette: A flowing A-line/maxi silhouette that drapes elegantly to the floor, creating a sophisticated and elongating effect.\nNeckline: A flattering V-neck wrap bodice that enhances the waistline and adds a feminine touch.\nSleeves: Short, loose flutter sleeves that provide comfort and movement while maintaining a polished look.\nWaist Detail: A self-tie fabric belt wraps around the waist, defining the figure and accentuating the dress's wrap design.",
+    "inStock": true
+  },
+  {
+    "id": "OSKkpeDypa6AY2xR5KqO",
+    "name": "Copper-brown satin maxi dress",
+    "price": 25000,
+    "category": "dresses",
+    "sizes": [
+      "L"
+    ],
+    "colors": [
+      "copper brown"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783065890902_1782912804920.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=YxKP5d%2FTXv6g7MWENv4BzLhwMPgS%2BmF6gv3ix7fNfHZFnApNEggKfsrmvOPRNo9hrJVnOYAW2Wi4NDJ0GBUktIWyUt47s1twdNyhuUwWSDcevB%2FsDVEIuZcBKpIYV86JLg7mYWAYQAt7kMYGLJEGjxeCtlvCXK45ENwthfgASCJBqd8ZZdYO0Bfx8g%2FXFOj%2F7jMp5R4RBaL50Tbv%2BjwXsghEFtOdrH%2BI7uZQWL71iPA2EeDTr8eh7baey2DqZIkH669yvTu9A5ISaiT5L93bFM7o%2BhlqNkaLV5uDSxKEyCfJmP%2Bx4By%2Bs3E1C3wf8IbQYaoiIwTdJhJulvG94BjazA%3D%3D"
+    ],
+    "description": "Lustrous satin-like fabric with a subtle sheen that catches the light beautifully.\nWarm copper/rust brown color with a soft textured pattern.\nModest round neckline for a timeless appearance.\nLong sleeves with gathered elastic cuffs that add volume and elegance.\nMatching self-tie belt at the waist, creating a flattering, feminine silhouette.\nStraight, floor-length skirt with a front slit for ease of movement and a touch of sophistication.\nRelaxed yet tailored fit that balances comfort and elegance.",
+    "inStock": true
+  },
+  {
+    "id": "22MirmZx3clbUdgWvKrk",
+    "name": "Draped Royal Blue Blouse",
+    "price": 18000,
+    "category": "tops",
+    "sizes": [
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063542139_Screenshot_20260701_190556_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=I1feJeU7Ye0NvpcFQtvz8EAEUh0pKzfs6Jr5N431%2FHTP1vlr31pMfKHvHGwFPh3KDapx7bEFgZXKFWLA7lasSrMVlaHZ9Z2m3QuAkNicnKcZf0FPdl9OEJd0fk9ufLVLDYmNpXXg6DJ%2B5cQfvaVnyj0z3d5d2q5kNwJrbu7XZhU90WhboH6v0r%2BUuiMuYqhMynPUyXv2R%2BUBXUuyzhcqrPOUJk5hNehMLRzABdJWlsqOp4ct6pMy5tj0OfmoVIv%2Fyv%2BN30MVlCgXE0ZBBWdBIqsrAkA70oJPZDu5cEEMI8A%2FDijarWeblIU26Z3RW%2Bl8rSvF1ZcXflJIEw5MNqM9SQ%3D%3D"
+    ],
+    "description": "Vibrant royal blue color that stands out.\nSoft, flowing fabric with a draped cowl-style front that creates graceful folds.\nAsymmetrical hemline that overlaps and tapers toward the center, adding visual interest.\nLoose, comfortable fit that skims the body rather than clinging to it.\nElbow-length sleeves with a relaxed cut.\nModest round or boat-style neckline.",
+    "inStock": true
+  },
+  {
+    "id": "Tli7Npq2pX9QKbwqTtn2",
+    "name": "Royal blue bodycon dress",
+    "price": 36000,
+    "category": "dresses",
+    "sizes": [
+      "M"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063406392_Screenshot_20260701_190509_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=SlgcLbvj00FR7RRCPeGvuUiuLXcIt3F25FDY4nUZteoOeuThaKbsCJYnAkXJQLn9E2J0mxGk58Z6o%2BKm8gD3YD5nYDFmn8VxG%2BtvYzYqJxacU9TId%2BhVM36k0so%2FhRyl16UtgVTnpkyXtBYL0uZMVnh6FdAxgpjzminKyvOPQtQlfcjYEkFsW5YJh%2Fu2xsxSqYisbae9GB%2FA50%2FHdV6ojRrXOam%2BC30XBKb4D9kup4b%2B%2BGwnXlTDbuynkgi4S5iIkUbYJOP5tqdn3jbeWvohIU9%2BzYaiN1C%2BVvzp%2FDEhqLjBGUjbGrooZJHP%2FBgnmYxFa%2FOagAc5qQlA%2BqnPoZ5rMA%3D%3D"
+    ],
+    "description": "Deep royal blue fabric with a subtle glittery, star-like shimmer throughout.\nLong fitted sleeves for an elegant silhouette.\nA unique twist-knot neckline that creates a stylish focal point at the chest.\nCutout details across the upper chest and shoulders, adding a modern and sophisticated touch.\nFigure-hugging, bodycon fit that accentuates the waist and curves.\nStraight, ankle-length skirt that gives the dress a sleek and streamlined appearance.",
+    "inStock": true
+  },
+  {
+    "id": "yhUeZWmmqV26RKUEpcXD",
+    "name": "royal blue button-down blouse",
+    "price": 8000,
+    "category": "tops",
+    "sizes": [
+      "M"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063237776_Screenshot_20260701_190445_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mCzR5nR3Gk%2FwEb5l8p%2FSTHvpUa%2FAsblahFcr8uW9cQ%2F4yL%2B5D0Wl2%2FGaAJKR0fog39YHdiMxZYXsus3qdwU2CImF6BagU%2BPk1AGJIsUvxuf8Uk6BkRixf5iArakEGZHJ9ynUAWU3hOmtRX4qZeYLkKD3v82hkrywbyt%2FbxJX0eFyZ%2BZrBR68I1ze5%2BfM0ilVuIYQRzB%2FaOjINeVdYo4rZGnXRVyurb%2BSa9yNCGfrpZEo9N9ZV4Gj4N9gGSOG7c5%2BnVj%2FKR8cFiKX6WvUEpChmfoz6cksJiA4R1hu4qhm%2BvjoZn3HTDGpGPsdLqp%2FyDaWsWe6EcMxCY145Fk7u1MWUw%3D%3D"
+    ],
+    "description": "Rich royal blue color with a subtle abstract or floral-inspired pattern in lighter blue tones.\nClassic collared neckline with an open V-shaped front.\nFull button-down closure featuring small white buttons.\nLong sleeves with a relaxed fit.\nFitted silhouette that narrows at the waist.\nUnique twist-knot detail at the front hem, creating a flattering, gathered effect.",
+    "inStock": true
+  },
+  {
+    "id": "tYFJCiChxqEi4nebKQH4",
+    "name": "Tan structured bag",
+    "price": 38000,
+    "category": "accessories",
+    "sizes": [
+      "XXL"
+    ],
+    "colors": [
+      "tan"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063113262_Screenshot_20260701_190420_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=YUjzqjispIQJGcxj5dS7fj6xHBibgikJJs1QdPaTcqkHeEYZouRktI4%2Fqb4jBIDmKoDFoXzxsSj8bVpZ5XYF7k840zT9n5K2IVLVEXtymViSd%2FpXwpm%2F9H34imgA9eJY4XP3iDWjpRoXV1R0iYjY4VCLTv3R2kIVFq4iAxJ8YFuci6nsCZ2cmWH5N8WwMtSbP%2BMg1MBPXHYNRyeCf4begwwtUIg5do1rioz87Dzhsnz3F776t1KtvJZvhMbCbqno4%2BLYwOM6nYQsh3sUyJgRWkKEA%2BZYahd5iVJ3DQptin3LftKj5KYMm3FGb%2BfG97OforubD6ha32hmC8rufGhTFQ%3D%3D"
+    ],
+    "description": "Bag Description:\n\nA structured tan/caramel-colored handbag with a sleek, rectangular silhouette.\nFeatures dark brown crocodile-textured accents on the handles, side trims, and front flap.\nThe front has a decorative flap with a metal twist-lock closure, giving it a sophisticated and elegant look.\nDesigned with sturdy top handles and includes a matching detachable shoulder strap for crossbody or shoulder wear.\n\nAccessories Included:\n\nA matching zip-around wallet in the same tan color.\nA coordinating adjustable shoulder strap rolled up beside the bag.",
+    "inStock": true
+  },
+  {
+    "id": "fChzurCtCMa5zHuPwevv",
+    "name": "Floor-length gown",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "L"
+    ],
+    "colors": [
+      "teal",
+      "blush pink",
+      "black"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062883281_1783061344674.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=eF9rm67y%2BNmOotc6EV%2FOSKj42JefDa8MtMLI2FvdyvO4kiQSESkAXTyw77sLVuVEjparsTJdKF%2FzLQ%2BRDcm8R04z0gA7nVVfubmqp1TZlZ1CEPlvGrRcHf%2FGh%2B3xStN1gNLfEp%2FUbGvFsuTMklJ5sX9CaZJK%2FARTep7WLQm85NKC0Jsf3c3otEzeI1%2FN8L6pdWtt%2FyPjxFmSpjjWTdKlfqfhr5A%2FzrsascopiC6cf1pdRrF0KhI4RosPH6%2BaMlRVRmUiiWvscpPtKsKOhx2znvpNz%2FIynweogjlHWLnk9h9Z1sN%2FsU8zMyBVHT%2BiXZk39gWNbNiDDL1DWUrXrKXtFw%3D%3D"
+    ],
+    "description": "Bodice\nFeatures a black base with an intricate floral and paisley-inspired pattern.\nAccented with shades of teal, blush pink, silver, and beige.\nRound neckline for a classic and refined look.\nLong fitted sleeves with black cuffs.\nThe detailed print adds texture and sophistication.\nWaist\nDefined by a black waistband, which creates a flattering separation between the bodice and skirt.\nHelps accentuate the waist and create an elegant silhouette.\nSkirt\nFull-length maxi skirt in a soft peach-blush color.\nGently gathered at the waist, creating graceful volume and flow.\nMade from a lightweight fabric that drapes beautifully to the floor.",
+    "inStock": true
+  },
+  {
+    "id": "tUUlxyC2e2tnd6wk733F",
+    "name": "Matching printed two-piece set",
+    "price": 18000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "L"
+    ],
+    "colors": [
+      "multi"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062583898_Screenshot_20260629_173424_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=kRNkjQFiT7VmI%2Fq0kihPmaOyoypfSL74Y%2BPpdaTtHlAUZWUAC8moUXMV8K5wcxAlc1AQiy%2BUoU8vHjiSCDv2UpwWUxugYuk8klBm2A%2BcDk3U%2Bn7jPYDiNjEXmFLFYVuXLAzfmdp2xDXnRIleN2nRnf9wlJtWCD3ZsoT%2F3JkxeIBKKwe4wPDDzlZLguNl6aKHcCAJO5SZJe%2BmKzmj%2FMxopcEJNN36Us8FSXml4luc6DBftxRkSUuA8xInZJ5uMbZkXos%2FS%2F0H61vgcWtXdPQ9OBWAVJsvtu2c9bUhG3UFxO2EAGHvl4zKrGZOSZ11tje0bDXCcpGGja1OAzhKd2MeAQ%3D%3D"
+    ],
+    "description": "Top\nA loose-fitting short-sleeve tunic blouse.\nFeatures a modest V-neckline with a small collar detail.\nRelaxed silhouette that drapes comfortably over the body.\nSlightly longer length, giving it a chic and easy-to-wear look.\nBottoms\nMatching wide-leg trousers in the same print.\nFull-length design with a flowing, comfortable fit.\nCreates a balanced and coordinated silhouette.",
     "inStock": true
   },
   {
@@ -1313,21 +479,58 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "ovzH4qv3Bpk42D3c9Jky",
-    "name": "Bodycon mini dress",
-    "price": 15000,
+    "id": "48",
+    "name": "Blue & White Striped One-Shoulder Midi Dress",
+    "price": 28000,
     "category": "dresses",
     "sizes": [
+      "S",
       "M",
       "L"
     ],
     "colors": [
-      "Black"
+      "Blue/White"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148624491_1783065411821.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=CA8xqi8Av6GwbrxQ9beuuXNl6NiLxeqz9OouEwTin8PKQtCMlk3EuMWzyRGbqUdVGkQ5V0zxeZ21%2B5M1VtmXp%2F5vRi7DSJ4EQJJ%2FX%2BUOx5CfARA08Pr2z1Qlna90xj1jwznLDjZpLCIllAxDa%2B6oFH9hV0bTVt%2BOCX3xOAXJQD8oDXYH5b3aF5beBPbIe1WBsNEqFUAFEvNl7Hm2fwl1REsX9A4doydBC9yMJxUO5aJqR6v%2BlB89xLVxKUbfCU%2FBpnpyJmLeZAg1Gekdmd6FlcS9JlWvO5RZFfhV2JVXnQAjqOp%2Bl3Cor88GthjOEwUAaZxK2sCpDS6Y4iHBLiZkcw%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062399225_blue-white-striped-one-shoulder-midi-dress-front.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=hjkCNFojfl9gVuzN5iu5SR740KELDNf7N%2BpB8zGv11ALfrr33VjhnCsLuw8xPY9ADpVZTO0l8eOv88ryHQ9uYlbOaZ1p1MEnoEUaaLP5zirxKXqeldgViTZjxxDhlQmUgU2N5QzuIcxWV7917KznLWKzBLNYXe6%2BW%2B3IO%2BfpAI0BFv7UvYk%2FSQu5XqZpIHHb2%2BuDMSAcg0mstRPdcSiioW7D1SIpbdv88sj7WhwCEDJeeLJ1oFGlYpS%2FAUyHJgUcO911wLHYASvM4niLMKTxlqzJw%2BSYBg3tb5XDDVQT9t9Lm%2BEvUymRdRKWaLih0PxrmnS1gXtUpTvyy0lXX4wwmw%3D%3D",
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062401424_blue-white-striped-one-shoulder-midi-dress-back.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=UJodnpT%2Br1ZUTPgAgOozBWjIjoN249znuShHTBL%2Fts57Vux5SEl9A7Dada%2Fuu15YbHEdp09f9590oIG31VdAUgCySsCGiG1kqbQqAg9LJGqAG8GQDRgcE5K%2BDm8cC0fCoY8hcrPqKfK3SIitpNxFMK0A1j0tbeA6ZcZHKAxkE1tWbTl3YiP2vkPTmH%2BjS8g6iYokMk9gXJIrB6cDC%2BsO%2FHE87ug5sVZI2bFKEsFpZkURXD8IkCfxtostzMX9XXXXd5bBEXD77UAw798VyLCf1aCDFw1RsRxL9r2goHZQyursJ%2FNrmj2E029vrF3eVaWHB68eSNkY8lCrj2%2FrOgEmhA%3D%3D"
     ],
-    "description": "stunning black bodycon mini dress, featuring a flattering square neckline and elegant sheer patterned sleeves. Designed to contour the figure while offering a sophisticated edge, this versatile piece combines timeless simplicity with modern detailing, making it the perfect choice for any special occasion.",
+    "description": "A stylish blue and white striped one-shoulder midi dress with a flattering fit. Elegant for brunch, beach outings, and semi-formal occasions.",
+    "inStock": true
+  },
+  {
+    "id": "hDGTjNn9RA5iWmjzFROT",
+    "name": "Bold green matching two-piece set",
+    "price": 18000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "L"
+    ],
+    "colors": [
+      "green"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062249156_1782751487594.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mOPPP7MSElNcChCFJa645xHUmDpGuZWRPP8DpuTa2YFNh8YiwcbT6XK8BhBAOaAj1Bl7zJI51zqTvcueiV1BkPGkPcpOXIwRIZHEbJ9N2b35CMWx0KLJHyMWMTXsdTmUiIwYumKDVE9LZlGN7itNfDrB7bdIqbksSISAwsEzTFrXLUnajWpDueuZoUsuYj3HB7AHNil1KNB16%2FcJvkBPgAhjxKWqGqn6pAdZVyXPE9dSu5gaqh%2F4pWQndBseUQ%2B6DZQaYUhATN5H2Ymf2uAnHWOE6XTzsmLlXugffR3ytnugHTyy8cD%2BTA3rup35uMe9lGAz93Owx3DJix0iGS%2B28g%3D%3D"
+    ],
+    "description": "A short-sleeve button-up shirt with a classic collar.\nRelaxed, slightly boxy fit for comfort and ease.\nFeatures a striking print with large turquoise flowers, olive-green swirls, black panels, and small white accents.\nThe shirt is worn untucked, giving it a casual-chic feel.\nBottoms\nMatching wide-leg trousers in the same print.\nFull-length design that elongates the silhouette.\nFlowing cut adds movement and sophistication.",
+    "inStock": true
+  },
+  {
+    "id": "EnrOvyRsnyf2rbM8vSON",
+    "name": "matching printed style",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Brown"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783061458358_Screenshot_20260629_173145_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=XVJLk%2F2I0fmBVE3%2B%2FvxwUZ24L%2F2kfER%2Bi0mSpZq9cAV%2Bpc2Bayp%2B%2FhZvYf6auB5UrsGeH2f6sLwkRCnjW2Gb3zuWA4HoaINJUkoah76n3y%2F5BgsX8OKsR2075iDehVB%2FZEH0Wtdv%2BqoupgyajthWRV3VlXxGmw0O20MvQbCqF0QVvIirxSvsFHslw9Kx1nnJplKLn01HUqNfo9f1nbqcYGZQu%2ByDrUgKD9qIasm%2BP2tgE2iZffS8QRsX9G7RZGjtHoJx03v6UIdGlTSq%2B9C0OHzQU0QQcEiAVUzwU0OeZCGWBAdgm7Lkz4%2FO5hBkS8uotxqYLGn17TnxKQUGW02wdg%3D%3D"
+    ],
+    "description": "A loose-fitting button-front shirt with a relaxed silhouette.\nLong sleeves that are casually rolled up.\nFeatures a warm rust-orange base color with repeating burgundy and pink ornamental motifs.\nContrasting patterned trim runs along the button placket and collar, adding visual interest.",
     "inStock": true
   },
   {
@@ -1349,55 +552,75 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "rlfvkFJAv8rafzrELBCA",
-    "name": "Royal blue shift dress",
-    "price": 18000,
+    "id": "iWeOrsCgxo4sozZ3QjOi",
+    "name": "Playful pink mini dress",
+    "price": 15000,
     "category": "dresses",
     "sizes": [
       "M",
       "L"
     ],
     "colors": [
-      "blue"
+      "Pink"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783146863044_1782917401580.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=NNVk7qB7DC%2B6yRNdtPUkbD%2FGUyEMgeo8jWcNbiVVGLY8%2B%2Fok%2B%2BJ51bAYVZP1bJBhws%2B%2F2r7GUnpj1j3d27Nc6%2BLQ2B4SrK4oUfJR%2F0bvjnlpZilrAfWCFWDSqoXL3s65XwPWZPpK1fSrYwqJtOmuC1HNiBqCapSl7iCVMslsWKxxVUq2YPRruXYw%2FXmr2D6dMELJmAoqu7e2tsMUiI6Fsld1XfgNFjqxg5mKPW6vMAFO3uYs85r7s%2F1G9EH%2FrdmsyWai01MRLg6bpGYnBoT1hqSjqL4Q7Aqn%2BclBFgB32YvXOCjY96r4d2T85DhxuP7Sl2FiEumG%2FRCfnWGp6dXPnA%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782899320634_1782847871937.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=LuC2%2FyceVRCtXYGTkUB%2FGpcxU8gRjt6LMgiyddRV2X3vEEW8ETF11VE04wOA%2F%2Fq5j%2Bo3dB9yRjYIeHNYi%2FYSCnRuDLhdWxGaKGhFe86vHQK8ttGQKcy2b2lylV9eAnXQCsaVS5V9Fn39BgSTj%2FWI0qr1cl1eJBo3mHxDj0sMGFePLuL8adq%2Fis5ksx9GI7FaLEDCwol1fjAJLzSOz1d4ut3mQUi3gPyhoK0PIJlsQisq3ssQ6Yy2JIT6l2diwxyE7pFBMQk9inpFGVbsg1GL21RrF9658hjtvZO6JaACUbb%2BWDcIee6nVh6mvd9pgoygYIg6UJjOJoDUJPAjUDg4Zw%3D%3D"
     ],
-    "description": "Silhouette: A relaxed shift-style silhouette that skims the body comfortably, offering a flattering and easy-to-wear fit.\nNeckline: A simple round neckline that keeps the design clean and elegant.\nSleeves: Short to elbow-length sleeves with a loose, comfortable cut that enhances the dress's effortless appeal.\nStatement Detail: The standout feature is the oversized decorative bow across the chest. Crafted in a contrasting white fabric with subtle pinstripes, the bow creates a bold, feminine focal point.",
+    "description": "Color: A pink ombré effect, transitioning from a vibrant fuchsia pink at the top to a softer blush pink toward the skirt.\nNeckline: Simple round neckline.\nBodice: Pleated texture throughout the upper portion, adding dimension and elegance.\nSleeves: Short cap sleeves with a relaxed fit.\nWaist: Wide fitted waistband in a deeper pink shade that defines the waist.\nSkirt: Short pleated skirt that flares gently from the waist, creating movement and a fun, airy silhouette.\nLength: Mini length, ending well above the knees.",
     "inStock": true
   },
   {
-    "id": "tUUlxyC2e2tnd6wk733F",
-    "name": "Matching printed two-piece set",
+    "id": "1ADn3UttMrBqE5ZrlUI6",
+    "name": "Isla Bow Maxi Dress",
     "price": 18000,
-    "category": "two-piece-sets",
+    "category": "dresses",
     "sizes": [
+      "L",
+      "XL",
+      "M"
+    ],
+    "colors": [
+      "Burgundy"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898983589_1782847452362.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=VAxb6Vpa6OUJvZezbtjnBYNYwBMc3tKMJ5E6wFKpj4RC5UWTdbaXdxw63PjPIvFW%2BoGZL6X86fTorv5l16Z4GIZesHKqtbmsSONYUyOkF%2B7KmiaKC8hr47C%2FVuozBL0AqAL5cjuZAPucOEh6xMjSce4lbvs8z6xWF0TfcsO9HbdYwOXvytyYh2YOH9OTVn7f8IVf4rx7rjVX1ykZLK0xWzOxBnyArazdbIeCdGZz2WTZM%2F95LxOFaGOpWUv4S9vKwR5kv2X87HISM2%2B8Dj64R21iM4sn3uBBSTBIlayKVLx65iHpSoQCtVKz%2FbJmRj1Bpkg4niAkIa7Jqf22m2NfgQ%3D%3D"
+    ],
+    "description": "Color: Soft red with fine vertical pinstripes.\nLength: Full-length maxi dress that falls to the ankles.\nNeckline: Flattering V-neckline.\nSleeves: Short kimono-style sleeves with turned-up cuffs.\nFit: Loose, flowing silhouette that prioritizes comfort while maintaining a chic appearance.\nStandout Feature\nA wide burgundy sash-like panel runs diagonally from the shoulder down the front.\nAttached to it is a large burgundy bow at the waist/chest area.\nLong ribbon tails hang from the bow, adding drama and visual interest.",
+    "inStock": true
+  },
+  {
+    "id": "9fHBOa4TxgEf5t5ueNOA",
+    "name": "Pink shirt",
+    "price": 10000,
+    "category": "tops",
+    "sizes": [
+      "M",
       "L"
     ],
     "colors": [
-      "multi"
+      "Pink"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062583898_Screenshot_20260629_173424_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=kRNkjQFiT7VmI%2Fq0kihPmaOyoypfSL74Y%2BPpdaTtHlAUZWUAC8moUXMV8K5wcxAlc1AQiy%2BUoU8vHjiSCDv2UpwWUxugYuk8klBm2A%2BcDk3U%2Bn7jPYDiNjEXmFLFYVuXLAzfmdp2xDXnRIleN2nRnf9wlJtWCD3ZsoT%2F3JkxeIBKKwe4wPDDzlZLguNl6aKHcCAJO5SZJe%2BmKzmj%2FMxopcEJNN36Us8FSXml4luc6DBftxRkSUuA8xInZJ5uMbZkXos%2FS%2F0H61vgcWtXdPQ9OBWAVJsvtu2c9bUhG3UFxO2EAGHvl4zKrGZOSZ11tje0bDXCcpGGja1OAzhKd2MeAQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898807144_1782847216114.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=Do8L3Nh10uJm0%2BVadiPJZWKglkNhxINXzuIP5hw6joTi4uLfnzcdITIFVtm9zfpb0EtQkPBupHYdS8QHAMZErnUMDgjoLpkgFE5fjDdhdsJ%2BlKJxSnyTvMAU0%2B3DBXo%2B6Ezme%2BUX%2F36xdv7UqJpfOO5%2BzGJFjQxx%2FPy1cwDTsxCky87%2BVZ%2BQ4MFp4ATgoXhxptTn98gS9KhtTWW0RpcG%2BycLE3kl%2FcOAZT3MzWziIaDH1R7jf8BDrAkkOkd8LZ2TlMm1ocDPvG0RtbCSU7B8q%2F%2BLVzUddKaVfq9u%2BvdUVtirhR4q34kaIfazGjQwwm2toAVNKkbHeixLtlOad1FE0Q%3D%3D"
     ],
-    "description": "Top\nA loose-fitting short-sleeve tunic blouse.\nFeatures a modest V-neckline with a small collar detail.\nRelaxed silhouette that drapes comfortably over the body.\nSlightly longer length, giving it a chic and easy-to-wear look.\nBottoms\nMatching wide-leg trousers in the same print.\nFull-length design with a flowing, comfortable fit.\nCreates a balanced and coordinated silhouette.",
+    "description": "The blouse blends a classic shirt design with a playful, contemporary fashion element. The dramatic black bow makes it a statement piece",
     "inStock": true
   },
   {
-    "id": "tYFJCiChxqEi4nebKQH4",
-    "name": "Tan structured bag",
-    "price": 38000,
-    "category": "accessories",
+    "id": "xIufpxT55tEdArSyA1Bd",
+    "name": "blue-and-white coordinated outfit",
+    "price": 18000,
+    "category": "two-piece-sets",
     "sizes": [
       "XXL"
     ],
     "colors": [
-      "tan"
+      "blue"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063113262_Screenshot_20260701_190420_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=YUjzqjispIQJGcxj5dS7fj6xHBibgikJJs1QdPaTcqkHeEYZouRktI4%2Fqb4jBIDmKoDFoXzxsSj8bVpZ5XYF7k840zT9n5K2IVLVEXtymViSd%2FpXwpm%2F9H34imgA9eJY4XP3iDWjpRoXV1R0iYjY4VCLTv3R2kIVFq4iAxJ8YFuci6nsCZ2cmWH5N8WwMtSbP%2BMg1MBPXHYNRyeCf4begwwtUIg5do1rioz87Dzhsnz3F776t1KtvJZvhMbCbqno4%2BLYwOM6nYQsh3sUyJgRWkKEA%2BZYahd5iVJ3DQptin3LftKj5KYMm3FGb%2BfG97OforubD6ha32hmC8rufGhTFQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898291362_1782753845518.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=bNw2Pwf3tyKsSbBJQbvahxLrpAyx5%2BxIbbGkY1vlEVRh2ZPaDHiUeulXsJhh%2Bhr%2FZH%2FMYKzbQcT9ewskRogut6z8Ed27xJ7gF3aa%2FMU5i8pCATW6vMWYH1MpSgYn97NmX%2BaNIFbtCQtp76L%2F6yJ%2FdwlYB25FwfAtmCmcM9Y1x5ouYHWZTBnKJEq92axs29PW82HmTvBE7KicMfCYGewKDyMvRPr8u0psR9xMWI2xyu4uP5rCui%2Fs8EJPr3SqcC6riGaLzTKgjuhJB4cB9gPQSY9yE5XuXv8%2BfFmywGhpZhZBFQpjoCOJZ9WZn8gEjSPqAqrjsKsMgGAucqznpG%2BI0g%3D%3D"
     ],
-    "description": "Bag Description:\n\nA structured tan/caramel-colored handbag with a sleek, rectangular silhouette.\nFeatures dark brown crocodile-textured accents on the handles, side trims, and front flap.\nThe front has a decorative flap with a metal twist-lock closure, giving it a sophisticated and elegant look.\nDesigned with sturdy top handles and includes a matching detachable shoulder strap for crossbody or shoulder wear.\n\nAccessories Included:\n\nA matching zip-around wallet in the same tan color.\nA coordinating adjustable shoulder strap rolled up beside the bag.",
+    "description": "A loose, flowing tunic-style top with an oversized silhouette.\nFeatures a striking blue floral and botanical print on a white background.\nWide three-quarter-length sleeves add an airy, elegant feel.\nRound neckline with a simple, clean finish.\nA drawstring detail at the waist creates gentle shaping while maintaining the relaxed fit.\nThe hem is asymmetrical and drapes lower at the sides, giving the outfit a contemporary look.",
     "inStock": true
   },
   {
@@ -1418,21 +641,21 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "wgcOTOFZubv0zc12nFHZ",
-    "name": "Wrap-style maxi dress",
+    "id": "0MfXhz0aF6XvWOmHz0r2",
+    "name": "Monochromatic purple two-piece set",
     "price": 18000,
     "category": "two-piece-sets",
     "sizes": [
-      "L",
-      "XL"
+      "XL",
+      "L"
     ],
     "colors": [
-      "Brown"
+      "Purple"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783144837755_1782914184396.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=PTW4MZbJb97rZS23MLZ%2BJsq%2FuHCkkaz5XLf2p4ACsXv4MkDe1zA9po207tSO3BpH20fHTyp1Xhej5JbE7zPwfDvs%2F%2FCKX8CJ5YzQUj8P3mzmADX9cyuOQnM12xWLJm6sTHOWhNemsyFJlizTivI0E62VFgMMFgJEEnxXZb%2BfnuEqRqGAauV3NGGSjo1Nc6Wj2q434NVXrgz9JIAvqvTpY2h6jNVNJe3aJAvcrJBz%2FntpiHb8Xms6cnovDUpmDcsh2GkGTbqNixFZydTQaeoTTdwSP5MlinwU9GhI36nt%2BS5HBUHWzUH5bwWMkK5g%2FnIfyvP5PsUS4FHAQsatLPpnng%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782895762177_1782753537726.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=ZsvTcQxSD1JctCAgeUj97kKTzdCXQkUfJ5IX7n%2BqvBFEv7U5BB86zJ%2FKzDbodRwII6cqCkLYBrpRvuq01qxG1JhOUXRaY9cQ5v17TH6Q2lx2LiMPa19iB%2FLoIMwwuVrePqDHx9pNfKaP8aQepO8rSmr%2BG6w8W0nu3%2FGeDPqUKeTCGjSpTM4CA9fp2o1El%2B4uAH4Ia26LMEKpGOenYvYr%2Fy4IXFFYb1rEUM1UPNJXV4eArr9D1I8Ze58BBdZTsKru25I6xYC6GgDDR1H3d%2FvfmkN0%2BgGipn8Rc0JDQip4%2Bm0SHEyDFLcuDUKPhu1TsXY1HnyutBKPEnrhkhQvycr4xQ%3D%3D"
     ],
-    "description": "Silhouette: A flowing A-line/maxi silhouette that drapes elegantly to the floor, creating a sophisticated and elongating effect.\nNeckline: A flattering V-neck wrap bodice that enhances the waistline and adds a feminine touch.\nSleeves: Short, loose flutter sleeves that provide comfort and movement while maintaining a polished look.\nWaist Detail: A self-tie fabric belt wraps around the waist, defining the figure and accentuating the dress's wrap design.",
+    "description": "An oversized button-up shirt in a vibrant purple shade.\nFeatures a classic collar and front button closure.\nRelaxed fit with dropped shoulders for a modern, effortless style.\nWide elbow-length sleeves add to the comfortable, airy feel.",
     "inStock": true
   },
   {
@@ -1454,37 +677,814 @@ export const firebaseProducts: Product[] = [
     "inStock": true
   },
   {
-    "id": "xIufpxT55tEdArSyA1Bd",
-    "name": "blue-and-white coordinated outfit",
-    "price": 18000,
-    "category": "two-piece-sets",
-    "sizes": [
-      "XXL"
-    ],
-    "colors": [
-      "blue"
-    ],
-    "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898291362_1782753845518.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=bNw2Pwf3tyKsSbBJQbvahxLrpAyx5%2BxIbbGkY1vlEVRh2ZPaDHiUeulXsJhh%2Bhr%2FZH%2FMYKzbQcT9ewskRogut6z8Ed27xJ7gF3aa%2FMU5i8pCATW6vMWYH1MpSgYn97NmX%2BaNIFbtCQtp76L%2F6yJ%2FdwlYB25FwfAtmCmcM9Y1x5ouYHWZTBnKJEq92axs29PW82HmTvBE7KicMfCYGewKDyMvRPr8u0psR9xMWI2xyu4uP5rCui%2Fs8EJPr3SqcC6riGaLzTKgjuhJB4cB9gPQSY9yE5XuXv8%2BfFmywGhpZhZBFQpjoCOJZ9WZn8gEjSPqAqrjsKsMgGAucqznpG%2BI0g%3D%3D"
-    ],
-    "description": "A loose, flowing tunic-style top with an oversized silhouette.\nFeatures a striking blue floral and botanical print on a white background.\nWide three-quarter-length sleeves add an airy, elegant feel.\nRound neckline with a simple, clean finish.\nA drawstring detail at the waist creates gentle shaping while maintaining the relaxed fit.\nThe hem is asymmetrical and drapes lower at the sides, giving the outfit a contemporary look.",
-    "inStock": true
-  },
-  {
-    "id": "yhUeZWmmqV26RKUEpcXD",
-    "name": "royal blue button-down blouse",
-    "price": 8000,
-    "category": "tops",
+    "id": "BN56XQdan4UCAcSmXnYM",
+    "name": "Red plaid midi dress",
+    "price": 12000,
+    "category": "dresses",
     "sizes": [
       "M"
     ],
     "colors": [
-      "blue"
+      "red"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063237776_Screenshot_20260701_190445_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mCzR5nR3Gk%2FwEb5l8p%2FSTHvpUa%2FAsblahFcr8uW9cQ%2F4yL%2B5D0Wl2%2FGaAJKR0fog39YHdiMxZYXsus3qdwU2CImF6BagU%2BPk1AGJIsUvxuf8Uk6BkRixf5iArakEGZHJ9ynUAWU3hOmtRX4qZeYLkKD3v82hkrywbyt%2FbxJX0eFyZ%2BZrBR68I1ze5%2BfM0ilVuIYQRzB%2FaOjINeVdYo4rZGnXRVyurb%2BSa9yNCGfrpZEo9N9ZV4Gj4N9gGSOG7c5%2BnVj%2FKR8cFiKX6WvUEpChmfoz6cksJiA4R1hu4qhm%2BvjoZn3HTDGpGPsdLqp%2FyDaWsWe6EcMxCY145Fk7u1MWUw%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782894834297_1782742670171.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=cPlbqHZuSQUc9kZSVR9cf76Yw77%2FqXWnj6UzOsvHN2Rdqn7vT2N3yLrcPPq9QwazbzCTLaDjDP4Je6O964i700YdVn5GYdCFBA7uGUa5srGHmCqClL236REEU8%2FC9D6%2BtOHNEVpfz7m9EVFGRzuoL%2BMVJiMgvd3JO4ywf4qubuSEOnIcD1acxgmtaBuVd7BCvF1h9OAR1Cd7ydqV3vpOJNYfiYhHZ%2Fsd1T4shtyLykXzRuJUotnvnM%2B43Q760n%2BOca3YMgFCEVTmeJsT%2BleEa3ti7XGuVYocnqIiEhOTlvkiEJAv%2FDG4YmeHIZFIOkX5wxQtmMvyWPpVPphPbDYA9A%3D%3D"
     ],
-    "description": "Rich royal blue color with a subtle abstract or floral-inspired pattern in lighter blue tones.\nClassic collared neckline with an open V-shaped front.\nFull button-down closure featuring small white buttons.\nLong sleeves with a relaxed fit.\nFitted silhouette that narrows at the waist.\nUnique twist-knot detail at the front hem, creating a flattering, gathered effect.",
+    "description": "The outfit is a red plaid midi dress with a stylish, modern design.\n\nKey Features\nPattern: Red, white, and black plaid/checkered print.\nNeckline: Collared shirt-style neckline with a partial button-front look.\nSleeves: Long sleeves with fitted cuffs.\nWaist Detail: A twisted knot detail at the front waist creates a flattering gathered effect.\nLength: Midi length, falling below the knees.\nSkirt: Features a front slit/opening created by the wrap-style draping, adding movement and style.\nFit: Fitted around the waist with a more relaxed fit through the upper body and skirt.",
+    "inStock": true
+  },
+  {
+    "id": "jEvSibSAIdogOPBqAnhc",
+    "name": "casual summer green dress",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "XL"
+    ],
+    "colors": [
+      "green"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782851033079_1782742488507.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=e5QPsIzSfqP2l%2Fpiah94HVGB7XTGkreaS6TO3w0cmZD4NZlG9a2q4P4hCGhIx585HZurTPhnf%2BpiwYJyF1hk%2BZwZ3DvYByHqiLtz69KRBtsgGX3GWLCZ%2BAWx3O62rFpck69fRWAdgvCxhw1guKJoc8h0fHY8qcdwx6P78THax2oHqKih5W0y%2B269K6PtTa2c1p2k%2BSy%2FO5Q95ELjkDPzWoLsz2fK%2FI1aIxmj9acle4zbNbi0WySwDiOnJ7HpVKOX6iefih%2F%2B0gnRhHzwWacoeiHKULmvn0J2jNRIHjWbFm2%2B%2B%2B6PtdfdgTWrVRR0aHCWiN%2BdcIwxEJGP%2B0i4uGvrMw%3D%3D"
+    ],
+    "description": "green knee-length dress with a small white floral pattern",
+    "inStock": true
+  },
+  {
+    "id": "47",
+    "name": "Yellow Ombre Floral Jumpsuit",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Yellow/Ombre"
+    ],
+    "images": [
+      "/images/products/yellow-ombre-floral-jumpsuit.webp"
+    ],
+    "description": "A bright yellow ombre floral jumpsuit with a relaxed fit. Bold and breezy for parties, vacations, and summer days.",
+    "inStock": true
+  },
+  {
+    "id": "46",
+    "name": "Yellow Kaftan Gold Brooch Dress",
+    "price": 20000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Yellow/Gold"
+    ],
+    "images": [
+      "/images/products/yellow-kaftan-gold-brooch-dress.webp"
+    ],
+    "description": "A stunning yellow kaftan dress with a gold brooch accent. Regal and perfect for celebrations, weddings, and special events.",
+    "inStock": true
+  },
+  {
+    "id": "45",
+    "name": "Teal Floral Mesh Maxi Dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Teal/Floral"
+    ],
+    "images": [
+      "/images/products/teal-floral-mesh-maxi-dress.webp"
+    ],
+    "description": "A dreamy teal floral mesh maxi dress with soft draping. Ideal for weddings, evening events, and elegant occasions.",
+    "inStock": true
+  },
+  {
+    "id": "44",
+    "name": "Teal Double Breasted Midi Dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Teal"
+    ],
+    "images": [
+      "/images/products/teal-double-breasted-midi-dress.webp"
+    ],
+    "description": "A sophisticated teal double-breasted midi dress with a tailored silhouette. Perfect for office, church, and formal events.",
+    "inStock": true
+  },
+  {
+    "id": "43",
+    "name": "Tan Structured Handbag",
+    "price": 12000,
+    "category": "accessories",
+    "sizes": [
+      "One Size"
+    ],
+    "colors": [
+      "Tan"
+    ],
+    "images": [
+      "/images/products/tan-structured-handbag.webp"
+    ],
+    "description": "A classic tan structured handbag with clean lines. A timeless accessory that pairs with almost any outfit.",
+    "inStock": true
+  },
+  {
+    "id": "42",
+    "name": "Rust Beaded Shoulder Blouse",
+    "price": 12000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Rust"
+    ],
+    "images": [
+      "/images/products/rust-beaded-shoulder-blouse.webp"
+    ],
+    "description": "A warm rust blouse with delicate beaded shoulder details. Elegant for dinners, parties, and cultural celebrations.",
+    "inStock": true
+  },
+  {
+    "id": "41",
+    "name": "Red Teal Abstract Skirt Set",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Red/Teal"
+    ],
+    "images": [
+      "/images/products/red-teal-abstract-skirt-set.webp"
+    ],
+    "description": "A vibrant red and teal abstract print skirt set. Matching top and skirt for a coordinated, standout look.",
+    "inStock": true
+  },
+  {
+    "id": "40",
+    "name": "Red Layered Pinstripe Collar Top",
+    "price": 10000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Red"
+    ],
+    "images": [
+      "/images/products/red-layered-pinstripe-collar-top.webp"
+    ],
+    "description": "A bold red layered top with pinstripe collar details. Eye-catching and modern for work, church, and evening events.",
+    "inStock": true
+  },
+  {
+    "id": "39",
+    "name": "Pinstripe Bell Sleeve Blouse",
+    "price": 10000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Pinstripe"
+    ],
+    "images": [
+      "/images/products/pinstripe-bell-sleeve-blouse.webp"
+    ],
+    "description": "A chic pinstripe blouse with dramatic bell sleeves. A polished choice for office wear and smart-casual occasions.",
+    "inStock": true
+  },
+  {
+    "id": "38",
+    "name": "Pink Striped Polo Top",
+    "price": 9000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Pink/White"
+    ],
+    "images": [
+      "/images/products/pink-striped-polo-top.webp"
+    ],
+    "description": "A preppy pink striped polo top with a classic collar. Great for casual days paired with jeans or skirts.",
+    "inStock": true
+  },
+  {
+    "id": "37",
+    "name": "Pink Stripe Oversized Shirt Set",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Pink/White"
+    ],
+    "images": [
+      "/images/products/pink-stripe-oversized-shirt-set.webp"
+    ],
+    "description": "A breezy pink striped oversized shirt set with matching bottoms. Comfortable and stylish for casual outings and travel.",
+    "inStock": true
+  },
+  {
+    "id": "36",
+    "name": "Mixed Print Kaftan",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Multicolor"
+    ],
+    "images": [
+      "/images/products/mixed-print-kaftan.webp"
+    ],
+    "description": "A relaxed mixed-print kaftan with wide sleeves and a flowing cut. Perfect for resort wear, Fridays, and effortless style.",
+    "inStock": true
+  },
+  {
+    "id": "35",
+    "name": "Grey Ribbed Polo Midi Dress",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Grey"
+    ],
+    "images": [
+      "/images/products/grey-ribbed-polo-midi-dress.webp"
+    ],
+    "description": "A fitted grey ribbed polo midi dress with a collar detail. Smart and sporty for everyday wear and casual Fridays.",
+    "inStock": true
+  },
+  {
+    "id": "34",
+    "name": "Grey Chain Strap Handbag",
+    "price": 12000,
+    "category": "accessories",
+    "sizes": [
+      "One Size"
+    ],
+    "colors": [
+      "Grey"
+    ],
+    "images": [
+      "/images/products/grey-chain-strap-handbag.webp"
+    ],
+    "description": "A sleek grey handbag with a chain strap detail. A versatile accessory that elevates both casual and formal looks.",
+    "inStock": true
+  },
+  {
+    "id": "33",
+    "name": "Floral Ruffle Dress",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Multicolor"
+    ],
+    "images": [
+      "/images/products/floral-ruffle-dress.webp"
+    ],
+    "description": "A cheerful floral ruffle dress with playful tiered details. A lovely pick for parties, vacations, and sunny days.",
+    "inStock": true
+  },
+  {
+    "id": "32",
+    "name": "Cream Striped Belted Midi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Cream"
+    ],
+    "images": [
+      "/images/products/cream-striped-belted-midi-dress.webp"
+    ],
+    "description": "A refined cream striped midi dress with a waist belt. Polished and flattering for work, church, and elegant outings.",
+    "inStock": true
+  },
+  {
+    "id": "31",
+    "name": "Cream Floral Chiffon Midi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Cream/Floral"
+    ],
+    "images": [
+      "/images/products/cream-floral-chiffon-midi-dress.webp"
+    ],
+    "description": "A romantic cream chiffon midi dress with a soft floral print. Light and airy for brunches, garden parties, and daytime events.",
+    "inStock": true
+  },
+  {
+    "id": "30",
+    "name": "Brown Wave Print Maxi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Brown/Multicolor"
+    ],
+    "images": [
+      "/images/products/brown-wave-print-maxi-dress.webp"
+    ],
+    "description": "A relaxed brown wave print maxi dress with effortless movement. Ideal for vacations, beach days, and casual outings.",
+    "inStock": true
+  },
+  {
+    "id": "29",
+    "name": "Blue Mesh Ruffle Maxi Dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Blue"
+    ],
+    "images": [
+      "/images/products/blue-mesh-ruffle-maxi-dress.webp"
+    ],
+    "description": "A flowing blue mesh maxi dress with delicate ruffle details. Elegant for weddings, dinners, and summer events.",
+    "inStock": true
+  },
+  {
+    "id": "28",
+    "name": "Black & White Striped Polo Set",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black/White"
+    ],
+    "images": [
+      "/images/products/black-white-striped-polo-set.webp"
+    ],
+    "description": "A matching black and white striped polo top and bottom set. Sporty yet elegant for casual and semi-formal settings.",
+    "inStock": true
+  },
+  {
+    "id": "27",
+    "name": "Black & White Striped Handbag",
+    "price": 12000,
+    "category": "accessories",
+    "sizes": [
+      "One Size"
+    ],
+    "colors": [
+      "Black/White"
+    ],
+    "images": [
+      "/images/products/black-white-striped-handbag.webp"
+    ],
+    "description": "A chic black and white striped handbag with structured shape. A stylish accessory to complete any outfit.",
+    "inStock": true
+  },
+  {
+    "id": "26",
+    "name": "Black Rhinestone Mesh Midi Dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "/images/products/black-rhinestone-mesh-midi-dress.webp"
+    ],
+    "description": "A glamorous black mesh midi dress with rhinestone embellishments. Perfect for evening parties, dinners, and red-carpet moments.",
+    "inStock": true
+  },
+  {
+    "id": "25",
+    "name": "Black Off-Shoulder Ball Gown",
+    "price": 20000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "/images/products/black-off-shoulder-ball-gown.webp"
+    ],
+    "description": "A dramatic black off-shoulder ball gown with a voluminous skirt. The ultimate choice for gala nights, weddings, and formal celebrations.",
+    "inStock": true
+  },
+  {
+    "id": "24",
+    "name": "Abstract Print Pleated Skirt Set",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Multicolor"
+    ],
+    "images": [
+      "/images/products/abstract-print-pleated-skirt-set.webp"
+    ],
+    "description": "A coordinated abstract print top and pleated skirt set. Feminine and polished for special occasions and gatherings.",
+    "inStock": true
+  },
+  {
+    "id": "23",
+    "name": "Abstract Print Pant Set",
+    "price": 15000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Multicolor"
+    ],
+    "images": [
+      "/images/products/abstract-print-pant-set.webp"
+    ],
+    "description": "A bold abstract print two-piece set with matching pants. Comfortable and statement-making for parties and outings.",
+    "inStock": true
+  },
+  {
+    "id": "22",
+    "name": "Abstract Print Green Skirt Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Green/Multicolor"
+    ],
+    "images": [
+      "/images/products/abstract-print-green-skirt-dress.webp"
+    ],
+    "description": "A stylish green abstract print dress with a flattering skirt silhouette. Perfect for daytime events and casual elegance.",
+    "inStock": true
+  },
+  {
+    "id": "21",
+    "name": "Green Silk Blouse",
+    "price": 12000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Green"
+    ],
+    "images": [
+      "/images/products/green-silk-blouse.webp"
+    ],
+    "description": "A elegant green silk blouse with a soft, flowing drape. A refined choice for work, dinners, and casual elegance.",
+    "inStock": true
+  },
+  {
+    "id": "20",
+    "name": "Grey Satin Mermaid Midi Skirt",
+    "price": 12000,
+    "category": "skirts",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Grey"
+    ],
+    "images": [
+      "/images/products/grey-satin-mermaid-midi-skirt.webp"
+    ],
+    "description": "A sleek grey satin mermaid midi skirt with a flattering silhouette. Perfect for evening wear and chic styling.",
+    "inStock": true
+  },
+  {
+    "id": "19",
+    "name": "Navy Pink Floral Maxi Dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Navy/Pink"
+    ],
+    "images": [
+      "/images/products/navy-pink-floral-maxi-dress.webp"
+    ],
+    "description": "A graceful navy maxi dress with a pink floral print. Flowing and feminine for weddings, outings, and formal events.",
+    "inStock": true
+  },
+  {
+    "id": "18",
+    "name": "Teal Velvet Maxi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Teal"
+    ],
+    "images": [
+      "/images/products/teal-velvet-maxi-dress.webp"
+    ],
+    "description": "A rich teal velvet maxi dress with a soft, luxurious feel. Elegant for dinners, parties, and special occasions.",
+    "inStock": true
+  },
+  {
+    "id": "17",
+    "name": "Beige Rainbow Fringe Knit Sweater",
+    "price": 12000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Beige/Rainbow"
+    ],
+    "images": [
+      "/images/products/beige-rainbow-fringe-knit-sweater.webp"
+    ],
+    "description": "A cozy beige knit sweater with playful rainbow fringe details. A fun and stylish pick for casual days, chilly evenings, and relaxed outings.",
+    "inStock": true
+  },
+  {
+    "id": "16",
+    "name": "Blue Gold Abstract Wrap Maxi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Blue/Gold"
+    ],
+    "images": [
+      "/images/products/blue-gold-abstract-wrap-maxi-dress.webp"
+    ],
+    "description": "A stunning blue and gold abstract wrap maxi dress with a flattering silhouette. Ideal for formal gatherings, weddings, and elegant outings.",
+    "inStock": true
+  },
+  {
+    "id": "15",
+    "name": "Black Multicolor Floral Maxi Skirt",
+    "price": 12000,
+    "category": "skirts",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black/Multicolor"
+    ],
+    "images": [
+      "/images/products/black-multicolor-floral-maxi-skirt.webp"
+    ],
+    "description": "A bold black maxi skirt featuring a vibrant multicolor floral print. Comfortable and eye-catching for parties, vacations, and statement styling.",
+    "inStock": true
+  },
+  {
+    "id": "14",
+    "name": "Black Chiffon Overlay Maxi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black"
+    ],
+    "images": [
+      "/images/products/black-chiffon-overlay-maxi-dress.webp"
+    ],
+    "description": "A flowing black chiffon overlay maxi dress with elegant draping and a lightweight feel. Perfect for evening events, dinners, and special occasions.",
+    "inStock": true
+  },
+  {
+    "id": "13",
+    "name": "Blue & White Striped Kaftan Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Blue/White"
+    ],
+    "images": [
+      "/images/products/blue-white-striped-kaftan-dress.webp"
+    ],
+    "description": "A relaxed blue and white striped kaftan maxi dress with a deep V-neck, wide sleeves, and front drawstring ties. Effortlessly stylish for beach days, resort wear, and casual errands.",
+    "inStock": true
+  },
+  {
+    "id": "12",
+    "name": "Floral Chiffon Crop Top & Skirt Set",
+    "price": 12000,
+    "category": "two-piece-sets",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Multicolor"
+    ],
+    "images": [
+      "/images/products/floral-chiffon-crop-top-skirt-set.webp"
+    ],
+    "description": "A vibrant floral chiffon two-piece set featuring a square-neck long-sleeve crop top and a matching tiered ruffle mini skirt. Bold and breezy for vacations, parties, and sunny outings.",
+    "inStock": true
+  },
+  {
+    "id": "11",
+    "name": "Mauve Lace Pleated Midi Dress",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Mauve"
+    ],
+    "images": [
+      "/images/products/mauve-lace-pleated-midi-dress.webp"
+    ],
+    "description": "A graceful mauve midi dress with a crochet-lace bodice, flared pleated sleeves, and a sunburst pleated skirt. Feminine and refined for weddings, dinners, and special gatherings.",
+    "inStock": true
+  },
+  {
+    "id": "10",
+    "name": "Black & White Contrast Sleeve Midi Dress",
+    "price": 15000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black/White"
+    ],
+    "images": [
+      "/images/products/black-white-contrast-sleeve-midi-dress.webp"
+    ],
+    "description": "A sophisticated black midi dress with voluminous white bishop sleeves. The clean contrast and modest silhouette make it perfect for office wear, church, and elegant daytime occasions.",
+    "inStock": true
+  },
+  {
+    "id": "9",
+    "name": "Black & White Button Collar Midi Dress",
+    "price": 12000,
+    "category": "dresses",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Black/White"
+    ],
+    "images": [
+      "/images/products/black-white-button-collar-midi-dress.webp"
+    ],
+    "description": "A chic sleeveless black midi dress with a white Peter Pan collar trim, button-front detail, and contrast pocket outlines. A polished choice for work, church, and semi-formal events.",
+    "inStock": true
+  },
+  {
+    "id": "2",
+    "name": "Cream Striped Patchwork Shirt",
+    "price": 10000,
+    "category": "tops",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Cream",
+      "White"
+    ],
+    "images": [
+      "/images/products/cream-striped-patchwork-shirt.webp"
+    ],
+    "description": "A relaxed cream striped patchwork shirt with a unique mixed-print design. A stylish pick for casual Fridays and weekend outings.",
+    "inStock": true
+  },
+  {
+    "id": "1",
+    "name": "Beige Tailored Wide-Leg Trouser",
+    "price": 15000,
+    "category": "trousers",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Beige"
+    ],
+    "images": [
+      "/images/products/beige-tailored-wide-leg-trouser.webp"
+    ],
+    "description": "A sophisticated beige tailored wide-leg trouser with a clean silhouette. Comfortable and polished for work, church, and smart-casual occasions.",
     "inStock": true
   }
 ];
