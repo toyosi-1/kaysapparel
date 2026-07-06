@@ -123,20 +123,12 @@ export default function Home() {
   // Start with static + synced Firebase products so everything appears instantly
   const [products, setProducts] = useState<Product[]>(initialProducts);
 
-  // Refresh from Firebase in the background to catch any newer changes
+  // Subscribe to real-time Firebase product updates so admin edits reflect instantly
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const fetchedProducts = await productService.getAll() as Product[];
-        if (fetchedProducts && fetchedProducts.length > 0) {
-          setProducts(mergeProductCatalog(staticProducts, fetchedProducts));
-        }
-      } catch (error) {
-        console.error("Failed to load products:", error);
-        // Synced products already showing
-      }
-    };
-    loadProducts();
+    const unsubscribe = productService.subscribeToAll((firebaseProducts) => {
+      setProducts(mergeProductCatalog(staticProducts, firebaseProducts));
+    });
+    return () => unsubscribe();
   }, []);
 
   const featuredProducts = products.slice(0, 8);

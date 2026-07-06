@@ -26,31 +26,17 @@ export function ProductDetailFetcher({ productId }: ProductDetailFetcherProps) {
       setLoading(false);
     }
 
-    // Fetch fresh data in the background to update if anything changed
-    const loadProduct = async () => {
-      try {
-        const fetched = await Promise.race([
-          productService.getById(productId) as Promise<Product | null>,
-          new Promise<null>((_, reject) =>
-            setTimeout(() => reject(new Error("Firebase fetch timed out")), 3000)
-          ),
-        ]);
-        if (fetched) {
-          setProduct(fetched);
-        } else if (!fallback) {
-          setError(true);
-        }
-      } catch (err) {
-        console.error("Failed to load product:", err);
-        if (!fallback) {
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
+    // Subscribe to real-time updates for this product so admin edits reflect instantly
+    const unsubscribe = productService.subscribeToById(productId, (fetched) => {
+      if (fetched) {
+        setProduct(fetched);
+      } else if (!fallback) {
+        setError(true);
       }
-    };
+      setLoading(false);
+    });
 
-    loadProduct();
+    return () => unsubscribe();
   }, [productId]);
 
   if (loading) {

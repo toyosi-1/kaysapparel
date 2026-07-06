@@ -46,24 +46,12 @@ function ShopContent() {
   const [allProducts, setAllProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
 
-  // Refresh from Firebase in the background to catch any newer changes
+  // Subscribe to real-time Firebase product updates so admin edits reflect instantly
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const fetchedProducts = await Promise.race([
-          productService.getAll() as Promise<Product[]>,
-          new Promise<Product[]>((_, reject) =>
-            setTimeout(() => reject(new Error("Firebase fetch timed out")), 3000)
-          ),
-        ]);
-        setAllProducts(mergeProductCatalog(staticProducts, fetchedProducts));
-      } catch (error) {
-        console.error("Failed to load products:", error);
-        // Synced products are already showing, no need to block UI
-      }
-    };
-
-    loadProducts();
+    const unsubscribe = productService.subscribeToAll((firebaseProducts) => {
+      setAllProducts(mergeProductCatalog(staticProducts, firebaseProducts));
+    });
+    return () => unsubscribe();
   }, []);
 
   const allColors = useMemo(

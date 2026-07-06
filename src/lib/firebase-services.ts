@@ -9,10 +9,12 @@ import {
   query, 
   where, 
   orderBy, 
-  Timestamp 
+  Timestamp,
+  onSnapshot
 } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { db, storage } from './firebase'
+import { Product as ProductType } from './types'
 
 // Collections
 const PRODUCTS_COLLECTION = 'products'
@@ -140,6 +142,27 @@ export const productService = {
   async delete(id: string): Promise<void> {
     const docRef = doc(db, PRODUCTS_COLLECTION, id)
     await deleteDoc(docRef)
+  },
+
+  subscribeToAll(callback: (products: ProductType[]) => void) {
+    return onSnapshot(collection(db, PRODUCTS_COLLECTION), (snapshot) => {
+      const products = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as ProductType[]
+      callback(products)
+    }, (error) => {
+      console.error('Products subscription error:', error)
+    })
+  },
+
+  subscribeToById(id: string, callback: (product: ProductType | null) => void) {
+    const docRef = doc(db, PRODUCTS_COLLECTION, id)
+    return onSnapshot(docRef, (docSnap) => {
+      callback(docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } as ProductType : null)
+    }, (error) => {
+      console.error('Product subscription error:', error)
+    })
   }
 }
 
