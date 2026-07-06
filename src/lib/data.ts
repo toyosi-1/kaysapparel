@@ -522,9 +522,9 @@ export const products: Product[] = [
 ];
 
 export const BANK_DETAILS = {
-  bankName: "Moniepoint MFB",
+  bankName: "Sterling Bank",
   accountName: "Kaysapparel Global Concept",
-  accountNumber: "5439334220",
+  accountNumber: "0092419264",
 };
 
 export function formatPrice(price: number): string {
@@ -535,10 +535,14 @@ export function formatPrice(price: number): string {
   }).format(price);
 }
 
+export function getProducts(): Product[] {
+  return [...products, ...firebaseProducts];
+}
+
 export function getProductsByCategory(category: string): Product[] {
-  return [...products, ...firebaseProducts].filter((p) => p.category === category);
+  return getProducts().filter((p) => p.category === category);
 }
 
 export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id) || firebaseProducts.find((p) => p.id === id);
+  return getProducts().find((p) => p.id === id);
 }

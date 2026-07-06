@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getProducts } from "@/lib/data-service";
+import { getProducts } from "@/lib/data";
 import { ProductDetailFetcher } from "./product-detail-fetcher";
 
 export const metadata: Metadata = {
