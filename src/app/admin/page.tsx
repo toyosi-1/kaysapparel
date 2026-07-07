@@ -749,7 +749,10 @@ export default function AdminPage() {
 
                 {/* Image Upload with auto-compress */}
                 <div>
-                  <Label>Product Images</Label>
+                  <Label>Product Images (Front & Back)</Label>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Upload front view first, then back view (optional). Single image products are allowed.
+                  </p>
                   <div className="border-2 border-dashed rounded-lg p-6 text-center mt-2 hover:border-primary/50 transition-colors">
                     <input
                       type="file"
@@ -777,7 +780,7 @@ export default function AdminPage() {
                           <div className="space-y-1">
                             {resizeResults.map((r, i) => (
                               <p key={i} className="text-xs text-muted-foreground">
-                                {r.file.name} — {formatBytes(r.originalSize)} → {formatBytes(r.compressedSize)}
+                                {i === 0 && "Front: "}{i === 1 && "Back: "}{r.file.name} — {formatBytes(r.originalSize)} → {formatBytes(r.compressedSize)}
                                 {r.savedPercent > 0 && (
                                   <span className="text-green-600 font-medium ml-1">({r.savedPercent}% saved)</span>
                                 )}
@@ -791,7 +794,7 @@ export default function AdminPage() {
                           <Upload className="h-8 w-8 mx-auto text-muted-foreground" />
                           <p className="text-sm font-medium">Click to upload images</p>
                           <p className="text-xs text-muted-foreground">
-                            PNG, JPG, WebP — auto-compressed before upload
+                            Front view required. Back view optional. PNG, JPG, WebP — auto-compressed before upload
                           </p>
                         </div>
                       )}
