@@ -21,10 +21,33 @@ interface ProductDetailProps {
   product: Product;
 }
 
+function formatUpdatedAt(value?: Product["updatedAt"]): string | null {
+  if (!value) return null;
+  let date: Date | null = null;
+  if (value instanceof Date) {
+    date = value;
+  } else if (typeof value === "number") {
+    date = new Date(value);
+  } else if (typeof value === "string") {
+    date = new Date(value);
+  } else if (value && typeof value === "object" && "seconds" in value) {
+    date = new Date((value.seconds ?? 0) * 1000);
+  }
+  if (!date || isNaN(date.getTime())) return null;
+  return date.toLocaleString("en-NG", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    day: "numeric",
+    month: "short",
+  });
+}
+
 export function ProductDetail({ product }: ProductDetailProps) {
   const router = useRouter();
   const addItem = useCartStore((s) => s.addItem);
   const categoryName = categories.find((c) => c.slug === product.category)?.name ?? product.category;
+  const updatedAtText = formatUpdatedAt(product.updatedAt);
 
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -199,6 +222,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <p className="text-3xl font-bold text-primary mt-4">
               {formatPrice(product.price)}
             </p>
+            {updatedAtText && (
+              <p className="text-[11px] text-muted-foreground mt-1">
+                Last updated: {updatedAtText}
+              </p>
+            )}
           </div>
 
           <Separator />
