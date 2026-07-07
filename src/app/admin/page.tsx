@@ -359,65 +359,76 @@ export default function AdminPage() {
       return;
     }
     setAddingProduct(true);
-    try {
-      const baseUpdates = {
-        name: newProduct.name,
-        price: Number(newProduct.price),
-        category: newProduct.category,
-        sizes: newProduct.sizes,
-        colors: newProduct.colors.split(",").map((c) => c.trim()).filter(Boolean),
-        description: newProduct.description,
-      };
-
-      if (editingProduct?.id) {
-        const updatePayload: Record<string, unknown> = {
-          productId: editingProduct.id,
-          updates: baseUpdates,
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const baseUpdates = {
+          name: newProduct.name,
+          price: Number(newProduct.price),
+          category: newProduct.category,
+          sizes: newProduct.sizes,
+          colors: newProduct.colors.split(",").map((c) => c.trim()).filter(Boolean),
+          description: newProduct.description,
         };
 
-        // If new images were selected during edit, replace the existing images
-        if (productImages.length > 0) {
+        if (editingProduct?.id) {
+          const updatePayload: Record<string, unknown> = {
+            productId: editingProduct.id,
+            updates: baseUpdates,
+          };
+
+          // If new images were selected during edit, replace the existing images
+          if (productImages.length > 0) {
+            const images = await Promise.all(
+              productImages.map(async (file) => ({
+                name: file.name,
+                data: await fileToBase64(file),
+              }))
+            );
+            updatePayload.images = images;
+          }
+
+          const updated = await adminApi("update", updatePayload);
+          console.log("[admin update response]", updated?.id, updated?.images?.[0], updated?.updatedAt);
+          toast.success(`"${newProduct.name}" updated successfully!`);
+          setEditingProduct(null);
+          setActiveTab("products");
+        } else {
+          // Convert images to base64 data URLs
           const images = await Promise.all(
             productImages.map(async (file) => ({
               name: file.name,
               data: await fileToBase64(file),
             }))
           );
-          updatePayload.images = images;
+
+          await adminApi("create", {
+            product: { ...baseUpdates, inStock: true },
+            images,
+          });
+          toast.success(`"${newProduct.name}" added to the store!`);
         }
 
-        const updated = await adminApi("update", updatePayload);
-        console.log("[admin update response]", updated?.id, updated?.images?.[0], updated?.updatedAt);
-        toast.success(`"${newProduct.name}" updated successfully!`);
-        setEditingProduct(null);
-        setActiveTab("products");
-      } else {
-        // Convert images to base64 data URLs
-        const images = await Promise.all(
-          productImages.map(async (file) => ({
-            name: file.name,
-            data: await fileToBase64(file),
-          }))
-        );
-
-        await adminApi("create", {
-          product: { ...baseUpdates, inStock: true },
-          images,
-        });
-        toast.success(`"${newProduct.name}" added to the store!`);
+        setNewProduct({ name: "", price: "", category: "", sizes: [], colors: "", description: "" });
+        setProductImages([]);
+        setResizeResults([]);
+        await loadProducts();
+        return; // success, exit retry loop
+      } catch (err) {
+        lastError = err;
+        console.error(`Attempt ${attempt} failed:`, err);
+        const message = err instanceof Error ? err.message : "Unknown error";
+        if (attempt === 1 && (message.includes("fetch failed") || message.includes("ENOTFOUND") || message.includes("network"))) {
+          toast.info("Network issue detected, retrying...");
+          await new Promise(r => setTimeout(r, 1500));
+        } else {
+          break;
+        }
       }
-
-      setNewProduct({ name: "", price: "", category: "", sizes: [], colors: "", description: "" });
-      setProductImages([]);
-      setResizeResults([]);
-      await loadProducts();
-    } catch (err) {
-      console.error(err);
-      const message = err instanceof Error ? err.message : "Unknown error";
-      toast.error(`Failed to save product: ${message}`);
-    } finally {
-      setAddingProduct(false);
     }
+    const message = lastError instanceof Error ? lastError.message : "Unknown error";
+    toast.error(`Failed to save product: ${message}`);
+    setAddingProduct(false);
   };
 
   const toggleSize = (size: string) => {

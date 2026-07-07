@@ -5,6 +5,114 @@ import { Product } from './types';
 
 export const firebaseProducts: Product[] = [
   {
+    "id": "bKQQ7cx4v3A5WPRp4uVH",
+    "name": "Blue long-sleeve blouse",
+    "price": 8000,
+    "category": "tops",
+    "sizes": [
+      "M",
+      "L"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783427369152_1783083724786.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=gvqXYxTUKa5ybTcM2ALl6qWFjLh290l3QlnQU1rHUPUCmQj7lMfAL6vMjbjrKyeNH45T%2BtNnJPg2GXXpYaZi1MZ3vpZAohjDvBANH6orOe3oI0vk2aRzPbV5YVA%2BCVoNtFHEud8OSz5uVKT4JeupPTrgRgfTHUDBzeDkMIfPU9J7uDzqxAIJV%2FpaxnMs8xJ0ff8qBXtpjEKlYPcOCBJ7iZhmM8GWkwLCWNgwg8LHOGdhRTtIUPC6vmWPPJd3toYZvU%2B4raWfac8q%2FhSydWewWu%2Fv4bYT7FcifUf2BHOVTg4DDSob2YEBdKVFinKaNC0RkmmM42MCoVlSZgdO7%2BOHMQ%3D%3D"
+    ],
+    "description": "Full-length fitted sleeves for a sleek and polished appearance.\nDesign Detail: Prominent side ruching/gathering along one side of the bodice, creating soft drapes that enhance the silhouette and add visual interest.\nFit: Slim, body-contouring fit that accentuates the waist.\nFabric: Smooth, stretchy knit fabric that provides comfort while maintaining a flattering shape.",
+    "inStock": true
+  },
+  {
+    "id": "exSdMOYkh0ryf0qWbp2l",
+    "name": "Fitted striped T-shirt",
+    "price": 8000,
+    "category": "tops",
+    "sizes": [
+      "M",
+      "S",
+      "L"
+    ],
+    "colors": [
+      "green striped"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783426834454_1783083628253.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=h3E9GtruwwT1fMwy5SZ3XB6miV72R729W8uh4poxZBdaZ%2FaT8RrV4dMT78K5UUzYBOwdWpsp6V1hi4ZHerMZjDFUL%2FflBvswU7so9hVUsmcTMODZvhsDINKwligZSnDeLk%2FwhWLq04IBu%2F45kT5Ua1Q8ggXjX0HNTWzrv%2B6X5tXiEoMh2XCmQdHeMu2Nfwx%2Bgvul9ba3lpstbiHAQ%2BaIefn4W0qZ%2F2ehH5GTLu9jhHOG%2F6ZMkGpzaqqa49%2Fxu7cj7PtxL%2FgoWHaQxoH0IhJyYo4mqSmMOUmon3m5SSsl1CrMjI2IEWtWuvzdAVAlmYPr31n1um2RS3aYFtLAiucrzg%3D%3D"
+    ],
+    "description": "Color: White base with evenly spaced turquoise/aqua horizontal stripes.\nNeckline: Round crew neck finished with a matching turquoise ribbed trim.\nSleeves: Short fitted sleeves with coordinating turquoise edging.\nFit: Slim, body-skimming silhouette that creates a flattering and streamlined look.\nFabric: Ribbed knit material, giving the top subtle texture and stretch for comfort.\nLength: Cropped to hip length, making it easy to tuck into skirts, shorts, or jeans.\nStyle: Simple, fresh, and versatile with a timeless nautical-inspired stripe pattern.",
+    "inStock": true
+  },
+  {
+    "id": "KuMhQGKExSSsnBRKJwEv",
+    "name": "Chiffon orange blouse",
+    "price": 10000,
+    "category": "tops",
+    "sizes": [
+      "S"
+    ],
+    "colors": [
+      "orange"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783426181690_1783083442873.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=WLeCuTruxrRip9xhzVWkBZBHiKHm5AARrRHLxazztPwfA%2F73sUHl9qtnCYH2lHA7G8zIs1eafMfm02Z8M9P2EytccMw0SU8RYr6dg57ijZ6OZ5tnJIyMYXOXpORHWyOKwQe1nQGbSDFNWI%2B7KyzIQJfWN80yFTJP8eKiq9wEt12TowbYDdzLw0CeUzzI%2FiN%2BQYAa0RCJrRum5B1hsU091pWkaid4ZHgaSGA2oem1pspbkN1X763%2BMmuzKINEuMleA8OUuZyFxPVPvh1SgoGzyEEtMFcXgCK2sYeDKlnSsv6R2KzPu108bZhJzm3fMqwHCB0jCv%2BbOnnOIccOp6EBUQ%3D%3D"
+    ],
+    "description": "Color: Rich burnt orange/rust tone with a subtle sheen.\nNeckline: High neckline featuring a dramatic self-tie bow (pussy-bow) that drapes elegantly down the front.\nSleeves: Long sleeves finished with layered flared cuffs, creating a statement ruffle effect that adds movement and elegance.\nFit: Relaxed yet tailored silhouette, designed to drape smoothly over the body.\nFabric: Silky satin-like material that gives the blouse a luxurious, polished appearance.\nStyle: Chic and refined, blending classic office wear with fashion-forward details.",
+    "inStock": true
+  },
+  {
+    "id": "b1KcOvMTWi5mWEMPJDGJ",
+    "name": "bodysuit-style blouse",
+    "price": 8000,
+    "category": "tops",
+    "sizes": [
+      "L",
+      "M"
+    ],
+    "colors": [
+      "Pink"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783424479189_1783083150895.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=JFn%2FMlZo4e9j6bt2VRRpgGUJmtVHyqN%2Bu1aixZV7G2%2BKD%2Fr9hIduuH8jAG4Gdbjh4SJghnkWGYNKZJrs2IviDag1t2rB7yR370ugyQs%2FejYe4OS0MI6a1h%2BlwgaZ7bMg8uwf%2FnOaghpW3GWOHifZizEhIFmLwuO%2FxAhGmJeZPP9Zm6eRbAYzSA24hiLoq6%2FCSAHMLfhllFReBdpLR61aBjbgJxxXW0M9eIKOXfNXMVf2YTJ01kw0zxcEBBhRdDMdiarDyO31MW6uk5T6bVfw%2BZIayECFl9Anv%2BraiPUBB3C4hznsqDoHEu%2BZWl95ikM6u1DXbBHWNW7Lb3er2BvwqA%3D%3D"
+    ],
+    "description": "Color: Soft pastel pink.\nNeckline: Wide scoop neckline that sits comfortably around the collarbone.\nSleeves: Short sleeves accented with dramatic layered organza ruffle details on the shoulders, creating a flutter-sleeve effect and adding volume.\nFit: Form-fitting silhouette that contours the body for a sleek, streamlined look.\nFabric: Smooth, stretchy knit fabric for the main body, contrasted with sheer, lightweight organza ruffles.\nStyle: Elegant and playful, combining a minimalist body with statement shoulder details.",
+    "inStock": true
+  },
+  {
+    "id": "LtcgWq5csN7BNl0kV2EC",
+    "name": "Pink long-sleeve blouse",
+    "price": 12000,
+    "category": "tops",
+    "sizes": [
+      "M",
+      "S"
+    ],
+    "colors": [
+      "Pink"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783422474117_1783082725776.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=KK74cfbrZopw2YjoX3yX9STeiSOnBBIuGtIaKQAtHTTe9I0zv1p87vNGjOw6LvqFS73G1KKmgAevdts7YESD1AbAEl1r3zr1rhVMv6qyIipmzJ9t6rdOFMbA3jzgYHFkPlMKZIDHSAL2JGubEzxVe%2FLRtOvir1Z8Vm%2Fceyi5I0GBnW7qFJoGGivmtZgR%2BVvOPo%2FCh1y1dGVhZcm9l4B4dVE%2BEmyOq%2BNBLfnHEppxfZL5UPKn0QORtPv2K824%2FC6Gd%2FlU7v8rpg24Mv4fBsN5RmbdxXIs6ylqGvGif3UMNV1%2Fshg48s%2FXa1gJSQ%2FZZ8u8fYUWerm7C8mQuJO6WWL2VQ%3D%3D"
+    ],
+    "description": "blouse that combines a bold pink base with artistic butterfly-inspired floral accents for a chic and contemporary look",
+    "inStock": true
+  },
+  {
+    "id": "UmhAZmcoWMKTS5ajju0k",
+    "name": "Champagne-gold lace maxi dress",
+    "price": 18000,
+    "category": "dresses",
+    "sizes": [
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Gold"
+    ],
+    "images": [
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783421681514_1783061591716.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=jgKPfCTS8DVyCFxmlPM128qL2TWoHtbYFP8rDDodOVc7zI7urLykkR2h0wz2GMVnX3XaBleGBPNqYqok%2F7Hk1k4fLjoUpkphsoZhoM8t6sJkqz8yUEQpXzEGok%2BXqlusMJA5NRRYuWXvtilLvw%2FHXBogyPW3MLD9GLWid1Mkiy0GqfY04cGRsMbbFzQyXxOpXNUjIzOUl51yBJGmIT5k8ZrqyXoTTjPNPjb0CWCgQLZxfj0ocsrr9G228NO2IFsPmTpfnl%2BVqEkHizuqEgLP1lsqYwNIh8Fowa25Gx71wYv7wq44dpTY5ZRMaumHCWu8LVaiawcK2OLNnM9qJTcS6Q%3D%3D"
+    ],
+    "description": "champagne-gold lace maxi dress, featuring a sophisticated tie-neck bow and an ethereal cape-style overlay. Crafted with intricate lace detailing and a flowing silhouette, this elegant ensemble offers timeless beauty and refined sophistication, making it the perfect choice for weddings, formal events, and special occasions.",
+    "inStock": true
+  },
+  {
     "id": "QxYZ9Zz8dsfEx4gpRmLs",
     "name": "Abstract Watercolor Print Blouse",
     "price": 9000,
@@ -166,7 +274,7 @@ export const firebaseProducts: Product[] = [
       "pink"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783148103641_1783065216583.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=IIK30OyfzYS2v3Yh9KN5N%2BzePjDtmKL7yQzqZPpfFCOpI6qayXlRIDhXMx7exrKnZ%2BFonfX2OvJzsKnftWlEIH7OrnlugZDkHk%2Fy2vIu1RMBHZj8uQUSHdcx7UM1Mo3ixJ1XMvR5VyiG%2FKeCZkt3YufxDcE8g%2BW1pFQpmD53sukyTO0ojcvz09TeHev1yvEgf393bsRTkGiLKnq0fQplwcqF%2BiDXHjeNrnd%2F10FjiZvmANTHxnXZcbKiK86gZ5GATHgFpSCXlK7pgwWVmHx7Qx9aFwA4AhIgkNQ%2BqfUjJwH6LP4L9Wv0pDAaJRkFHkDGhEryU%2BKAMP%2FeRfesz6W9dw%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783412417340_ChatGPT%20Image%20Jul%206%2C%202026%2C%2008_09_00%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=EVCD%2BR2IX9BnWSlsgVMcWKNkmF2K%2Fgi5V05JjoISR9H3z7qp7Nz5XmG3QOyBzLQtT2MJM86q%2BVF3av%2FP60Bb21wWPSEDT2%2F9K2wPkupiMrFQjN%2FjNXtbIeMC7B7uHckzx1gmtazuuqBg%2FqyOGIF%2FfYKXZBKsLe9b3O4yXO3WqYJxJPNHuf0wVICsYmhg36DY4qaWcZIxBbJFqMswuEsmgCXWJiq3C5rl83%2F%2B4f2hYMWPXrzSXvWU6VFxREmEDQGvDy6VlnTjoRAv8Z3Ggb%2BUnKSmeaSRU3GqrL6AzJdyLEr8lsKVVNJ1LAU7dsNSiZ%2FqZNU1Q9jG0k%2FVzW4V8xuAWw%3D%3D"
     ],
     "description": "Exude effortless elegance in this two-piece coordinated set featuring a floral-print blouse, flowing wide-leg trousers, and a lightweight kimono overlay with a matching waist tie. Designed in soft blush and neutral tones, this sophisticated ensemble combines comfort, versatility, and timeless style, making it perfect for both special occasions and elevated everyday wear.",
     "inStock": true
@@ -247,7 +355,7 @@ export const firebaseProducts: Product[] = [
   },
   {
     "id": "R4uxw97lojjCmR5l2KWk",
-    "name": "Black embellished maxi dress",
+    "name": "Noir Luxe Embellished Maxi Dress",
     "price": 22000,
     "category": "dresses",
     "sizes": [
@@ -259,7 +367,7 @@ export const firebaseProducts: Product[] = [
       "Black"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783146406650_1782914449127.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=mH3a77U3KAaB7x%2FDq3fcRE5U0lfxN%2BvKjUzomKiyexjZwJS%2B3lZBjjhcNgUw2jiL7sH4cVFCoR3Wfyck6QaP3IU%2FRnzkggczXCuNNyFx%2FOEDrNNSs8tXBJNdtYo9aIG0sgYxIxUi1pJp%2B5%2BjucOf8FtbD%2B33IoCeoJ7HRSCegPVvlGwi9vnmricxUZ01CB%2F6%2F1nDWlpn5LOmU8O9Z70o0E2M%2FiWERWQb0UXYZH1LkEWWxCJn0fd34bJSfcXF%2BmhpE%2FBmy4vFekEn1V2X%2FA0QugnQWozYo67HHWzmsWa4Ob4zPGqjyPPjv3VsbWDxmjKAJsV9dBtVTh1PNUai9q2Rew%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783425957118_ChatGPT%20Image%20Jul%207%2C%202026%2C%2001_03_01%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=CN4e7g6JyMh3CRE7YT3BsHoXVQmMhd5ejzKc%2Btih1sSzT7XdR3dIdRWSkBsYaxefviFJay%2FghCJRygxW8m3BqkOUfDOfLM98E3jpCuQRScGLHUXGQ66OM8Y%2Bi4l1aBUhizBeFsG2obckDuQD6ewO0nIg6MsvWJiFOIS7yQjT5V5o1I0cpex6nrPy674WT5eVXahLnDAYbUqV9I9l2mBaVYpAL1uwOcZqGOBeinmRbWnh8izdhdV%2FVdOjTqfjQl3orvSMHjB6KceINWZwNNZp9c188YZZx3LLUBj4ZxeprRFLJngy21byNBgdNrQmNg6NSXp5A3VkyQClCFVWwJ9mUw%3D%3D"
     ],
     "description": "Silhouette: A flowing A-line maxi silhouette that skims the body gracefully and offers both comfort and elegance.\nNeckline: A modest round neckline that creates a refined and classic look.\nSleeves: Three-quarter-length sleeves with embellished cuffs, providing balanced coverage and a polished finish.\nWaist Detail: A matching self-tie belt cinches the waist, allowing for a flattering, adjustable fit.\nEmbellishments: Intricate metallic stud or rhinestone patterns adorn the bodice, sleeves, and skirt. The geometric, cascading motifs create a luxurious visual effect and draw the eye vertically, enhancing the dress's elegant silhouette.",
     "inStock": true
@@ -368,7 +476,7 @@ export const firebaseProducts: Product[] = [
       "blue"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063542139_Screenshot_20260701_190556_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=I1feJeU7Ye0NvpcFQtvz8EAEUh0pKzfs6Jr5N431%2FHTP1vlr31pMfKHvHGwFPh3KDapx7bEFgZXKFWLA7lasSrMVlaHZ9Z2m3QuAkNicnKcZf0FPdl9OEJd0fk9ufLVLDYmNpXXg6DJ%2B5cQfvaVnyj0z3d5d2q5kNwJrbu7XZhU90WhboH6v0r%2BUuiMuYqhMynPUyXv2R%2BUBXUuyzhcqrPOUJk5hNehMLRzABdJWlsqOp4ct6pMy5tj0OfmoVIv%2Fyv%2BN30MVlCgXE0ZBBWdBIqsrAkA70oJPZDu5cEEMI8A%2FDijarWeblIU26Z3RW%2Bl8rSvF1ZcXflJIEw5MNqM9SQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783411844866_ChatGPT%20Image%20Jul%206%2C%202026%2C%2008_09_41%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=gwKR2%2BdUcu6VKqdPoWh9s%2FANA9UthU96wzz4x9lYey6Cw3J0WOD1n9nbtcZ%2FVnX22D2mSA2DlPjE7Auj80fBp4MN2Co%2BcneTQDbX9AP0%2Fqvthw3t3DOVkXtOxIZdfZXGN2MVV%2Bp%2BazS4sZ%2B5UMD0cguwA0YPt6qfNXVPcFIzdDncQX9MHYlLB0BuwmuA%2BpEgnGhHVQGc3gGLoOeDug3FDPHHsbVvQ49C7g3LW8cs2M0tKJE2ZQRTqGyUSOkAl41fRRVg4w60%2FqNjlzTaz7Pbg9TqvUJX4U4GB0ibGEQeshFEOF4nY2rAfuC%2F8%2BpHpDPqVNkoipQja%2FWJWJTG1vP4%2BA%3D%3D"
     ],
     "description": "Vibrant royal blue color that stands out.\nSoft, flowing fabric with a draped cowl-style front that creates graceful folds.\nAsymmetrical hemline that overlaps and tapers toward the center, adding visual interest.\nLoose, comfortable fit that skims the body rather than clinging to it.\nElbow-length sleeves with a relaxed cut.\nModest round or boat-style neckline.",
     "inStock": true
@@ -385,7 +493,7 @@ export const firebaseProducts: Product[] = [
       "blue"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783063406392_Screenshot_20260701_190509_Maps.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=SlgcLbvj00FR7RRCPeGvuUiuLXcIt3F25FDY4nUZteoOeuThaKbsCJYnAkXJQLn9E2J0mxGk58Z6o%2BKm8gD3YD5nYDFmn8VxG%2BtvYzYqJxacU9TId%2BhVM36k0so%2FhRyl16UtgVTnpkyXtBYL0uZMVnh6FdAxgpjzminKyvOPQtQlfcjYEkFsW5YJh%2Fu2xsxSqYisbae9GB%2FA50%2FHdV6ojRrXOam%2BC30XBKb4D9kup4b%2B%2BGwnXlTDbuynkgi4S5iIkUbYJOP5tqdn3jbeWvohIU9%2BzYaiN1C%2BVvzp%2FDEhqLjBGUjbGrooZJHP%2FBgnmYxFa%2FOagAc5qQlA%2BqnPoZ5rMA%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783426505601_ChatGPT%20Image%20Jul%207%2C%202026%2C%2001_07_15%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=bEC3xQukCGfk7%2FgPhNL4lIwfXPszpEoiNkXWqk3%2FYSVA%2FucfRzfYp2r7zvseRYlAs26Gi9kNkVwbiivhD1asgcRJjenEYUccFwyH3Bc3dhkd7FqYpzo8YLvU5XxDZhYJy2Z3UWlzza8H3kCI91XXuSazKPcEETpUpAvCr7y6WT%2FhCH7whHwuP1JrvljV1oJByGw%2Fx34ieeLaeocEdMebZgslmyBbaPca6QB9%2BOHHJxGetn0Rd%2FZ111WHJuW%2BdPHtu5wQm5EO3yqFytKn32jYt6jKa7z6uz1R9MyWb4p2VvehqDt9J4zmEjXaPl7IHU7UiCisdynrZZ7Cy%2F9jWTd45g%3D%3D"
     ],
     "description": "Deep royal blue fabric with a subtle glittery, star-like shimmer throughout.\nLong fitted sleeves for an elegant silhouette.\nA unique twist-knot neckline that creates a stylish focal point at the chest.\nCutout details across the upper chest and shoulders, adding a modern and sophisticated touch.\nFigure-hugging, bodycon fit that accentuates the waist and curves.\nStraight, ankle-length skirt that gives the dress a sleek and streamlined appearance.",
     "inStock": true
@@ -455,7 +563,7 @@ export const firebaseProducts: Product[] = [
       "multi"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783062583898_Screenshot_20260629_173424_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=kRNkjQFiT7VmI%2Fq0kihPmaOyoypfSL74Y%2BPpdaTtHlAUZWUAC8moUXMV8K5wcxAlc1AQiy%2BUoU8vHjiSCDv2UpwWUxugYuk8klBm2A%2BcDk3U%2Bn7jPYDiNjEXmFLFYVuXLAzfmdp2xDXnRIleN2nRnf9wlJtWCD3ZsoT%2F3JkxeIBKKwe4wPDDzlZLguNl6aKHcCAJO5SZJe%2BmKzmj%2FMxopcEJNN36Us8FSXml4luc6DBftxRkSUuA8xInZJ5uMbZkXos%2FS%2F0H61vgcWtXdPQ9OBWAVJsvtu2c9bUhG3UFxO2EAGHvl4zKrGZOSZ11tje0bDXCcpGGja1OAzhKd2MeAQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783427126319_ChatGPT%20Image%20Jul%207%2C%202026%2C%2001_24_39%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=RT6blDJ2qArDU26YNSo8ctm00A3KVEt%2FR%2FaW2Rwz3XVLtyMD6zg3G2Ben2e5W5x%2FAIIdjhstIeEilo21Q78LfYiJ%2BjjTUmb7q05u9xFYpWk1aLlrDBc28BwzZQ2%2BWnlFjyJUKfCQ9%2B%2Fvwuk5MD9A3HJx1ifLQ2WaOEIBegO17eZJKKH3sGXEyAdpyj7Ie%2FNOkvGWhALLqSU%2FjYjunqb6sbQ0N1oVbhsI13Ie29K4khxiWK5yPdnCeN%2FNBQsQxnEIAPrKUuqXE7DBWjIIsSzOZw36kf2qI1OcdU7fYcLUhjZtvpqGejzrqVx8Q0UVrtMOnbXs%2FdiVyJd%2BRS%2BMutmE2w%3D%3D"
     ],
     "description": "Top\nA loose-fitting short-sleeve tunic blouse.\nFeatures a modest V-neckline with a small collar detail.\nRelaxed silhouette that drapes comfortably over the body.\nSlightly longer length, giving it a chic and easy-to-wear look.\nBottoms\nMatching wide-leg trousers in the same print.\nFull-length design with a flowing, comfortable fit.\nCreates a balanced and coordinated silhouette.",
     "inStock": true
@@ -481,7 +589,7 @@ export const firebaseProducts: Product[] = [
   {
     "id": "48",
     "name": "Blue & White Striped One-Shoulder Midi Dress",
-    "price": 28000,
+    "price": 38000,
     "category": "dresses",
     "sizes": [
       "S",
@@ -517,7 +625,7 @@ export const firebaseProducts: Product[] = [
   },
   {
     "id": "EnrOvyRsnyf2rbM8vSON",
-    "name": "matching printed style",
+    "name": "Rust Printed Matching Set",
     "price": 15000,
     "category": "two-piece-sets",
     "sizes": [
@@ -525,10 +633,10 @@ export const firebaseProducts: Product[] = [
       "XL"
     ],
     "colors": [
-      "Brown"
+      "Rust Brown"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783061458358_Screenshot_20260629_173145_Google.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=XVJLk%2F2I0fmBVE3%2B%2FvxwUZ24L%2F2kfER%2Bi0mSpZq9cAV%2Bpc2Bayp%2B%2FhZvYf6auB5UrsGeH2f6sLwkRCnjW2Gb3zuWA4HoaINJUkoah76n3y%2F5BgsX8OKsR2075iDehVB%2FZEH0Wtdv%2BqoupgyajthWRV3VlXxGmw0O20MvQbCqF0QVvIirxSvsFHslw9Kx1nnJplKLn01HUqNfo9f1nbqcYGZQu%2ByDrUgKD9qIasm%2BP2tgE2iZffS8QRsX9G7RZGjtHoJx03v6UIdGlTSq%2B9C0OHzQU0QQcEiAVUzwU0OeZCGWBAdgm7Lkz4%2FO5hBkS8uotxqYLGn17TnxKQUGW02wdg%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783414418134_ChatGPT%20Image%20Jul%207%2C%202026%2C%2009_23_53%20AM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=OSXpORvKdqUQ3cZfnzdBYBw2OVU5ghQk43RPfYP%2BiYmG%2Fg6BKi0gOvxY%2FgC73XauJU%2Bk6IJtOOTje6HGBUAxQxtGk24QRUohXrQty4jRjFBEMaNe7IhdHKpQSbakR3tk2o6EQ9pdxhnkoV8KqT5jdXUlwvUXIyWI1Ivew9TrBYyqH34SBvz7PfW9Ja3%2FdNiVRDD1L6HWt63VabFDs7XE%2FLsspkkRgfaKcc%2F5LWs16511YI8PFZWtI%2BZ4mGyHIjTOIOaC%2FObM1Eq3XyV1yKGBj0stgesSWlCO%2BBmUArwRrIxJTlrAQpljMATqwNshz4b4IcRznBbsJ89Xrxr1D50x6w%3D%3D"
     ],
     "description": "A loose-fitting button-front shirt with a relaxed silhouette.\nLong sleeves that are casually rolled up.\nFeatures a warm rust-orange base color with repeating burgundy and pink ornamental motifs.\nContrasting patterned trim runs along the button placket and collar, adding visual interest.",
     "inStock": true
@@ -583,7 +691,7 @@ export const firebaseProducts: Product[] = [
       "Burgundy"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782898983589_1782847452362.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=VAxb6Vpa6OUJvZezbtjnBYNYwBMc3tKMJ5E6wFKpj4RC5UWTdbaXdxw63PjPIvFW%2BoGZL6X86fTorv5l16Z4GIZesHKqtbmsSONYUyOkF%2B7KmiaKC8hr47C%2FVuozBL0AqAL5cjuZAPucOEh6xMjSce4lbvs8z6xWF0TfcsO9HbdYwOXvytyYh2YOH9OTVn7f8IVf4rx7rjVX1ykZLK0xWzOxBnyArazdbIeCdGZz2WTZM%2F95LxOFaGOpWUv4S9vKwR5kv2X87HISM2%2B8Dj64R21iM4sn3uBBSTBIlayKVLx65iHpSoQCtVKz%2FbJmRj1Bpkg4niAkIa7Jqf22m2NfgQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783412479994_ChatGPT%20Image%20Jul%206%2C%202026%2C%2012_56_35%20PM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=e6dSNEkaoGFShJ9VoHx1ycA5rvLNYwmCO1E0HWQ6N7zh3lSTnPMTh603KlOl3Ov2RMijnyBWedm1FCbzXSArUYc8YtqCf6YhRNFN1ecu8v0xLmLOl0T8hN3pYGnrNAhtMmyK3LW9dU7mQqdwWw60ejMyZbQEfXHrtqYAj1DuJmu8lSCk0alVJ8LctezyNvrF%2Fo10aHroci0EHXf89JvHkvsTr1kDUV3oGt%2Be1EmHMvwStL0yJebKxUcgHbGjBrtux9Wfom2XdCoYe981ax%2FX%2BszKSaXrMfSCvMeqWbUg5zBWWCzUVPoppg6%2Bd7%2BL3eiybJyJXygdRtPFJHT3KN%2Bv0g%3D%3D"
     ],
     "description": "Color: Soft red with fine vertical pinstripes.\nLength: Full-length maxi dress that falls to the ankles.\nNeckline: Flattering V-neckline.\nSleeves: Short kimono-style sleeves with turned-up cuffs.\nFit: Loose, flowing silhouette that prioritizes comfort while maintaining a chic appearance.\nStandout Feature\nA wide burgundy sash-like panel runs diagonally from the shoulder down the front.\nAttached to it is a large burgundy bow at the waist/chest area.\nLong ribbon tails hang from the bow, adding drama and visual interest.",
     "inStock": true
@@ -653,7 +761,7 @@ export const firebaseProducts: Product[] = [
       "Purple"
     ],
     "images": [
-      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1782895762177_1782753537726.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=ZsvTcQxSD1JctCAgeUj97kKTzdCXQkUfJ5IX7n%2BqvBFEv7U5BB86zJ%2FKzDbodRwII6cqCkLYBrpRvuq01qxG1JhOUXRaY9cQ5v17TH6Q2lx2LiMPa19iB%2FLoIMwwuVrePqDHx9pNfKaP8aQepO8rSmr%2BG6w8W0nu3%2FGeDPqUKeTCGjSpTM4CA9fp2o1El%2B4uAH4Ia26LMEKpGOenYvYr%2Fy4IXFFYb1rEUM1UPNJXV4eArr9D1I8Ze58BBdZTsKru25I6xYC6GgDDR1H3d%2FvfmkN0%2BgGipn8Rc0JDQip4%2Bm0SHEyDFLcuDUKPhu1TsXY1HnyutBKPEnrhkhQvycr4xQ%3D%3D"
+      "https://storage.googleapis.com/kaysapparel-3250f.firebasestorage.app/products/1783426357490_ChatGPT%20Image%20Jul%207%2C%202026%2C%2009_25_12%20AM.webp?GoogleAccessId=firebase-adminsdk-fbsvc%40kaysapparel-3250f.iam.gserviceaccount.com&Expires=16730323200&Signature=fbooOivS%2BsGf0ddYLHEMec8kvObaSvpcdalqPfLtVr4jfFoJnvAe8CpFEplugAgDBxyvoFM0IVRdNe1kruMNWnp9RbXCrurquFT%2Ft4977Ts%2BIkXG%2B2TIo61SWVUJC%2BNIzsGzuyKIwNAhaxGxj0KWTQewTvnulLTDaeZlKHnfxYR6X0o95WPsCz7oNFFQiWi5lnUaoYGalprmw%2Bp0r1Mt224mecIsD2LxTjaeyIui7BT1LoL6gQeL%2Bu01S44HUtNhmOogtDiKn%2FNr2bF3BkEkM7v5z7SN6lFkcvi7QFLbJ8ba%2B46I8Ft%2B0QdPYa%2FgJouUdo5dTKmGW6eqd6K8SAlYGQ%3D%3D"
     ],
     "description": "An oversized button-up shirt in a vibrant purple shade.\nFeatures a classic collar and front button closure.\nRelaxed fit with dropped shoulders for a modern, effortless style.\nWide elbow-length sleeves add to the comfortable, airy feel.",
     "inStock": true
