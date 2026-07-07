@@ -349,7 +349,8 @@ export default function AdminPage() {
           updatePayload.images = images;
         }
 
-        await adminApi("update", updatePayload);
+        const updated = await adminApi("update", updatePayload);
+        console.log("[admin update response]", updated?.id, updated?.images?.[0], updated?.updatedAt);
         toast.success(`"${newProduct.name}" updated successfully!`);
         setEditingProduct(null);
         setActiveTab("products");
