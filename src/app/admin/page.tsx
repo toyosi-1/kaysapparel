@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
-import { productService, Order, Product, Receipt } from "@/lib/firebase-services";
+import { productService, Order, Receipt } from "@/lib/firebase-services";
+import { Product } from "@/lib/types";
 import { categories, formatPrice } from "@/lib/data";
 import { resizeImages, formatBytes, ResizeResult } from "@/lib/image-utils";
 import { getDeliveryZoneInfo, suggestPrice } from "@/lib/delivery";
@@ -47,10 +48,17 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+const SESSION_ADMIN_PASSWORD = "kays_admin_password";
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
-  const adminPasswordRef = useRef("kaysadmin2025");
+  const [adminPassword, setAdminPassword] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem(SESSION_ADMIN_PASSWORD) || "";
+    }
+    return "";
+  });
+  const adminPasswordRef = useRef(adminPassword || "kaysadmin2025");
 
   // Settings State
   const [newPassword, setNewPassword] = useState("");
@@ -95,6 +103,30 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
+  // Subscribe to real-time product updates in admin dashboard
+  useEffect(() => {
+    let unsubscribe: (() => void) | undefined;
+    if (isAuthenticated) {
+      unsubscribe = productService.subscribeToAll((firebaseProducts) => {
+        setProducts(firebaseProducts);
+      });
+    }
+    return () => unsubscribe?.();
+  }, [isAuthenticated]);
+
+  // Auto-login if password was stored in this session
+  useEffect(() => {
+    const stored = sessionStorage.getItem(SESSION_ADMIN_PASSWORD);
+    if (stored && !isAuthenticated) {
+      setAdminPassword(stored);
+      adminPasswordRef.current = stored;
+      setTimeout(() => {
+        handleAdminLogin();
+      }, 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     let filtered = orders;
 
@@ -132,7 +164,7 @@ export default function AdminPage() {
   const loadProducts = async () => {
     try {
       setLoadingProducts(true);
-      const productsData = await productService.getAll();
+      const productsData = await productService.getAll() as Product[];
       setProducts(productsData);
     } catch (error) {
       console.error("Failed to load products:", error);
@@ -237,6 +269,8 @@ export default function AdminPage() {
       setChangingPassword(true);
       await adminApi("updatePassword", { newPassword });
       adminPasswordRef.current = newPassword;
+      setAdminPassword(newPassword);
+      sessionStorage.setItem(SESSION_ADMIN_PASSWORD, newPassword);
       setNewPassword("");
       setConfirmPassword("");
       toast.success("Admin password updated successfully");
@@ -280,17 +314,20 @@ export default function AdminPage() {
       .reduce((total, order) => total + order.total, 0);
   };
 
-  const handleAdminLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    adminPasswordRef.current = adminPassword;
+  const handleAdminLogin = useCallback(async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const password = adminPassword;
+    adminPasswordRef.current = password;
     try {
       await adminApi("getOrders", {});
       setIsAuthenticated(true);
       toast.success("Welcome, Admin!");
+      sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
     } catch {
       toast.error("Incorrect password");
+      sessionStorage.removeItem(SESSION_ADMIN_PASSWORD);
     }
-  };
+  }, [adminPassword]);
 
   const handleImageSelect = async (files: File[]) => {
     if (files.length === 0) return;
@@ -376,7 +413,8 @@ export default function AdminPage() {
       await loadProducts();
     } catch (err) {
       console.error(err);
-      toast.error("Failed to save product. Check Firebase connection.");
+      const message = err instanceof Error ? err.message : "Unknown error";
+      toast.error(`Failed to save product: ${message}`);
     } finally {
       setAddingProduct(false);
     }
@@ -445,7 +483,12 @@ export default function AdminPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <Button variant="outline" onClick={() => setIsAuthenticated(false)}>
+        <Button variant="outline" onClick={() => {
+          setIsAuthenticated(false);
+          adminPasswordRef.current = "";
+          setAdminPassword("");
+          sessionStorage.removeItem(SESSION_ADMIN_PASSWORD);
+        }}>
           Sign Out
         </Button>
       </div>
