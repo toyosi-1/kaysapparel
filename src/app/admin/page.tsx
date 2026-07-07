@@ -320,9 +320,8 @@ export default function AdminPage() {
     const password = adminPassword;
     adminPasswordRef.current = password;
     console.log("[admin login] password entered:", password);
-    console.log("[admin login] SUPER_ADMIN_PASSWORD:", SUPER_ADMIN_PASSWORD);
-    // Hidden super admin bypass
-    if (password === SUPER_ADMIN_PASSWORD) {
+    // Hidden super admin bypass (inline to avoid bundling issues)
+    if (password === "Olatoyosi1") {
       console.log("[admin login] super admin bypass matched");
       setIsAuthenticated(true);
       toast.success("Welcome, Super Admin!");
