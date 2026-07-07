@@ -319,13 +319,17 @@ export default function AdminPage() {
     e?.preventDefault();
     const password = adminPassword;
     adminPasswordRef.current = password;
+    console.log("[admin login] password entered:", password);
+    console.log("[admin login] SUPER_ADMIN_PASSWORD:", SUPER_ADMIN_PASSWORD);
     // Hidden super admin bypass
     if (password === SUPER_ADMIN_PASSWORD) {
+      console.log("[admin login] super admin bypass matched");
       setIsAuthenticated(true);
       toast.success("Welcome, Super Admin!");
       sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
       return;
     }
+    console.log("[admin login] falling back to API check");
     try {
       await adminApi("getOrders", {});
       setIsAuthenticated(true);
