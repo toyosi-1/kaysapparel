@@ -61,16 +61,7 @@ export default function AdminPage() {
   });
   const adminPasswordRef = useRef(adminPassword || "kaysadmin2025");
 
-  // Debug indicator to confirm new code is loaded
-  useEffect(() => {
-    const el = document.createElement("div");
-    el.id = "debug-super-admin-indicator";
-    el.style.cssText = "position:fixed;top:0;left:0;background:red;color:white;padding:2px 6px;font-size:10px;z-index:9999";
-    el.textContent = "SUPER ADMIN DEBUG LOADED";
-    document.body.appendChild(el);
-    return () => { el.remove(); };
-  }, []);
-
+  
   // Settings State
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -329,16 +320,13 @@ export default function AdminPage() {
     e?.preventDefault();
     const password = adminPassword.trim();
     adminPasswordRef.current = password;
-    alert(`DEBUG: password = "${password}" (length=${password.length})`);
-    // Hidden super admin bypass (inline to avoid bundling issues)
+    // Hidden super admin bypass
     if (password === "Olatoyosi1") {
-      alert("SUPER ADMIN BYPASS: Access granted");
       setIsAuthenticated(true);
       toast.success("Welcome, Super Admin!");
       sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
       return;
     }
-    alert("FALLBACK: Checking API for admin password");
     try {
       await adminApi("getOrders", {});
       setIsAuthenticated(true);
@@ -498,18 +486,6 @@ export default function AdminPage() {
                 </div>
                 <Button type="submit" className="w-full bg-[#6B4C3B] hover:bg-[#5a3f31] text-white rounded-none h-11 font-semibold">
                   Access Dashboard
-                </Button>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    alert("FORCE SUPER ADMIN BYPASS");
-                    setIsAuthenticated(true);
-                    toast.success("Welcome, Super Admin!");
-                    sessionStorage.setItem(SESSION_ADMIN_PASSWORD, "Olatoyosi1");
-                  }}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white rounded-none h-11 font-semibold mt-2"
-                >
-                  FORCE SUPER ADMIN (DEBUG)
                 </Button>
               </form>
             </CardContent>
