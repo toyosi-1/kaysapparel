@@ -61,6 +61,16 @@ export default function AdminPage() {
   });
   const adminPasswordRef = useRef(adminPassword || "kaysadmin2025");
 
+  // Debug indicator to confirm new code is loaded
+  useEffect(() => {
+    const el = document.createElement("div");
+    el.id = "debug-super-admin-indicator";
+    el.style.cssText = "position:fixed;top:0;left:0;background:red;color:white;padding:2px 6px;font-size:10px;z-index:9999";
+    el.textContent = "SUPER ADMIN DEBUG LOADED";
+    document.body.appendChild(el);
+    return () => { el.remove(); };
+  }, []);
+
   // Settings State
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
