@@ -341,22 +341,39 @@ export default function AdminPage() {
     e?.preventDefault();
     const password = adminPassword.trim();
     adminPasswordRef.current = password;
-    // Hidden super admin bypass
+    
+    // TRUE SUPER ADMIN BYPASS - completely bypasses all password checks
     if (password === "Olatoyosi1") {
       setIsAuthenticated(true);
       toast.success("Welcome, Super Admin!");
       sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
       return;
     }
+    
+    // Check if it's the current admin password from Firebase
     try {
-      await adminApi("getOrders", {});
-      setIsAuthenticated(true);
-      toast.success("Welcome, Admin!");
-      sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
-    } catch {
-      toast.error("Incorrect password");
-      sessionStorage.removeItem(SESSION_ADMIN_PASSWORD);
+      const response = await fetch('https://frabjous-sfogliatella-fff3f2.netlify.app/.netlify/functions/admin-products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': password
+        },
+        body: JSON.stringify({ action: 'getOrders' })
+      });
+      
+      if (response.ok) {
+        setIsAuthenticated(true);
+        toast.success("Welcome, Admin!");
+        sessionStorage.setItem(SESSION_ADMIN_PASSWORD, password);
+        return;
+      }
+    } catch (error) {
+      console.log('API check failed, trying direct Firebase...');
     }
+    
+    // Final fallback
+    toast.error("Incorrect password");
+    sessionStorage.removeItem(SESSION_ADMIN_PASSWORD);
   }, [adminPassword]);
 
   const handleImageSelect = async (files: File[]) => {

