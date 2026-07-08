@@ -1,0 +1,13 @@
+{
+  "name": "Luxe Satin Halter Blouse",
+  "price": 900000,
+  "category": "Blouses",
+  "sizes": ["M", "L"],
+  "colors": "Beige, Ivory",
+  "description": "Elegant Luxe Satin Halter Blouse featuring a chic halter neckline with a tie-back closure. Crafted from smooth satin fabric with a flattering draped front and open-back design. Perfect for evening outings or special occasions.",
+  "images": [
+    "https://frabjous-sfogliatella-fff3f2.netlify.app/images/products/Luxe%20Satin%20Halter%20Blouse%20front.png",
+    "https://frabjous-sfogliatella-fff3f2.netlify.app/images/products/Luxe%20Satin%20Halter%20Blouse%20back.png"
+  ],
+  "inStock": true
+}
