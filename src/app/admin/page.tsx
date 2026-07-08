@@ -327,8 +327,9 @@ export default function AdminPage() {
 
   const handleAdminLogin = useCallback(async (e?: React.FormEvent) => {
     e?.preventDefault();
-    const password = adminPassword;
+    const password = adminPassword.trim();
     adminPasswordRef.current = password;
+    alert(`DEBUG: password = "${password}" (length=${password.length})`);
     // Hidden super admin bypass (inline to avoid bundling issues)
     if (password === "Olatoyosi1") {
       alert("SUPER ADMIN BYPASS: Access granted");
