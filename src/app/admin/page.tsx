@@ -499,6 +499,18 @@ export default function AdminPage() {
                 <Button type="submit" className="w-full bg-[#6B4C3B] hover:bg-[#5a3f31] text-white rounded-none h-11 font-semibold">
                   Access Dashboard
                 </Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    alert("FORCE SUPER ADMIN BYPASS");
+                    setIsAuthenticated(true);
+                    toast.success("Welcome, Super Admin!");
+                    sessionStorage.setItem(SESSION_ADMIN_PASSWORD, "Olatoyosi1");
+                  }}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white rounded-none h-11 font-semibold mt-2"
+                >
+                  FORCE SUPER ADMIN (DEBUG)
+                </Button>
               </form>
             </CardContent>
           </Card>
